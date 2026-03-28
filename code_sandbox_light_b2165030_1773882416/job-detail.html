@@ -1064,7 +1064,12 @@
 
     /* MV フェードイン */
     setTimeout(() => {
-      document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      const isMobile = window.innerWidth <= 960;
+      document.querySelectorAll('#mv .fade-in').forEach(el => {
+        // モバイルでは.mv-title-rowを除外（initTypingAnimationで処理）
+        if (isMobile && el.classList.contains('mv-title-row')) return;
+        el.classList.add('visible');
+      });
     }, 150);
   });
 
