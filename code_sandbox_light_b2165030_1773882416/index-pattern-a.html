@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pattern A - カード型浮遊レイアウト | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- 共通CSS -->
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV SECTION - 中央配置 + グラデーション背景
+    =========================== */
+    #mv {
+      min-height: calc(100vh - var(--header-h));
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      position: relative;
+      text-align: center;
+    }
+
+    .mv-heading-en {
+      font-family: var(--font-en);
+      font-size: clamp(72px, 11vw, 148px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .mv-heading-sub {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+    }
+    .mv-catchcopy {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .mv-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+      line-height: 2;
+      max-width: 520px;
+    }
+
+    /* scroll down arrow - 中央下部 */
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: bounce 2s infinite;
+    }
+    .scroll-down:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateX(-50%) translateY(-5px);
+    }
+    .scroll-down svg {
+      width: 18px; height: 18px;
+      fill: none; stroke: var(--white);
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    /* ===========================
+       MAIN CARDS SECTION - 浮遊型カード
+    =========================== */
+    #menu {
+      padding: 100px 60px;
+      background: #f9fafb;
+    }
+
+    .cards-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 32px;
+    }
+
+    .card-item {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 48px 36px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ホバー時に浮き上がる + 3D傾斜 */
+    .card-item:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    /* カードの背景グラデーション（ホバー時に表示） */
+    .card-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.06) 100%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card-item:hover::before {
+      opacity: 1;
+    }
+
+    /* 黒塗りカード → モノトーングラデーション */
+    .card-item.dark {
+      background: linear-gradient(135deg, #111111 0%, #2a2a2a 100%);
+      color: var(--white);
+    }
+    .card-item.dark:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+    .card-item.dark .card-arrow {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .card-item.dark .card-title { color: var(--white); }
+    .card-item.dark .card-body  { color: rgba(255,255,255,0.85); }
+
+    .card-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-light);
+      font-size: 16px;
+      color: var(--black);
+      margin-bottom: 24px;
+      font-family: var(--font-en);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    .card-item:hover .card-arrow {
+      transform: rotate(45deg);
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+    .card-item.dark:hover .card-arrow {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      margin-bottom: 18px;
+      line-height: 1.4;
+      position: relative;
+      z-index: 1;
+    }
+    .card-body {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ===========================
+       TEAM PHOTO
+    =========================== */
+    #photo {
+      overflow: hidden;
+      line-height: 0;
+    }
+    .photo-wrap {
+      width: 100%;
+      height: clamp(320px, 45vw, 600px);
+      background: linear-gradient(135deg, #e5e5e5 0%, #cccccc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: var(--gray-light);
+    }
+    .photo-placeholder svg {
+      width: 56px; height: 56px;
+      stroke: var(--gray-light);
+      fill: none; stroke-width: 1.2;
+    }
+    .photo-placeholder span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 768px) {
+      #mv    { padding: 0 24px 80px; }
+      #menu  { padding: 72px 24px; }
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+    @media (max-width: 480px) {
+      .mv-heading-en { font-size: clamp(44px, 14vw, 80px); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div class="mv-heading-en fade-in">Recruit</div>
+    <p class="mv-heading-sub fade-in delay-1">採用情報</p>
+    <p class="mv-catchcopy fade-in delay-2">未来を切り拓く</p>
+    <p class="mv-sub fade-in delay-3">
+      株式会社ウィンパートナーは、<br>
+      共に持続可能な成長を目指せる仲間を募集しています。
+    </p>
+    <div class="scroll-down" id="scrollBtn" aria-label="スクロール">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       MAIN CARDS  (浮遊型カード)
+  =========================== -->
+  <section id="menu">
+    <div class="cards-grid fade-in">
+
+      <a href="jobs.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">募集要項</h3>
+        <p class="card-body">
+          オモシロイ会社づくりには、オモシロイ仲間が欠かせない。<br>
+          各職種の仕事内容や求める人物像をご紹介します。
+        </p>
+      </a>
+
+      <a href="education.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">教育 / 研修制度</h3>
+        <p class="card-body">
+          ウィンパートナーのビジョンと社員一人ひとりの夢や目標を重ねるために、<br>
+          研修制度や職場環境を整えています。
+        </p>
+      </a>
+
+      <a href="benefits.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">福利厚生 / 社内制度</h3>
+        <p class="card-body">
+          「世界一オモシロイ会社」を目指して導入された、<br>
+          50以上のユニークな福利厚生や社内制度があります。
+        </p>
+      </a>
+
+      <a href="environment.html" class="card-item dark">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">働く環境</h3>
+        <p class="card-body">
+          好きなコトをやり続けるために、ライフスタイルに合わせた<br>
+          働き方制度やオフィス環境にこだわっています。
+        </p>
+      </a>
+
+      <a href="career.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">キャリアアップ</h3>
+        <p class="card-body">
+          会社のビジョンに共感しながら、自分の夢も追いかける。<br>
+          独自の評価システムとキャリアパスを整えています。
+        </p>
+      </a>
+
+      <a href="contact.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">エントリー</h3>
+        <p class="card-body">
+          ウィンパートナーの理念や仕事に共感いただけた方は、<br>
+          こちらのエントリーフォームからご応募ください。
+        </p>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       TEAM PHOTO
+  =========================== -->
+  <div id="photo">
+    <div class="photo-wrap">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="40" height="32" rx="2"/>
+          <circle cx="17" cy="20" r="4"/>
+          <polyline points="4,34 14,22 22,30 30,20 44,36"/>
+        </svg>
+        <span>TEAM PHOTO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    // MV テキストをすぐに表示
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+    });
+
+    // スクロールボタン
+    document.getElementById('scrollBtn').addEventListener('click', () => {
+      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

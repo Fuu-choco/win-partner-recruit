@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pattern B - ジグザグレイアウト | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- 共通CSS -->
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV SECTION - 分割レイアウト
+    =========================== */
+    #mv {
+      min-height: calc(100vh - var(--header-h));
+      background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    .mv-left {
+      background: linear-gradient(135deg, #111111 0%, #333333 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* アニメーション背景 */
+    .mv-left::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: moveGrid 20s linear infinite;
+    }
+
+    @keyframes moveGrid {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .mv-visual {
+      width: 400px;
+      height: 300px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-en);
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--white);
+      position: relative;
+      z-index: 1;
+      animation: float 3s ease-in-out infinite;
+      letter-spacing: 0.05em;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .mv-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px;
+    }
+
+    .mv-heading-en {
+      font-family: var(--font-en);
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .mv-heading-sub {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--gray-dark);
+      margin-bottom: 40px;
+    }
+    .mv-catchcopy {
+      font-size: clamp(18px, 2vw, 24px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+    .mv-sub {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      letter-spacing: 0.06em;
+      line-height: 2;
+      max-width: 520px;
+    }
+
+    /* scroll down arrow */
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      z-index: 10;
+    }
+    .scroll-down:hover {
+      background: var(--dark);
+      transform: translateX(-50%) translateY(-5px);
+    }
+    .scroll-down svg {
+      width: 18px; height: 18px;
+      fill: none; stroke: var(--white);
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ===========================
+       ZIGZAG SECTION - ジグザグレイアウト
+    =========================== */
+    #menu {
+      padding: 0;
+      background: var(--white);
+    }
+
+    .zigzag-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 500px;
+      transition: all 0.5s ease;
+    }
+
+    /* 偶数番目は逆順 */
+    .zigzag-item:nth-child(even) {
+      direction: rtl;
+    }
+    .zigzag-item:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    .zigzag-visual {
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 各カードに異なるグレー系のグラデーション */
+    .zigzag-item:nth-child(1) .zigzag-visual { background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%); }
+    .zigzag-item:nth-child(2) .zigzag-visual { background: linear-gradient(135deg, #e0e0e0 0%, #cccccc 100%); }
+    .zigzag-item:nth-child(3) .zigzag-visual { background: linear-gradient(135deg, #d0d0d0 0%, #b8b8b8 100%); }
+    .zigzag-item:nth-child(4) .zigzag-visual { background: linear-gradient(135deg, #111111 0%, #333333 100%); }
+    .zigzag-item:nth-child(5) .zigzag-visual { background: linear-gradient(135deg, #888888 0%, #666666 100%); }
+    .zigzag-item:nth-child(6) .zigzag-visual { background: linear-gradient(135deg, #c0c0c0 0%, #a0a0a0 100%); }
+
+    .zigzag-visual-icon {
+      font-size: 120px;
+      opacity: 0.3;
+      font-family: var(--font-en);
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .zigzag-content {
+      padding: 80px 60px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .zigzag-number {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      margin-bottom: 16px;
+    }
+
+    .zigzag-title {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .zigzag-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2;
+      margin-bottom: 36px;
+    }
+
+    .zigzag-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      padding: 14px 32px;
+      border: 2px solid var(--black);
+      transition: all 0.3s ease;
+      align-self: flex-start;
+    }
+
+    .zigzag-link:hover {
+      background: var(--black);
+      color: var(--white);
+      transform: translateX(8px);
+    }
+
+    .zigzag-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .zigzag-link:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ===========================
+       TEAM PHOTO
+    =========================== */
+    #photo {
+      overflow: hidden;
+      line-height: 0;
+    }
+    .photo-wrap {
+      width: 100%;
+      height: clamp(320px, 45vw, 600px);
+      background: linear-gradient(135deg, #111111 0%, #333333 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: rgba(255,255,255,0.5);
+    }
+    .photo-placeholder svg {
+      width: 56px; height: 56px;
+      stroke: rgba(255,255,255,0.5);
+      fill: none; stroke-width: 1.2;
+    }
+    .photo-placeholder span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 960px) {
+      #mv {
+        grid-template-columns: 1fr;
+      }
+      .mv-left {
+        min-height: 400px;
+      }
+      .zigzag-item,
+      .zigzag-item:nth-child(even) {
+        grid-template-columns: 1fr;
+        direction: ltr;
+      }
+      .zigzag-visual {
+        min-height: 300px;
+      }
+      .zigzag-content {
+        padding: 60px 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mv-right { padding: 60px 24px; }
+      .zigzag-content { padding: 48px 24px; }
+      .mv-heading-en { font-size: clamp(44px, 14vw, 80px); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       MV - 分割レイアウト
+  =========================== -->
+  <section id="mv">
+    <div class="mv-left">
+      <div class="mv-visual fade-in">WIN PARTNER</div>
+    </div>
+    <div class="mv-right">
+      <div class="mv-heading-en fade-in">Recruit</div>
+      <p class="mv-heading-sub fade-in delay-1">採用情報</p>
+      <p class="mv-catchcopy fade-in delay-2">未来を切り拓く</p>
+      <p class="mv-sub fade-in delay-3">
+        株式会社ウィンパートナーは、<br>
+        共に持続可能な成長を目指せる仲間を募集しています。
+      </p>
+    </div>
+    <div class="scroll-down" id="scrollBtn" aria-label="スクロール">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       ZIGZAG LAYOUT
+  =========================== -->
+  <section id="menu">
+
+    <div class="zigzag-item fade-in">
+      <div class="zigzag-visual">
+        <div class="zigzag-visual-icon">01</div>
+      </div>
+      <div class="zigzag-content">
+        <div class="zigzag-number">01 / JOBS</div>
+        <h3 class="zigzag-title">募集要項</h3>
+        <p class="zigzag-body">
+          オモシロイ会社づくりには、オモシロイ仲間が欠かせない。<br>
+          各職種の仕事内容や求める人物像をご紹介します。
+        </p>
+        <a href="jobs.html" class="zigzag-link">
+          View Details
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="zigzag-item fade-in">
+      <div class="zigzag-visual">
+        <div class="zigzag-visual-icon">02</div>
+      </div>
+      <div class="zigzag-content">
+        <div class="zigzag-number">02 / EDUCATION</div>
+        <h3 class="zigzag-title">教育 / 研修制度</h3>
+        <p class="zigzag-body">
+          ウィンパートナーのビジョンと社員一人ひとりの夢や目標を重ねるために、<br>
+          研修制度や職場環境を整えています。
+        </p>
+        <a href="education.html" class="zigzag-link">
+          View Details
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="zigzag-item fade-in">
+      <div class="zigzag-visual">
+        <div class="zigzag-visual-icon">03</div>
+      </div>
+      <div class="zigzag-content">
+        <div class="zigzag-number">03 / BENEFITS</div>
+        <h3 class="zigzag-title">福利厚生 / 社内制度</h3>
+        <p class="zigzag-body">
+          「世界一オモシロイ会社」を目指して導入された、<br>
+          50以上のユニークな福利厚生や社内制度があります。
+        </p>
+        <a href="benefits.html" class="zigzag-link">
+          View Details
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="zigzag-item fade-in">
+      <div class="zigzag-visual">
+        <div class="zigzag-visual-icon">04</div>
+      </div>
+      <div class="zigzag-content">
+        <div class="zigzag-number">04 / ENVIRONMENT</div>
+        <h3 class="zigzag-title">働く環境</h3>
+        <p class="zigzag-body">
+          好きなコトをやり続けるために、ライフスタイルに合わせた<br>
+          働き方制度やオフィス環境にこだわっています。
+        </p>
+        <a href="environment.html" class="zigzag-link">
+          View Details
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="zigzag-item fade-in">
+      <div class="zigzag-visual">
+        <div class="zigzag-visual-icon">05</div>
+      </div>
+      <div class="zigzag-content">
+        <div class="zigzag-number">05 / CAREER</div>
+        <h3 class="zigzag-title">キャリアアップ</h3>
+        <p class="zigzag-body">
+          会社のビジョンに共感しながら、自分の夢も追いかける。<br>
+          独自の評価システムとキャリアパスを整えています。
+        </p>
+        <a href="career.html" class="zigzag-link">
+          View Details
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="zigzag-item fade-in">
+      <div class="zigzag-visual">
+        <div class="zigzag-visual-icon">06</div>
+      </div>
+      <div class="zigzag-content">
+        <div class="zigzag-number">06 / ENTRY</div>
+        <h3 class="zigzag-title">エントリー</h3>
+        <p class="zigzag-body">
+          ウィンパートナーの理念や仕事に共感いただけた方は、<br>
+          こちらのエントリーフォームからご応募ください。
+        </p>
+        <a href="contact.html" class="zigzag-link">
+          View Details
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ===========================
+       TEAM PHOTO
+  =========================== -->
+  <div id="photo">
+    <div class="photo-wrap">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="40" height="32" rx="2"/>
+          <circle cx="17" cy="20" r="4"/>
+          <polyline points="4,34 14,22 22,30 30,20 44,36"/>
+        </svg>
+        <span>TEAM PHOTO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    // MV テキストをすぐに表示
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+    });
+
+    // スクロールボタン
+    document.getElementById('scrollBtn').addEventListener('click', () => {
+      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

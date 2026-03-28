@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>デザイン比較 - パターン選択</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 60px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    h1 {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(32px, 5vw, 64px);
+      font-weight: 800;
+      color: white;
+      text-align: center;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: rgba(255,255,255,0.85);
+      font-size: 16px;
+      margin-bottom: 60px;
+      line-height: 1.8;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.4);
+    }
+
+    .card-image {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 48px;
+      font-weight: 800;
+      color: rgba(0,0,0,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:nth-child(1) .card-image {
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      color: rgba(255,255,255,0.2);
+    }
+
+    .card:nth-child(2) .card-image {
+      background: linear-gradient(135deg, #111111 0%, #333333 100%);
+      color: rgba(255,255,255,0.2);
+    }
+
+    .card:nth-child(3) .card-image {
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      color: rgba(255,255,255,0.2);
+    }
+
+    .card:nth-child(4) .card-image {
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      color: rgba(255,255,255,0.2);
+    }
+
+    .card:nth-child(5) .card-image {
+      background: #111111;
+      color: rgba(255,255,255,0.15);
+    }
+
+    .card-content {
+      padding: 32px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      background: #2a2a2a;
+      color: white;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      text-transform: uppercase;
+    }
+
+    .card:nth-child(2) .badge {
+      background: #111111;
+    }
+
+    .card:nth-child(3) .badge {
+      background: #2a2a2a;
+    }
+
+    .card:nth-child(4) .badge {
+      background: #2a2a2a;
+    }
+
+    .card:nth-child(5) .badge {
+      background: #111111;
+    }
+
+    .card-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #111;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .features {
+      list-style: none;
+      margin-bottom: 28px;
+    }
+
+    .features li {
+      font-size: 13px;
+      color: #666;
+      padding: 8px 0;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #2a2a2a;
+      font-weight: bold;
+    }
+
+    .card:nth-child(2) .features li::before {
+      color: #111111;
+    }
+
+    .card:nth-child(3) .features li::before {
+      color: #2a2a2a;
+    }
+
+    .card:nth-child(4) .features li::before {
+      color: #2a2a2a;
+    }
+
+    .card:nth-child(5) .features li::before {
+      color: #111111;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: #111;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #000;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    .footer-note {
+      text-align: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      margin-top: 40px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 40px 20px;
+      }
+      .grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>デザインパターン比較</h1>
+    <p class="subtitle">
+      5つのデザインパターンをご用意しました。<br>
+      各デザインをクリックして、実際の見た目を確認してください。
+    </p>
+
+    <div class="grid">
+
+      <!-- Pattern A -->
+      <div class="card" onclick="window.open('index-pattern-a.html', '_blank')">
+        <div class="card-image">A</div>
+        <div class="card-content">
+          <span class="badge">Pattern A</span>
+          <h2 class="card-title">カード型浮遊レイアウト</h2>
+          <p class="card-desc">
+            モダンで洗練されたデザイン。影付きのカードが浮遊し、ホバー時に3D効果が加わります。
+          </p>
+          <ul class="features">
+            <li>モノトーンのMV背景</li>
+            <li>浮遊感のあるカードデザイン</li>
+            <li>3Dホバーエフェクト</li>
+            <li>矢印アイコンの回転アニメーション</li>
+            <li>白黒グレー系で統一</li>
+          </ul>
+          <a href="index-pattern-a.html" class="btn" target="_blank">このデザインを見る →</a>
+        </div>
+      </div>
+
+      <!-- Pattern B -->
+      <div class="card" onclick="window.open('index-pattern-b.html', '_blank')">
+        <div class="card-image">B</div>
+        <div class="card-content">
+          <span class="badge">Pattern B</span>
+          <h2 class="card-title">ジグザグレイアウト</h2>
+          <p class="card-desc">
+            ストーリー性を重視したデザイン。左右交互に配置されたセクションで視線を誘導します。
+          </p>
+          <ul class="features">
+            <li>分割型MV（WIN PARTNER + テキスト）</li>
+            <li>左右交互のジグザグレイアウト</li>
+            <li>グレートーンのグラデーション</li>
+            <li>動くグリッド背景</li>
+            <li>白黒グレー系で統一</li>
+          </ul>
+          <a href="index-pattern-b.html" class="btn" target="_blank">このデザインを見る →</a>
+        </div>
+      </div>
+
+      <!-- Pattern D -->
+      <div class="card" onclick="window.open('index-pattern-d.html', '_blank')">
+        <div class="card-image">D</div>
+        <div class="card-content">
+          <span class="badge">Pattern D</span>
+          <h2 class="card-title">2列グリッド + 詳細表示</h2>
+          <p class="card-desc">
+            大きめのカードで情報を見やすく。ホバー時に詳細情報が展開されるインタラクティブなデザイン。
+          </p>
+          <ul class="features">
+            <li>2列のゆったりしたレイアウト</li>
+            <li>大きめカード + 番号表示</li>
+            <li>ホバー時に詳細情報が表示</li>
+            <li>スムーズなアニメーション</li>
+            <li>白黒グレー系で統一</li>
+          </ul>
+          <a href="index-pattern-d.html" class="btn" target="_blank">このデザインを見る →</a>
+        </div>
+      </div>
+
+      <!-- Pattern E -->
+      <div class="card" onclick="window.open('index-pattern-e.html', '_blank')">
+        <div class="card-image">E</div>
+        <div class="card-content">
+          <span class="badge">Pattern E</span>
+          <h2 class="card-title">スライダー型</h2>
+          <p class="card-desc">
+            横スクロールのカードスライダー。ページの高さを抑え、モダンで軽快な印象を与えます。
+          </p>
+          <ul class="features">
+            <li>横スクロールのカードスライダー</li>
+            <li>ページ高さが最小限</li>
+            <li>ナビゲーションボタン付き</li>
+            <li>アイコン付きカードデザイン</li>
+            <li>白黒グレー系で統一</li>
+          </ul>
+          <a href="index-pattern-e.html" class="btn" target="_blank">このデザインを見る →</a>
+        </div>
+      </div>
+
+      <!-- Original -->
+      <div class="card" onclick="window.open('index-original.html', '_blank')">
+        <div class="card-image">Original</div>
+        <div class="card-content">
+          <span class="badge">Original</span>
+          <h2 class="card-title">オリジナル（元デザイン）</h2>
+          <p class="card-desc">
+            クローン元のデザイン。ミニマルでシンプルな構成です。比較のためにご覧ください。
+          </p>
+          <ul class="features">
+            <li>モノトーンカラースキーム</li>
+            <li>2×3グリッドカードレイアウト</li>
+            <li>ボーダー区切りのデザイン</li>
+            <li>シンプルなホバー効果</li>
+            <li>左下寄せのMVテキスト</li>
+          </ul>
+          <a href="index-original.html" class="btn" target="_blank">このデザインを見る →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="footer-note">
+      ✨ 各パターンをブラウザで開いて、スクロールやホバー、レスポンシブ表示をお試しください。<br>
+      気に入ったデザインをベースに、さらにカスタマイズすることも可能です。
+    </p>
+  </div>
+
+</body>
+</html>

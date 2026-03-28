@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>キャリアアップ | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* 固定ボタングループの修正 */
+    .fixed-buttons {
+      position: fixed;
+      right: 40px;
+      bottom: 40px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+    .back-to-top,
+    .back-to-home {
+      width: 56px !important;
+      height: 56px !important;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 1;
+      visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-decoration: none;
+      overflow: hidden;
+    }
+    .back-to-top svg,
+    .back-to-home svg {
+      width: 24px !important;
+      height: 24px !important;
+      stroke: var(--white);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ===========================
+       MV
+    =========================== */
+    #mv {
+      padding: 80px 60px 100px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mv-inner { max-width: 1160px; margin: 0 auto; }
+
+    /* ===========================
+       採用フロー
+    =========================== */
+    #hiring-flow {
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .flow-inner { max-width: 1160px; margin: 0 auto; }
+    .flow-section-title {
+      font-family: var(--font-en);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .flow-section-sub {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+    .flow-steps {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .flow-step {
+      flex: 1;
+      padding: 28px 20px 32px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      text-align: center;
+    }
+    .flow-step:last-child { border-right: none; }
+    .flow-step-num {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--gray-light);
+      margin-bottom: 12px;
+    }
+    .flow-step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+    /* ステップ間の矢印 */
+    .flow-step::after {
+      content: '›';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--gray-light);
+      z-index: 1;
+      line-height: 1;
+    }
+    .flow-step:last-child::after { display: none; }
+
+    .mv-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 52px;
+      flex-wrap: wrap;
+    }
+    .mv-en {
+      font-family: var(--font-en);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      line-height: 1.1;
+      color: var(--black);
+    }
+    .mv-ja {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--gray-dark);
+      white-space: nowrap;
+      background: var(--bg-light);
+      padding: 4px 12px;
+    }
+    .mv-catch {
+      font-size: clamp(18px, 2.4vw, 26px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .mv-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.4;
+      max-width: 560px;
+    }
+
+    /* ===========================
+       Topに戻るボタン
+    =========================== */
+    .back-to-top {
+      position: fixed;
+      right: 40px;
+      bottom: 40px;
+      z-index: 100;
+      width: 56px;
+      height: 56px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 1;
+      visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top:hover {
+      background: var(--dark);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .back-to-top svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--white);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ===========================
+       MODEL CASE セクション
+       ▼ 人物を追加するには
+         <!-- MODEL CASE TEMPLATE --> のブロックをコピーして
+         #model-case-list の末尾に追加するだけでOK
+    =========================== */
+    #model-case {
+      padding: 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mc-inner { max-width: 1160px; margin: 0 auto; }
+
+    /* 人物ブロック */
+    .mc-person {
+      padding: 72px 0 64px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mc-person:last-child { border-bottom: none; }
+
+    /* 上段：写真＋プロフィール横並び */
+    .mc-profile-row {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 64px;
+      margin-bottom: 48px;
+      align-items: start;
+    }
+    .mc-photo-wrap {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      background: var(--bg-light);
+      overflow: hidden;
+      position: relative;
+    }
+    .mc-photo {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+    /* プレースホルダー */
+    .mc-photo-ph {
+      width: 100%; height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--gray-light);
+    }
+    .mc-photo-ph svg {
+      width: 48px; height: 48px;
+      stroke: var(--gray-light); fill: none; stroke-width: 1.2;
+    }
+    .mc-photo-ph span {
+      font-family: var(--font-en);
+      font-size: 11px; letter-spacing: 0.2em;
+    }
+
+    .mc-profile {
+      padding-top: 8px;
+    }
+    .mc-catch {
+      font-size: clamp(18px, 2.2vw, 26px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .mc-bio {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+      line-height: 2.0;
+      margin-bottom: 36px;
+    }
+    .mc-name-block {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+    .mc-role {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 6px;
+    }
+    .mc-name {
+      font-family: var(--font-en);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--black);
+    }
+
+    /* タイムライン（年目リスト） */
+    .mc-timeline {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 0;
+      list-style: none;
+    }
+    .mc-timeline-item {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--black);
+      letter-spacing: 0.04em;
+    }
+    .mc-timeline-item:last-child { border-bottom: none; }
+    .mc-timeline-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--black);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .mc-timeline-year {
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--gray);
+      white-space: nowrap;
+      min-width: 60px;
+    }
+    .mc-timeline-text {
+      flex: 1;
+      line-height: 1.8;
+    }
+
+    /*
+    =====================================================
+    MODEL CASE TEMPLATE（コピー用）
+    =====================================================
+    <div class="mc-person fade-in">
+      <div class="mc-profile-row">
+        <div class="mc-photo-wrap">
+          <!-- 写真がある場合: <img class="mc-photo" src="画像パス" alt="氏名"> -->
+          <div class="mc-photo-ph">
+            <svg viewBox="0 0 48 48"><circle cx="24" cy="16" r="8"/><path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16"/></svg>
+            <span>PHOTO</span>
+          </div>
+        </div>
+        <div class="mc-profile">
+          <p class="mc-catch">
+            【キャッチコピー1行目】<br>
+            【キャッチコピー2行目】
+          </p>
+          <p class="mc-bio">
+            【プロフィール本文】
+          </p>
+          <div class="mc-name-block">
+            <p class="mc-role">【職種名】</p>
+            <p class="mc-name">【氏名（ローマ字）】</p>
+          </div>
+        </div>
+      </div>
+      <ul class="mc-timeline">
+        <li class="mc-timeline-item">
+          <span class="mc-timeline-dot"></span>
+          <span class="mc-timeline-year">1年目</span>
+          <span class="mc-timeline-text">【内容】</span>
+        </li>
+        <li class="mc-timeline-item">
+          <span class="mc-timeline-dot"></span>
+          <span class="mc-timeline-year">2年目</span>
+          <span class="mc-timeline-text">【内容】</span>
+        </li>
+        追加は li.mc-timeline-item をコピー
+      </ul>
+    </div>
+    =====================================================
+    */
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 960px) {
+    }
+    @media (max-width: 768px) {
+      #mv, #hiring-flow, #model-case { padding-left: 24px; padding-right: 24px; }
+      .mc-profile-row { grid-template-columns: 1fr; gap: 32px; }
+      .mc-photo-wrap { aspect-ratio: 3 / 2; max-width: 320px; }
+      .back-to-top { right: 20px; bottom: 20px; width: 48px; height: 48px; }
+      .flow-steps { flex-direction: column; }
+      .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .flow-step:last-child { border-bottom: none; }
+      .flow-step::after { display: none; }
+    }
+    @media (max-width: 480px) {
+      .mv-title-row { gap: 12px; }
+      .mc-timeline-item { gap: 14px; font-size: 13px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- 固定ボタングループ -->
+  <div class="fixed-buttons">
+    <a href="index-pattern-f.html" class="back-to-home" id="backToHome">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <button class="back-to-top" id="backToTop">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div class="mv-inner">
+      <div class="mv-title-row fade-in">
+        <h1 class="mv-en">Career Path / Model</h1>
+        <span class="mv-ja">キャリアパス・モデルケース</span>
+      </div>
+      <p class="mv-catch fade-in delay-1">
+        実際の社員のキャリアパスを紹介。<br>
+        多様な成長の軌跡がここにあります。
+      </p>
+      <p class="mv-desc fade-in delay-2">
+        様々なバックグラウンドから入社し、それぞれの道で成長を続ける社員たち。<br>
+        実際のキャリアモデルを通じて、WIN PARTNERでの可能性をご覧ください。
+      </p>
+    </div>
+
+
+  <!-- ===========================
+       採用フロー
+  =========================== -->
+  <section id="hiring-flow">
+    <div class="flow-inner">
+      <div class="fade-in delay-1">
+        <p class="flow-section-title">Hiring Flow</p>
+        <p class="flow-section-sub">採用フロー</p>
+        <div class="flow-steps">
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 01</p>
+            <p class="flow-step-title">エントリー</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 02</p>
+            <p class="flow-step-title">書類選考</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 03</p>
+            <p class="flow-step-title">一次面接</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 04</p>
+            <p class="flow-step-title">最終面接</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 05</p>
+            <p class="flow-step-title">内定</p>
+          </div>
+
+        </div><!-- /flow-steps -->
+      </div>
+    </div><!-- /flow-inner -->
+  </section>
+
+
+  <!-- ===========================
+       MODEL CASE
+       ▼ 人物を追加するには
+         下の「MODEL CASE TEMPLATE」コメントをコピーして
+         #model-case-list の末尾（</div>の直前）に貼り付け
+  =========================== -->
+  <section id="model-case">
+    <div class="mc-inner">
+
+      <h2 class="section-heading-en fade-in">Model Case</h2>
+
+      <!-- ===== 人物リスト ===== -->
+      <div id="model-case-list">
+
+        <!-- ▼ 人物 01 -->
+        <div class="mc-person fade-in">
+          <div class="mc-profile-row">
+
+            <!-- 写真エリア -->
+            <div class="mc-photo-wrap">
+              <img class="mc-photo" src="images/yuki-tawara.png" alt="Haruto Sasaki">
+            </div>
+
+            <!-- プロフィール -->
+            <div class="mc-profile">
+              <p class="mc-catch">
+                コードも営業も、<br>
+                未経験の自分が管理職になるまで。
+              </p>
+              <p class="mc-bio">
+                プログラミングも営業も、入社前は何もできませんでした。でも研修を通じてコードを書く力だけでなく、クライアントと向き合うコミュニケーション力や提案力まで自然と身についていきました。「技術だけじゃない人間」に育ててもらえたことが、今の自分の一番の強みです。
+              </p>
+              <div class="mc-name-block">
+                <p class="mc-role">エンジニア → チームリーダー</p>
+                <p class="mc-name">Haruto Sasaki</p>
+              </div>
+            </div>
+
+          </div><!-- /mc-profile-row -->
+
+          <!-- タイムライン -->
+          <ul class="mc-timeline">
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">1年目</span>
+              <span class="mc-timeline-text">研修でエンジニアの基礎を習得</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">2年目</span>
+              <span class="mc-timeline-text">実案件に参加・営業同行も経験</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">3年目</span>
+              <span class="mc-timeline-text">クライアントへの提案を単独で担当</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">4年目</span>
+              <span class="mc-timeline-text">後輩エンジニアのメンターに就任</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">5年目</span>
+              <span class="mc-timeline-text">チームリーダーとして管理職へ昇格</span>
+            </li>
+          </ul>
+
+        </div><!-- /mc-person 01 -->
+
+
+        <!-- ▼ 人物 02 -->
+        <div class="mc-person fade-in">
+          <div class="mc-profile-row">
+            <div class="mc-photo-wrap">
+              <img class="mc-photo" src="images/sara-inoue.png" alt="Sara Inoue">
+            </div>
+            <div class="mc-profile">
+              <p class="mc-catch">
+                毎朝憂鬱だった通勤が、<br>
+                今は楽しみに変わりました。
+              </p>
+              <p class="mc-bio">
+                前職では毎朝、会社に行くのが憂鬱でした。決まった時間、決まった場所、決まった仕事。「これが一生続くのかな」と思っていた頃に転職を決意。ウィンパートナーでは働く時間も場所も自分で選べて、最初は戸惑うくらいでした。今は仕事が楽しくて、休日もプライベートを全力で楽しめています。
+              </p>
+              <div class="mc-name-block">
+                <p class="mc-role">一般事務 → プロジェクトマネージャー</p>
+                <p class="mc-name">Sara Inoue</p>
+              </div>
+            </div>
+          </div>
+          <ul class="mc-timeline">
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">1年目</span>
+              <span class="mc-timeline-text">フレックス制度を活用しながら業務習得</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">2年目</span>
+              <span class="mc-timeline-text">チームの進行管理を任されるように</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">3年目</span>
+              <span class="mc-timeline-text">リモートワークを活用しながら成果を出す</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">4年目</span>
+              <span class="mc-timeline-text">複数プロジェクトを同時に管理</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">5年目</span>
+              <span class="mc-timeline-text">プロジェクトマネージャーとして管理職へ</span>
+            </li>
+          </ul>
+        </div><!-- /mc-person 02 -->
+
+
+        <!-- ▼ 人物 03 -->
+        <div class="mc-person fade-in">
+          <div class="mc-profile-row">
+            <div class="mc-photo-wrap">
+              <img class="mc-photo" src="images/haruto-sasaki.png" alt="Yuki Tawara">
+            </div>
+            <div class="mc-profile">
+              <p class="mc-catch">
+                「未経験はお断り」の壁を<br>
+                ウィンパートナーが壊してくれた。
+              </p>
+              <p class="mc-bio">
+                エンジニアになりたくて独学で勉強したものの、「未経験者は採用されづらい」「伏線を取りづらい」という壁に何度もぶつかりました。ウィンパートナーの研修制度と出会い、9ヶ月でゼロから実務レベルまで到達。夢を諦めなくてよかったと、今は心から思えます。いい環境があれば、道は必ず開けます。
+              </p>
+              <div class="mc-name-block">
+                <p class="mc-role">飲食業 → エンジニア → エンジニアリング責任者</p>
+                <p class="mc-name">Yuki Tawara</p>
+              </div>
+            </div>
+          </div>
+          <ul class="mc-timeline">
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">1年目</span>
+              <span class="mc-timeline-text">9ヶ月研修でプログラミングを習得</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">2年目</span>
+              <span class="mc-timeline-text">実案件の開発に参加</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">3年目</span>
+              <span class="mc-timeline-text">新機能の設計・実装をリード</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">4年目</span>
+              <span class="mc-timeline-text">チームの技術方針を策定</span>
+            </li>
+            <li class="mc-timeline-item">
+              <span class="mc-timeline-dot"></span>
+              <span class="mc-timeline-year">5年目</span>
+              <span class="mc-timeline-text">開発リーダーとして管理職へ昇格</span>
+            </li>
+          </ul>
+        </div><!-- /mc-person 03 -->
+
+
+      </div><!-- /model-case-list -->
+
+    </div>
+  </section>
+
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // タイピングアニメーション
+      initTypingAnimation('.mv-en', 150, 300);
+
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+
+      // Topに戻るボタンの表示/非表示
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+
+      // Topに戻るボタンのクリックイベント
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>

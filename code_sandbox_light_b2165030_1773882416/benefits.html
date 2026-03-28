@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>福利厚生・社内制度 | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV
+    =========================== */
+    #mv {
+      padding: 80px 60px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mv-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .mv-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .mv-en {
+      font-family: var(--font-en);
+      font-size: clamp(64px, 10vw, 130px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+    }
+    .mv-ja {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--gray-dark);
+      white-space: nowrap;
+      background: var(--bg-light);
+      padding: 4px 12px;
+    }
+    .mv-catch {
+      font-size: clamp(18px, 2.4vw, 26px);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .mv-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.4;
+      max-width: 640px;
+    }
+
+    /* ===========================
+       セクション共通
+    =========================== */
+    .sec-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .section-heading-en {
+      font-family: var(--font-en);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+    .section-heading-ja {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--gray);
+      margin-bottom: 48px;
+    }
+    .section-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.4;
+      max-width: 700px;
+      margin-bottom: 48px;
+    }
+
+    /* ===========================
+       INTERNAL SYSTEM
+       左ラベル・右説明の2カラムリスト
+    =========================== */
+    #internal-system {
+      padding: 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .internal-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .internal-heading {
+      font-family: var(--font-en);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      padding-top: 64px;
+      margin-bottom: 48px;
+    }
+    .system-list {
+      border-top: 1px solid var(--border);
+    }
+    .system-row {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 40px 0;
+      align-items: start;
+    }
+    .system-name {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--black);
+      padding-right: 40px;
+      line-height: 1.7;
+    }
+    .system-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.2;
+      max-width: 700px;
+    }
+
+    /* ===========================
+       オフィス写真エリア
+    =========================== */
+    #office-photo {
+      overflow: hidden;
+      line-height: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .office-photo-wrap {
+      width: 100%;
+      height: clamp(280px, 40vw, 540px);
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .office-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: var(--gray-light);
+    }
+    .photo-placeholder svg {
+      width: 56px; height: 56px;
+      stroke: var(--gray-light); fill: none; stroke-width: 1.2;
+    }
+    .photo-placeholder span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+    }
+
+    /* ===========================
+       ALL BENEFIT / HOLIDAY
+       アコーディオン形式
+    =========================== */
+    #all-benefit,
+    #holiday {
+      padding: 0 60px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    #holiday { border-bottom: none; }
+
+    .benefit-heading-wrap {
+      padding-top: 64px;
+      margin-bottom: 0;
+    }
+
+    /* カードグリッド */
+    .benefit-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+      margin-top: 48px;
+    }
+
+    /* アコーディオンアイテム */
+    .benefit-accordion-item {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .benefit-accordion-item:hover { background: var(--bg-light); }
+
+    /* アコーディオンヘッダー（ボタン） */
+    .benefit-accordion-header {
+      width: 100%;
+      padding: 28px 28px;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      transition: background 0.2s;
+    }
+
+    .benefit-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    /* アコーディオンアイコン */
+    .benefit-accordion-icon {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--black);
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .benefit-accordion-item.active .benefit-accordion-icon {
+      transform: rotate(45deg);
+    }
+
+    /* アコーディオンコンテンツ */
+    .benefit-accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+    .benefit-accordion-item.active .benefit-accordion-content {
+      max-height: 500px;
+    }
+
+    .benefit-card-desc {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2;
+      padding: 0 28px 28px;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 960px) {
+      .benefit-cards-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      #mv                { padding: 56px 24px; }
+      #internal-system   { padding: 0 24px; }
+      #all-benefit,
+      #holiday           { padding: 0 24px 60px; }
+      .mv-title-row      { flex-wrap: wrap; gap: 12px; }
+      .system-row        { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+      .benefit-cards-grid{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .mv-en { font-size: clamp(44px, 14vw, 80px); }
+    }
+
+
+    /* 固定ボタングループ */
+    .fixed-buttons {
+      position: fixed; right: 40px; bottom: 40px; z-index: 100;
+      display: flex; flex-direction: column; gap: 12px; align-items: center;
+    }
+    .back-to-top, .back-to-home {
+      width: 56px; height: 56px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 1; visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-decoration: none;
+    }
+    .back-to-top.visible, .back-to-home.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover, .back-to-home:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .back-to-top svg, .back-to-home svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
+  </style>
+</head>
+<body>
+
+  <!-- 固定ボタングループ -->
+  <div class="fixed-buttons">
+    <a href="index-pattern-f.html" class="back-to-home" id="backToHome">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <button class="back-to-top" id="backToTop">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div class="mv-inner">
+      <div class="mv-title-row fade-in">
+        <h1 class="mv-en">Benefit</h1>
+        <span class="mv-ja">福利厚生・社内制度</span>
+      </div>
+      <p class="mv-catch fade-in delay-1">
+        働く人の数だけ、働き方がある。
+      </p>
+      <p class="mv-desc fade-in delay-2">
+        一人ひとりの声から生まれた制度が、ウィンパートナーらしい働き方をつくっています。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       INTERNAL SYSTEM（社内制度 2カラムリスト）
+       ▼ 項目を追加するには
+         .system-row ブロックをコピーして .system-list 内に追加するだけでOK
+  =========================== -->
+  <section id="internal-system">
+    <div class="internal-inner">
+
+      <h2 class="internal-heading fade-in">Our Initiative</h2>
+
+      <div class="system-list fade-in delay-1">
+
+        <div class="system-row">
+          <p class="system-name">ブラックマンデー</p>
+          <p class="system-desc">毎月最終月曜日の出社時間を15時に設定。日曜日や月曜の朝をゆっくり過ごせる制度です。約7割の社員が利用し、週の始まりを心地よくスタートしています。</p>
+        </div>
+
+        <div class="system-row">
+          <p class="system-name">ファミリーバースデー休暇</p>
+          <p class="system-desc">本人や家族（配偶者・1親等）の誕生日に特別休暇を取得できます。家族を大切にできる人は、仕事も大切にできる。そう信じています。</p>
+        </div>
+
+        <div class="system-row">
+          <p class="system-name">メディカル休暇</p>
+          <p class="system-desc">体調不良で休む際、年間3日間まで給与全額を保障。誰でも体調を崩すことはある。だから、安心して休める環境を整えています。</p>
+        </div>
+
+        <div class="system-row">
+          <p class="system-name">勤務間インターバル</p>
+          <p class="system-desc">退勤から翌日の始業まで、最低10時間のインターバルを確保。高いパフォーマンスは、十分な休息から生まれると考えています。</p>
+        </div>
+
+        <!--
+        =====================================================
+        ▼ 社内制度を追加する場合は以下をコピーして貼り付け
+        =====================================================
+        <div class="system-row">
+          <p class="system-name">【制度名】</p>
+          <p class="system-desc">【説明文】</p>
+        </div>
+        =====================================================
+        -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       オフィス写真
+       ▼ 写真を挿入する場合は .photo-placeholder を
+         <img src="画像パス" alt="説明"> に差し替えてOK
+  =========================== -->
+  <div id="office-photo">
+    <div class="office-photo-wrap">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="40" height="32" rx="2"/>
+          <circle cx="17" cy="20" r="4"/>
+          <polyline points="4,34 14,22 22,30 30,20 44,36"/>
+        </svg>
+        <span>OFFICE PHOTO</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===========================
+       ALL BENEFIT（全福利厚生 番号付きカード）
+       ▼ カードを追加するには
+         .benefit-card ブロックをコピーして .benefit-cards-grid 内に追加するだけでOK
+         番号は手動で連番にしてください
+  =========================== -->
+  <section id="all-benefit">
+    <div class="sec-inner">
+      <div class="benefit-heading-wrap fade-in">
+        <h2 class="section-heading-en">All Benefit</h2>
+        <p class="section-heading-ja">全福利厚生</p>
+        <p class="section-desc">
+          会社独自の福利厚生が多数あり、その8割以上が社員の発案により導入に至っています。<br>
+          オモシロイ会社づくりを目指すべく、今後も様々な福利厚生を増やしていく予定です。
+        </p>
+      </div>
+
+      <div class="benefit-cards-grid fade-in delay-1">
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">ワークスタイル選択制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">規定を満たした場合、フルフレックス・フレックス・ワークライフバランスの3種から様々な働き方を選択できます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">ブック70</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">読後に会社に保管してもらえる本は、会社が購入費用の70%を負担します。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">新聞購読奨励制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">日本経済新聞を購読する場合、月額購読料金の50%を負担します。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">出産お祝い金制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">お子さんが生まれた際のお祝い金として1人目5万円、2人目以降10万円を支給します。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">住宅補助制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">事務所から3駅 or 3km圏内の場合、家賃の25%を補助します。（上限あり）</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">勤務地フリー制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">本人の意思を伴わない会社辞令による異動や転勤は一切ありません。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">セミナー補助制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">休日に実施される社外研修・勉強会などの参加費は社内申請をすると100%会社負担で受講できます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">通信手当</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">本人の希望により仕事で個人携帯を使用している場合、毎月2,000円が支給されます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">ランチセッション</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">12:00から他部署を交えたランチセッションを開催しています。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">社内イベント</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">【春】お花見、【夏・秋】海・BBQ、【冬】社員総会を実施しています。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">勤務間インターバル</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">退勤から翌日の始業時間のあいだに一定時間（10時間）の休息・睡眠時間を確保できる制度です。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">シエスタ（仮眠）制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">業務時間内に30分のお昼寝ができる制度です。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">フリードリンクバー</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">18:00以降、オフィスのBARにあるドリンク（ジュース、アルコールなど）を無料で飲むことができます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">リモートワーク制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">環境や家庭の事情に応じてリモートワークを選択できます。（規定あり）</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">スーツ廃止制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">TPOを遵守した私服勤務のワークスタイルをとっています。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">社員旅行</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">会社の業績達成に応じて社員旅行へ行くことがあります。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">社員食堂</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">希望者には専属シェフによるランチを社内で食べることができます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">時短勤務制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">週2〜3日、子育てや介護等と両立しながら正社員として働ける制度。※個別事案に応じた働き方が可能</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">参観日タイム</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">勤務時間内に子供の参観日や運動会などの行事ごとに行ける制度。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">妊活タイム</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">不妊治療など妊活にあたって、勤務時間内で病院に行ける制度。※上長への申告不要、男女共に利用可</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">選挙タイム</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">選挙期間中に投票するため、勤務時間内に投票所へ行くことができる制度。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">グレードアップ制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">PC・メモリなど生産性向上に繋がるツールを会社が購入する制度。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">SNS手当</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">フォロワー数に応じて毎月手当を支給。自分の影響力が評価される制度。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">メディカル休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">年間3日まで体調不良での欠勤も給与を全額保障します。</p>
+          </div>
+        </div>
+
+        <!--
+        =====================================================
+        ▼ All Benefit のカードを追加する場合は以下をコピーして貼り付け
+        =====================================================
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">【制度名】</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">【説明文】</p>
+          </div>
+        </div>
+        =====================================================
+        -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       HOLIDAY（休暇制度 番号付きカード）
+       ▼ カードを追加するには
+         .benefit-card ブロックをコピーして .benefit-cards-grid 内に追加するだけでOK
+  =========================== -->
+  <section id="holiday">
+    <div class="sec-inner">
+      <div class="benefit-heading-wrap fade-in">
+        <h2 class="section-heading-en">Holiday</h2>
+        <p class="section-heading-ja">休暇制度</p>
+        <p class="section-desc">
+          社員のライフスタイルに合わせた多彩な休暇制度を設定。<br>
+          育休は最長10年取得可能。仕事と家庭・育児の両立支援制度を充実させています。
+        </p>
+      </div>
+
+      <div class="benefit-cards-grid fade-in delay-1">
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">ファミリーバースデー休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">本人及び配偶者を含む1親等までの親族の誕生日には、1日特別休暇を取得できます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">マリッジアニバーサリー</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">5年・10年・15年の結婚記念日には、3日間の特別休暇を取得できます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">結婚準備休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">手続き等の準備として初年度に1日特別休暇を取得できます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">リフレッシュバケーション</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">留学や長期旅行など理由に関わらず、どのタイミングでも最長1年間の長期休業を取得できます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">メディカル休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">体調不良などでやむを得ない欠勤の場合、年間3日間まで給与の全額を会社が保障する制度です。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">産休育休制度</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">産休は予定日の3ヶ月前から取得可能。育休は法定（最大2歳まで）に加え、3歳以降も最長10年以内は復職可能な制度を用意しています。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">ブラックマンデー</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">毎月最終の月曜日は出勤時間を15:00とし、前日や月曜の朝を有効活用してリフレッシュできる制度です。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">休日・休暇実績125日</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">完全週休2日制（土日）。有給休暇＋リフレッシュ休暇。（初年度から最大20日の休暇付与）</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">失恋休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">恋に破れた翌日は心を休め、午後から出社できる制度。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">離婚慰安休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">離婚による心の傷を癒すために1日特別休暇をもらえる制度。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">マタニティ休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">妊娠による体調不良でやむを得ない欠勤の場合、5日間まで給与の全額を会社が保障する制度（初回〜産後までの合計）。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">F休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">生理による体調不良で働くことが困難な場合、休暇やリモート出勤に切り替えることができる制度。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">おひとりさまアニバーサリー</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">40歳以上の独身社員には40歳・45歳・50歳の年に3日間の特別休暇を取得することができます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">バズ休（X）</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">Xの投稿が1万リツイートされた場合、1日特別休暇を取得できます。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">バズ休（ブログ）</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">自分が書いたブログ記事がバズった場合、1日特別休暇がもらえる制度。</p>
+          </div>
+        </div>
+
+        <!--
+        =====================================================
+        ▼ Holiday のカードを追加する場合は以下をコピーして貼り付け
+        =====================================================
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">【制度名】</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">【説明文】</p>
+          </div>
+        </div>
+        =====================================================
+        -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // タイピングアニメーション
+      initTypingAnimation('.mv-en', 150, 300);
+
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+
+      // Topに戻るボタンの表示/非表示
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+
+      // Topに戻るボタンのクリックイベント
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // アコーディオン機能
+      const accordionHeaders = document.querySelectorAll('.benefit-accordion-header');
+      accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          const accordionItem = header.parentElement;
+          accordionItem.classList.toggle('active');
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

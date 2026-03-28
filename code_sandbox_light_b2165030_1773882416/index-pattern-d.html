@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pattern D - 2列グリッド + 詳細表示 | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- 共通CSS -->
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV SECTION - 中央配置
+    =========================== */
+    #mv {
+      min-height: calc(100vh - var(--header-h));
+      background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      position: relative;
+      text-align: center;
+    }
+
+    .mv-heading-en {
+      font-family: var(--font-en);
+      font-size: clamp(72px, 11vw, 148px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .mv-heading-sub {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 40px;
+    }
+    .mv-catchcopy {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .mv-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      letter-spacing: 0.06em;
+      line-height: 2;
+      max-width: 520px;
+    }
+
+    /* scroll down arrow */
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: bounce 2s infinite;
+    }
+    .scroll-down:hover {
+      background: rgba(255,255,255,0.3);
+      transform: translateX(-50%) translateY(-5px);
+    }
+    .scroll-down svg {
+      width: 18px; height: 18px;
+      fill: none; stroke: var(--white);
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
+    /* ===========================
+       MAIN CARDS SECTION - 2列大きめグリッド
+    =========================== */
+    #menu {
+      padding: 100px 60px;
+      background: #fafafa;
+    }
+
+    .cards-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .card-item {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 60px 48px;
+      cursor: pointer;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ホバー時に拡大 + 詳細表示 */
+    .card-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    }
+
+    /* カード番号 */
+    .card-number {
+      position: absolute;
+      top: 24px;
+      right: 32px;
+      font-family: var(--font-en);
+      font-size: 80px;
+      font-weight: 800;
+      color: rgba(0,0,0,0.03);
+      line-height: 1;
+      transition: all 0.3s ease;
+    }
+
+    .card-item:hover .card-number {
+      color: rgba(0,0,0,0.08);
+      transform: scale(1.1);
+    }
+
+    .card-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 2px solid var(--gray-light);
+      font-size: 18px;
+      color: var(--black);
+      margin-bottom: 32px;
+      font-family: var(--font-en);
+      flex-shrink: 0;
+      transition: all 0.4s ease;
+    }
+
+    .card-item:hover .card-arrow {
+      transform: rotate(45deg) scale(1.1);
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    .card-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      margin-bottom: 20px;
+      line-height: 1.4;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-body {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    /* 詳細情報（通常は非表示） */
+    .card-detail {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s ease;
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.8;
+      padding-top: 0;
+      border-top: 1px solid transparent;
+    }
+
+    .card-item:hover .card-detail {
+      opacity: 1;
+      max-height: 200px;
+      padding-top: 24px;
+      border-top-color: var(--border);
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      margin-top: auto;
+      transition: all 0.3s ease;
+    }
+
+    .card-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .card-item:hover .card-link {
+      gap: 12px;
+    }
+
+    .card-item:hover .card-link svg {
+      transform: translateX(4px);
+    }
+
+    /* 黒塗りカード */
+    .card-item.dark {
+      background: linear-gradient(135deg, #111111 0%, #2a2a2a 100%);
+      color: var(--white);
+    }
+
+    .card-item.dark .card-arrow {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.3);
+    }
+
+    .card-item.dark:hover .card-arrow {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+
+    .card-item.dark .card-number {
+      color: rgba(255,255,255,0.05);
+    }
+
+    .card-item.dark:hover .card-number {
+      color: rgba(255,255,255,0.1);
+    }
+
+    .card-item.dark .card-title { color: var(--white); }
+    .card-item.dark .card-body { color: rgba(255,255,255,0.8); }
+    .card-item.dark .card-detail { color: rgba(255,255,255,0.6); border-top-color: rgba(255,255,255,0.1); }
+    .card-item.dark .card-link { color: var(--white); }
+
+    /* ===========================
+       TEAM PHOTO
+    =========================== */
+    #photo {
+      overflow: hidden;
+      line-height: 0;
+    }
+    .photo-wrap {
+      width: 100%;
+      height: clamp(320px, 45vw, 600px);
+      background: linear-gradient(135deg, #e5e5e5 0%, #cccccc 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: var(--gray-light);
+    }
+    .photo-placeholder svg {
+      width: 56px; height: 56px;
+      stroke: var(--gray-light);
+      fill: none; stroke-width: 1.2;
+    }
+    .photo-placeholder span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 960px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #mv { padding: 0 24px 80px; }
+      #menu { padding: 72px 24px; }
+      .card-item {
+        padding: 48px 32px;
+        min-height: 320px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .mv-heading-en { font-size: clamp(44px, 14vw, 80px); }
+      .card-number { font-size: 60px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div class="mv-heading-en fade-in">Recruit</div>
+    <p class="mv-heading-sub fade-in delay-1">採用情報</p>
+    <p class="mv-catchcopy fade-in delay-2">未来を切り拓く</p>
+    <p class="mv-sub fade-in delay-3">
+      株式会社ウィンパートナーは、<br>
+      共に持続可能な成長を目指せる仲間を募集しています。
+    </p>
+    <div class="scroll-down" id="scrollBtn" aria-label="スクロール">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       MAIN CARDS  (2列大きめグリッド)
+  =========================== -->
+  <section id="menu">
+    <div class="cards-grid fade-in">
+
+      <a href="jobs.html" class="card-item">
+        <span class="card-number">01</span>
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">募集要項</h3>
+        <p class="card-body">
+          オモシロイ会社づくりには、オモシロイ仲間が欠かせない。<br>
+          各職種の仕事内容や求める人物像をご紹介します。
+        </p>
+        <div class="card-detail">
+          戦略企画部、意匠制作部、コンテンツ制作部、テクノロジー部、経営管理部の5つの部署で15の職種を募集中です。
+        </div>
+        <span class="card-link">
+          View More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a href="education.html" class="card-item">
+        <span class="card-number">02</span>
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">教育 / 研修制度</h3>
+        <p class="card-body">
+          ウィンパートナーのビジョンと社員一人ひとりの夢や目標を重ねるために、<br>
+          研修制度や職場環境を整えています。
+        </p>
+        <div class="card-detail">
+          新入社員研修、OJT、スキルアップ研修、マネジメント研修など、キャリアステージに応じた充実した教育プログラムを用意しています。
+        </div>
+        <span class="card-link">
+          View More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a href="benefits.html" class="card-item">
+        <span class="card-number">03</span>
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">福利厚生 / 社内制度</h3>
+        <p class="card-body">
+          「世界一オモシロイ会社」を目指して導入された、<br>
+          50以上のユニークな福利厚生や社内制度があります。
+        </p>
+        <div class="card-detail">
+          リモートワーク制度、副業OK、資格取得支援、書籍購入補助、健康診断補助など、働きやすさを追求した制度が充実しています。
+        </div>
+        <span class="card-link">
+          View More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a href="environment.html" class="card-item dark">
+        <span class="card-number">04</span>
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">働く環境</h3>
+        <p class="card-body">
+          好きなコトをやり続けるために、ライフスタイルに合わせた<br>
+          働き方制度やオフィス環境にこだわっています。
+        </p>
+        <div class="card-detail">
+          フレックスタイム制、リモート勤務可能、フリーアドレス、カフェスペース完備など、快適に働ける環境を整えています。
+        </div>
+        <span class="card-link">
+          View More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a href="career.html" class="card-item">
+        <span class="card-number">05</span>
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">キャリアアップ</h3>
+        <p class="card-body">
+          会社のビジョンに共感しながら、自分の夢も追いかける。<br>
+          独自の評価システムとキャリアパスを整えています。
+        </p>
+        <div class="card-detail">
+          年2回の評価面談、明確な昇進基準、キャリア相談制度など、一人ひとりの成長をサポートする仕組みがあります。
+        </div>
+        <span class="card-link">
+          View More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+      <a href="contact.html" class="card-item">
+        <span class="card-number">06</span>
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">エントリー</h3>
+        <p class="card-body">
+          ウィンパートナーの理念や仕事に共感いただけた方は、<br>
+          こちらのエントリーフォームからご応募ください。
+        </p>
+        <div class="card-detail">
+          新卒採用、中途採用、アルバイト・インターン採用を随時受け付けています。まずはお気軽にエントリーください。
+        </div>
+        <span class="card-link">
+          View More
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       TEAM PHOTO
+  =========================== -->
+  <div id="photo">
+    <div class="photo-wrap">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="40" height="32" rx="2"/>
+          <circle cx="17" cy="20" r="4"/>
+          <polyline points="4,34 14,22 22,30 30,20 44,36"/>
+        </svg>
+        <span>TEAM PHOTO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    // MV テキストをすぐに表示
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+    });
+
+    // スクロールボタン
+    document.getElementById('scrollBtn').addEventListener('click', () => {
+      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

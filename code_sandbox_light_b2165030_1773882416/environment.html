@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>働く環境 | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+
+    /* ===========================
+       MV
+    =========================== */
+    #mv {
+      padding: 80px 60px 80px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mv-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .mv-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+    .mv-en {
+      font-family: var(--font-en);
+      font-size: clamp(64px, 10vw, 130px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+    }
+    .mv-ja {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--gray-dark);
+      white-space: nowrap;
+      background: var(--bg-light);
+      padding: 4px 12px;
+    }
+    .mv-catch {
+      font-size: clamp(18px, 2.4vw, 26px);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .mv-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.4;
+      max-width: 600px;
+    }
+
+    /* ===========================
+       IN NUMBER セクション
+    =========================== */
+    #in-number {
+      padding: 0 60px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .in-number-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .section-heading-en {
+      font-family: var(--font-en);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      padding-top: 64px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: baseline;
+      gap: 20px;
+    }
+    .section-heading-note {
+      font-family: var(--font-ja);
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+
+    /* 数値カードグリッド */
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: none;
+      border-left: none;
+      margin-top: 40px;
+    }
+    .number-card {
+      border-right: none;
+      border-bottom: none;
+      padding: 32px 28px 36px;
+    }
+    .number-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--gray-dark);
+      margin-bottom: 20px;
+      display: inline-block;
+      background: var(--bg-light);
+      padding: 3px 10px;
+    }
+    .number-value {
+      font-family: var(--font-en);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      line-height: 1.0;
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .number-unit {
+      font-family: var(--font-ja);
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 500;
+      color: var(--black);
+    }
+    .number-sub {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--gray);
+      margin-top: 8px;
+      letter-spacing: 0.06em;
+      line-height: 1.8;
+    }
+    /* 比率カード（A：B 形式） */
+    .number-ratio {
+      display: flex;
+      align-items: baseline;
+      gap: 0;
+    }
+    .ratio-val {
+      font-family: var(--font-en);
+      font-size: clamp(36px, 5vw, 56px);
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1.0;
+    }
+    .ratio-sep {
+      font-family: var(--font-en);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 400;
+      color: var(--black);
+      padding: 0 6px;
+    }
+    .ratio-sub-row {
+      display: flex;
+      gap: 0;
+      margin-top: 8px;
+    }
+    .ratio-sub-item {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: 0.06em;
+      flex: 1;
+    }
+    .ratio-sub-item:nth-child(2) {
+      padding-left: 8px;
+    }
+
+    /* グラフ付きカード */
+    .chart-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: none;
+      border-left: none;
+    }
+    .chart-card {
+      border-right: none;
+      border-bottom: none;
+      padding: 36px 32px;
+    }
+    .chart-card-title {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--gray-dark);
+      margin-bottom: 28px;
+      display: inline-block;
+      background: var(--bg-light);
+      padding: 3px 10px;
+    }
+
+    /* 拠点カード */
+    .location-row {
+      display: flex;
+      gap: 32px;
+      align-items: flex-end;
+      margin-top: 12px;
+    }
+    .location-item .loc-val {
+      font-family: var(--font-en);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--black);
+      line-height: 1.0;
+    }
+    .location-item .loc-unit {
+      font-family: var(--font-ja);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--black);
+    }
+    .location-item .loc-label {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--gray);
+      margin-top: 6px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ドーナツグラフ */
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .donut-canvas-wrap {
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .donut-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      letter-spacing: 0.04em;
+    }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .legend-pct {
+      font-family: var(--font-en);
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--black);
+      margin-right: 2px;
+    }
+
+    /* ===========================
+       WORK STYLE セクション
+    =========================== */
+    #work-style {
+      padding: 0 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .work-style-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .work-style-heading {
+      font-family: var(--font-en);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      padding-top: 64px;
+      margin-bottom: 0;
+    }
+    .work-style-list {
+      margin-top: 48px;
+    }
+    /* アコーディオンアイテム */
+    .ws-accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .ws-accordion-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+    /* アコーディオンヘッダー */
+    .ws-accordion-header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 28px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+    .ws-accordion-header:hover {
+      opacity: 0.7;
+    }
+    .ws-label {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--black);
+    }
+    /* ＋－アイコン */
+    .ws-accordion-icon {
+      font-family: var(--font-en);
+      font-size: 24px;
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+      margin-left: 20px;
+    }
+    .ws-accordion-item.active .ws-accordion-icon {
+      transform: rotate(45deg);
+    }
+    /* アコーディオン本文 */
+    .ws-accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.4s ease;
+      opacity: 0;
+    }
+    .ws-accordion-item.active .ws-accordion-content {
+      max-height: 500px;
+      opacity: 1;
+      padding-bottom: 32px;
+    }
+    .ws-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.2;
+      margin: 0;
+    }
+    .ws-desc strong {
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    /* ===========================
+       OFFICE GALLERY セクション
+    =========================== */
+    #office-gallery {
+      padding: 0 60px 80px;
+    }
+    .office-gallery-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .office-gallery-heading {
+      font-family: var(--font-en);
+      font-size: clamp(40px, 6vw, 80px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      padding-top: 64px;
+      margin-bottom: 40px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .gallery-item {
+      background: var(--bg-light);
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item.wide {
+      grid-column: 1 / -1;
+    }
+    .gallery-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* プレースホルダー */
+    .gallery-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      color: var(--gray-light);
+      background: var(--bg-light);
+    }
+    .gallery-placeholder.tall {
+      aspect-ratio: 4 / 3;
+    }
+    .gallery-placeholder.wide-ph {
+      aspect-ratio: 21 / 9;
+    }
+    .gallery-placeholder svg {
+      width: 48px;
+      height: 48px;
+      stroke: var(--gray-light);
+      fill: none;
+      stroke-width: 1.2;
+    }
+    .gallery-placeholder span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 960px) {
+      .number-grid { grid-template-columns: repeat(2, 1fr); }
+      .chart-grid  { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      #mv, #in-number, #work-style, #office-gallery { padding-left: 24px; padding-right: 24px; }
+      .mv-en { font-size: clamp(48px, 14vw, 80px); }
+      .mv-title-row { flex-wrap: wrap; gap: 12px; }
+      .number-grid { grid-template-columns: 1fr 1fr; }
+      .ws-row { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item.wide { grid-column: auto; }
+    }
+    @media (max-width: 480px) {
+      .number-grid { grid-template-columns: 1fr; }
+      .donut-wrap { flex-direction: column; align-items: flex-start; }
+      .location-row { gap: 20px; flex-wrap: wrap; }
+    }
+
+
+    /* 固定ボタングループ */
+    .fixed-buttons {
+      position: fixed; right: 40px; bottom: 40px; z-index: 100;
+      display: flex; flex-direction: column; gap: 12px; align-items: center;
+    }
+    .back-to-top, .back-to-home {
+      width: 56px; height: 56px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 1; visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-decoration: none;
+    }
+    .back-to-top.visible, .back-to-home.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover, .back-to-home:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .back-to-top svg, .back-to-home svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
+  </style>
+</head>
+<body>
+
+  <!-- 固定ボタングループ -->
+  <div class="fixed-buttons">
+    <a href="index-pattern-f.html" class="back-to-home" id="backToHome">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <button class="back-to-top" id="backToTop">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div class="mv-inner">
+      <div class="mv-title-row fade-in">
+        <h1 class="mv-en">Environment</h1>
+        <span class="mv-ja">働く環境</span>
+      </div>
+      <p class="mv-catch fade-in delay-1">
+        自分らしく働ける場所が、ここにあります。
+      </p>
+      <p class="mv-desc fade-in delay-2">
+        ライフスタイルもキャリアビジョンも、人それぞれ。だから、働き方も一人ひとりに合わせています。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       IN NUMBER
+       ▼ 数値を変更・カードを追加するには
+         .number-card ブロックを編集またはコピーするだけでOK
+  =========================== -->
+  <section id="in-number">
+    <div class="in-number-inner">
+
+      <h2 class="section-heading-en fade-in">
+        In Number
+      </h2>
+
+      <!-- 1行目：4指標 -->
+      <div class="number-grid fade-in delay-1">
+
+        <div class="number-card">
+          <span class="number-label">従業員数</span>
+          <div class="number-value">
+            <span>32</span><span class="number-unit">名</span>
+          </div>
+        </div>
+
+        <div class="number-card">
+          <span class="number-label">平均年齢</span>
+          <div class="number-value">
+            <span>30</span><span class="number-unit">歳</span>
+          </div>
+        </div>
+
+        <div class="number-card">
+          <span class="number-label">最短昇格年数</span>
+          <div class="number-value">
+            <span>6</span><span class="number-unit">ヶ月</span>
+          </div>
+        </div>
+
+        <div class="number-card">
+          <span class="number-label">平均年収</span>
+          <div class="number-value">
+            <span>500</span><span class="number-unit">万円</span>
+          </div>
+        </div>
+
+      </div><!-- /number-grid row1 -->
+
+      <!-- 2行目：人数比 + 働き方分布（横並び） -->
+      <div class="chart-grid fade-in delay-2" style="border-top: 1px solid var(--border); padding-top: 24px; margin-top: 40px;">
+
+        <!-- 人数比棒グラフ -->
+        <div class="chart-card">
+          <span class="chart-card-title">人数比</span>
+          <div style="margin-top: 32px;">
+            <canvas id="ageChart" style="max-height: 300px;"></canvas>
+          </div>
+        </div>
+
+        <!-- 働き方分布セミサークルグラフ -->
+        <div class="chart-card" style="position: relative;">
+          <span class="chart-card-title">働き方分布</span>
+          <div style="margin-top: 32px; max-width: 280px; margin-left: auto; margin-right: auto;">
+            <canvas id="workStyleChart" style="max-height: 200px;"></canvas>
+          </div>
+          <span style="position: absolute; bottom: 36px; left: 32px; font-size: 11px; font-weight: 300; color: var(--gray); letter-spacing: 0.05em;">※2026年3月現在</span>
+        </div>
+
+      </div><!-- /chart-grid -->
+
+    </div><!-- /in-number-inner -->
+  </section>
+
+
+  <!-- ===========================
+       WORK STYLE
+       ▼ 項目を追加するには
+         .ws-row ブロックをコピーして貼り付けるだけでOK
+  =========================== -->
+  <section id="work-style">
+    <div class="work-style-inner">
+
+      <h2 class="work-style-heading fade-in">Work Style</h2>
+
+      <div class="work-style-list">
+
+        <div class="ws-accordion-item fade-in">
+          <button class="ws-accordion-header">
+            <span class="ws-label">ワークスタイル選択制度</span>
+            <span class="ws-accordion-icon">+</span>
+          </button>
+          <div class="ws-accordion-content">
+            <p class="ws-desc">
+              当社の勤務制度は3種類。出退勤が完全自由な<strong>「フルフレックス制度」</strong>、コアタイム内で柔軟な働き方が可能な<strong>「フレックスタイム制度」</strong>、残業を一切認めず定時勤務を徹底する<strong>「ワークライフバランス制度」</strong>を用意。いずれも個人のライフスタイルやキャリアステージに合わせて選択できます。
+            </p>
+          </div>
+        </div>
+
+        <div class="ws-accordion-item fade-in delay-1">
+          <button class="ws-accordion-header">
+            <span class="ws-label">多様な勤務形態</span>
+            <span class="ws-accordion-icon">+</span>
+          </button>
+          <div class="ws-accordion-content">
+            <p class="ws-desc">
+              時短・海外リモート・産休育休・業務委託など、多様な働き方に対応しています。一人ひとりの事情や希望に合わせた柔軟な勤務形態を整えています。
+            </p>
+          </div>
+        </div>
+
+        <div class="ws-accordion-item fade-in delay-2">
+          <button class="ws-accordion-header">
+            <span class="ws-label">フリーアドレス</span>
+            <span class="ws-accordion-icon">+</span>
+          </button>
+          <div class="ws-accordion-content">
+            <p class="ws-desc">
+              肩書きや部署に縛られない。それが、ウィンパートナーの働き方です。フリーアドレスによって部署間・階層間の交流が自然と生まれています。
+            </p>
+          </div>
+        </div>
+
+        <div class="ws-accordion-item fade-in delay-3">
+          <button class="ws-accordion-header">
+            <span class="ws-label">リモートワーク制度</span>
+            <span class="ws-accordion-icon">+</span>
+          </button>
+          <div class="ws-accordion-content">
+            <p class="ws-desc">
+              出勤・リモート・MIX、自分に合ったスタイルで働けます。毎日オフィスに来たい人も、自宅で集中したい人も、その日によって使い分けたい人も。働く場所は、自分で決めてください。
+            </p>
+          </div>
+        </div>
+
+        <div class="ws-accordion-item fade-in delay-4">
+          <button class="ws-accordion-header">
+            <span class="ws-label">スーツ廃止制度</span>
+            <span class="ws-accordion-icon">+</span>
+          </button>
+          <div class="ws-accordion-content">
+            <p class="ws-desc">
+              服装の規定はありません。クライアント訪問など場面に応じた対応はしつつ、社内やリモートワーク時は完全に自由です。自分らしいスタイルで働いてください。
+            </p>
+          </div>
+        </div>
+
+        <div class="ws-accordion-item fade-in delay-5">
+          <button class="ws-accordion-header">
+            <span class="ws-label">シエスタ制度</span>
+            <span class="ws-accordion-icon">+</span>
+          </button>
+          <div class="ws-accordion-content">
+            <p class="ws-desc">
+              昼食後に15〜30分の休憩を推奨しています。短時間の休息が午後の集中力を高めることは科学的にも証明されています。休む時間も、仕事のうちだと考えています。
+            </p>
+          </div>
+        </div>
+
+        <!--
+        =====================================================
+        ▼ 項目を追加する場合は以下をコピーして貼り付け
+        =====================================================
+        <div class="ws-row fade-in">
+          <p class="ws-label">【項目名】</p>
+          <p class="ws-desc">
+            【説明文】
+          </p>
+        </div>
+        =====================================================
+        -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       OFFICE GALLERY
+       ▼ 写真を追加するには
+         .gallery-item の中の .gallery-placeholder を
+         <img class="gallery-photo" src="画像パス" alt="説明"> に差し替えてOK
+  =========================== -->
+  <section id="office-gallery">
+    <div class="office-gallery-inner">
+
+      <h2 class="office-gallery-heading fade-in">Office Gallery</h2>
+
+      <div class="gallery-grid fade-in delay-1">
+
+        <!-- 全幅ワイド（1枚目） -->
+        <div class="gallery-item wide">
+          <div class="gallery-placeholder wide-ph">
+            <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="2"/><circle cx="17" cy="20" r="4"/><polyline points="4,34 14,22 22,30 30,20 44,36"/></svg>
+            <span>OFFICE PHOTO 01</span>
+          </div>
+        </div>
+
+        <!-- 左：縦長 -->
+        <div class="gallery-item">
+          <div class="gallery-placeholder tall">
+            <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="2"/><circle cx="17" cy="20" r="4"/><polyline points="4,34 14,22 22,30 30,20 44,36"/></svg>
+            <span>OFFICE PHOTO 02</span>
+          </div>
+        </div>
+
+        <!-- 右：縦長 -->
+        <div class="gallery-item">
+          <div class="gallery-placeholder tall">
+            <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="2"/><circle cx="17" cy="20" r="4"/><polyline points="4,34 14,22 22,30 30,20 44,36"/></svg>
+            <span>OFFICE PHOTO 03</span>
+          </div>
+        </div>
+
+        <!-- 全幅ワイド（4枚目） -->
+        <div class="gallery-item wide">
+          <div class="gallery-placeholder wide-ph">
+            <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="2"/><circle cx="17" cy="20" r="4"/><polyline points="4,34 14,22 22,30 30,20 44,36"/></svg>
+            <span>OFFICE PHOTO 04</span>
+          </div>
+        </div>
+
+        <!-- 左 -->
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="2"/><circle cx="17" cy="20" r="4"/><polyline points="4,34 14,22 22,30 30,20 44,36"/></svg>
+            <span>OFFICE PHOTO 05</span>
+          </div>
+        </div>
+
+        <!-- 右 -->
+        <div class="gallery-item">
+          <div class="gallery-placeholder">
+            <svg viewBox="0 0 48 48"><rect x="4" y="8" width="40" height="32" rx="2"/><circle cx="17" cy="20" r="4"/><polyline points="4,34 14,22 22,30 30,20 44,36"/></svg>
+            <span>OFFICE PHOTO 06</span>
+          </div>
+        </div>
+
+      </div><!-- /gallery-grid -->
+    </div>
+  </section>
+
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    /* MV フェードイン */
+    window.addEventListener('DOMContentLoaded', () => {
+      // タイピングアニメーション
+      initTypingAnimation('.mv-en', 150, 300);
+
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+
+      // Topに戻るボタンの表示/非表示
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+
+      // Topに戻るボタンのクリックイベント
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    /* ============================================================
+       Chart.js ドーナツグラフ
+    ============================================================ */
+    window.addEventListener('load', () => {
+
+      /* 共通オプション */
+      const baseOpts = {
+        responsive: true,
+        maintainAspectRatio: true,
+        cutout: '70%',
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false }
+        },
+        animation: { duration: 900, easing: 'easeInOutQuart' }
+      };
+
+      /* 働き方分布 - セミサークル(半円)グラフ */
+      new Chart(document.getElementById('workStyleChart'), {
+        type: 'doughnut',
+        data: {
+          labels: ['出勤', 'リモート', 'Mix'],
+          datasets: [{
+            label: '人数',
+            data: [10, 8, 14],
+            backgroundColor: ['#111111', '#555555', '#aaaaaa'],
+            borderWidth: 2,
+            borderColor: '#ffffff',
+            hoverOffset: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          circumference: 180,
+          rotation: -90,
+          cutout: '60%',
+          plugins: {
+            legend: {
+              display: true,
+              position: 'bottom',
+              labels: {
+                font: { size: 13, family: 'Noto Sans JP', weight: '500' },
+                color: '#111',
+                padding: 20,
+                usePointStyle: true,
+                pointStyle: 'circle'
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                  const percentage = ((context.parsed / total) * 100).toFixed(1);
+                  return context.label + ': ' + context.parsed + '名 (' + percentage + '%)';
+                }
+              }
+            }
+          },
+          animation: { duration: 900, easing: 'easeInOutQuart' }
+        }
+      });
+
+      /* 人数比（年代）- 棒グラフ */
+      new Chart(document.getElementById('ageChart'), {
+        type: 'bar',
+        data: {
+          labels: ['20代', '30代', '40代'],
+          datasets: [{
+            label: '人数',
+            data: [13, 14, 5],
+            backgroundColor: ['#111111', '#555555', '#aaaaaa'],
+            borderWidth: 0,
+            barThickness: 80
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.parsed.y + '名';
+                }
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                stepSize: 5,
+                font: { size: 11, family: 'Noto Sans JP' },
+                color: '#888'
+              },
+              grid: {
+                color: '#e5e5e5',
+                drawBorder: false
+              }
+            },
+            x: {
+              ticks: {
+                font: { size: 13, family: 'Noto Sans JP', weight: '500' },
+                color: '#111'
+              },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+
+      /* ============================================================
+         アコーディオン機能
+      ============================================================ */
+      const accordionHeaders = document.querySelectorAll('.ws-accordion-header');
+
+      accordionHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          const item = header.parentElement;
+          const isActive = item.classList.contains('active');
+
+          // クリックされたアイテムの開閉を切り替え
+          if (isActive) {
+            item.classList.remove('active');
+          } else {
+            item.classList.add('active');
+          }
+        });
+      });
+
+    });
+  </script>
+
+</body>
+</html>

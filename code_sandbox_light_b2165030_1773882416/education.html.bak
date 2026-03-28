@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>教育 / 研修制度 | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV
+    =========================== */
+    #mv {
+      min-height: calc(100vh - var(--header-h));
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 60px 90px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .mv-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 52px;
+    }
+    .mv-en {
+      font-family: var(--font-en);
+      font-size: clamp(64px, 10vw, 130px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+    }
+    .mv-ja {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--gray-dark);
+      white-space: nowrap;
+    }
+    .mv-catch {
+      font-size: clamp(17px, 2.2vw, 24px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .mv-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.2;
+      max-width: 600px;
+    }
+
+    /* scroll down button */
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s;
+      border: none;
+    }
+    .scroll-down:hover { background: var(--dark); }
+    .scroll-down svg {
+      width: 18px; height: 18px;
+      fill: none; stroke: var(--white);
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ===========================
+       右端固定 CTA
+    =========================== */
+    .fixed-cta {
+      position: fixed;
+      right: 0;
+      bottom: 120px;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .fixed-cta-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--black);
+      color: var(--white);
+      padding: 14px 20px 14px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+      transition: background 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .fixed-cta-btn:hover { background: var(--dark); }
+    .fixed-cta-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 10px;
+    }
+
+    /* ===========================
+       研修カテゴリーセクション
+    =========================== */
+    .training-section {
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .training-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+
+    /* グレー帯の小見出し */
+    .category-label {
+      display: inline-block;
+      background: var(--bg-light);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      padding: 14px 24px;
+      margin-bottom: 48px;
+      width: 100%;
+    }
+
+    /* 2カラムリスト */
+    .training-list {
+      border-top: 1px solid var(--border);
+    }
+    .training-row {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      padding: 44px 0;
+      align-items: start;
+    }
+    .training-name {
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      padding-right: 40px;
+      line-height: 1.7;
+      padding-top: 2px;
+    }
+    .training-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.2;
+      padding-right: 200px; /* 右端CTAの余白 */
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 768px) {
+      #mv              { padding: 0 24px 80px; min-height: 80vh; }
+      .mv-en           { font-size: clamp(52px, 13vw, 80px); }
+      .training-section { padding: 56px 24px; }
+      .training-row    {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 28px 0;
+      }
+      .training-desc   { padding-right: 0; }
+      .fixed-cta       { display: none; }
+      .scroll-down     { bottom: 24px; right: 24px; }
+    }
+    @media (max-width: 480px) {
+      .mv-title-row { flex-wrap: wrap; gap: 8px; }
+    }
+
+
+    /* Topに戻るボタン */
+    .back-to-top {
+      position: fixed; right: 40px; bottom: 40px; z-index: 100;
+      width: 56px; height: 56px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 1; visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .back-to-top svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
+  </style>
+</head>
+<body>
+
+  <!-- Topに戻るボタン -->
+  <button class="back-to-top" id="backToTop">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- 右端固定 CTA -->
+  <div class="fixed-cta">
+    <a href="contact.html" class="fixed-cta-btn">
+      <span class="fixed-cta-icon">●</span>
+      エントリーはこちら
+    </a>
+    <a href="jobs.html" class="fixed-cta-btn">
+      <span class="fixed-cta-icon">●</span>
+      募集要項はこちら
+    </a>
+  </div>
+
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div style="max-width:1160px;margin:0 auto;width:100%;">
+      <div class="mv-title-row fade-in">
+        <h1 class="mv-en">Training</h1>
+        <span class="mv-ja">教育 / 研修制度</span>
+      </div>
+      <p class="mv-catch fade-in delay-1">
+        会社のビジョンと社員のビジョンを紐づける。
+      </p>
+      <p class="mv-desc fade-in delay-2">
+        社員一人ひとりが夢や目標に向かって挑戦し続けることが、<br>
+        「世界一オモシロイ会社になる」というビジョンを実現する原動力になる。<br>
+        この紐付きを強化するため、多角的な研修や取り組みを実施しています。
+      </p>
+    </div>
+    <button class="scroll-down" id="scrollBtn" aria-label="スクロール">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+  </section>
+
+
+  <!-- ===========================
+       研修カテゴリー：個人の成長
+       ▼ カテゴリーを追加する場合は
+         .training-section ブロックをまるごとコピー
+       ▼ 項目を追加する場合は
+         .training-row をコピーして追加
+  =========================== -->
+
+  <section class="training-section fade-in" id="section-growth">
+    <div class="training-inner">
+
+      <!-- ▼ カテゴリーラベル（グレー帯） -->
+      <p class="category-label">個人の成長機会をつくり、ビジョンに近づける</p>
+
+      <div class="training-list">
+
+        <div class="training-row">
+          <p class="training-name">企画・提案RPG</p>
+          <p class="training-desc">実際の案件を題材にしたロールプレイングです。マネージャーがクライアント役を務め、メンバーは初回商談、受注前提の提案、受注後の企画提案、コンサルティング進行など、多様なシーンを想定して取り組みます。終了後、マネージャーに加え、見学していた他のメンバーからも多角的なフィードバックを受け、理論と実務を兼ね備えたスキルを習得します。</p>
+        </div>
+
+        <div class="training-row">
+          <p class="training-name">クリエイティブセミナー</p>
+          <p class="training-desc">広告、ブランディング、マーケティング等、各分野で第一線で活躍する専門家を招いたイベント「オフレコ」を主催。社員は無料で参加でき、日本中で話題となった広告の舞台裏、一流企業のブランディング理論、最新のWebや映像トレンドを直接学べます。イベント後には二次会では、リラックスした雰囲気でこそ出てくる実務的かつリアルも聞くことができます。</p>
+        </div>
+
+        <div class="training-row">
+          <p class="training-name">マイビジョンマップ</p>
+          <p class="training-desc">「社員の夢と会社のビジョンをつなぐ、期限付きのロードマップ」です。夢は言葉にするだけでは実現しません。「いつまでに」「どのような状態を目指し」「何をするか」を1年単位で具体化。特徴は、個人の夢を会社のビジョンと結びつける点。これにより、日々の仕事が「言われたことをやる」ではなく「目標のためにやること」へと変わります。</p>
+        </div>
+
+        <div class="training-row">
+          <p class="training-name">1on1ミーティング</p>
+          <p class="training-desc">マネージャーと月1回以上実施する個別面談。業務の課題解決だけでなく、キャリアの方向性や個人的な悩みまで幅広く話せる場です。評価ではなく「成長支援」を目的としているため、本音で話せる関係性を大切にしています。</p>
+        </div>
+
+        <!-- ▼ 項目を追加する場合はここに .training-row をコピーして追加 -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       研修カテゴリー：組織・チームの強化
+  =========================== -->
+  <section class="training-section fade-in" id="section-team">
+    <div class="training-inner">
+
+      <p class="category-label">組織・チームの力を高め、一体感を生む</p>
+
+      <div class="training-list">
+
+        <div class="training-row">
+          <p class="training-name">新卒研修プログラム</p>
+          <p class="training-desc">入社後の3ヶ月間、ビジョン・バリューの理解から始まり、ビジネスマナー、各部署のOJT、プレゼンテーション研修まで体系的に実施。「ウィンパートナーらしい人材」としての基礎を徹底的に磨きます。</p>
+        </div>
+
+        <div class="training-row">
+          <p class="training-name">部署横断ワークショップ</p>
+          <p class="training-desc">普段関わりの少ない他部署のメンバーと共にテーマに取り組むワークショップを定期的に開催。多様な視点に触れることで、自部署では気づかなかった課題や解決策が生まれます。</p>
+        </div>
+
+        <div class="training-row">
+          <p class="training-name">マネジメント研修</p>
+          <p class="training-desc">チームリーダー・マネージャー職に就くメンバーを対象とした研修プログラム。メンバーの強みを引き出す1on1の進め方、目標設定のフレームワーク、心理的安全性の高いチームづくりなどを実践的に学びます。</p>
+        </div>
+
+        <!-- ▼ 項目を追加する場合はここに .training-row をコピーして追加 -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       研修カテゴリー：スキルアップ支援
+  =========================== -->
+  <section class="training-section fade-in" id="section-skill">
+    <div class="training-inner">
+
+      <p class="category-label">専門スキルを磨き、市場価値を高める</p>
+
+      <div class="training-list">
+
+        <div class="training-row">
+          <p class="training-name">セミナー補助制度</p>
+          <p class="training-desc">社外の研修・勉強会への参加費を100%会社が負担。デザイン、マーケティング、エンジニアリングなど職種を問わず、自己研鑽の機会を全力でサポートします。</p>
+        </div>
+
+        <div class="training-row">
+          <p class="training-name">資格取得支援</p>
+          <p class="training-desc">業務に関連する資格の取得費用を会社が負担。取得後は給与への反映や職種変更のきっかけにもなります。挑戦したい気持ちを、制度がしっかり後押しします。</p>
+        </div>
+
+        <div class="training-row">
+          <p class="training-name">社内勉強会（ナレッジシェア）</p>
+          <p class="training-desc">各自が学んだことや実務で得た知見を社内に共有する月次の勉強会。発表者は自由に立候補でき、ジャンルも問いません。「学びを独り占めしない文化」を全員で育てています。</p>
+        </div>
+
+        <!-- ▼ 項目を追加する場合はここに .training-row をコピーして追加 -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <!--
+  =====================================================
+  ▼ カテゴリーを追加する場合は以下をコピーして貼り付け
+  =====================================================
+  <section class="training-section fade-in" id="section-XXXX">
+    <div class="training-inner">
+      <p class="category-label">【カテゴリーの説明文】</p>
+      <div class="training-list">
+
+        <div class="training-row">
+          <p class="training-name">【研修名】</p>
+          <p class="training-desc">【説明文】</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  =====================================================
+  -->
+
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+  <!-- 斜めカット・オーバーラップ型 + SNS非表示 -->
+  <style>
+    #dl-contact { padding: 120px 60px; background: var(--bg-light); }
+    .dl-contact-grid { max-width: 1000px; margin: 0 auto; display: flex; justify-content: center; align-items: center; gap: 0; border: none; position: relative; height: 400px; }
+    .dl-contact-item { width: 500px; height: 100%; padding: 60px 50px; text-align: left; border: none; position: relative; transition: transform 0.4s ease, box-shadow 0.4s ease; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
+    .dl-contact-item:first-child { background: var(--black); z-index: 2; clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%); }
+    .dl-contact-item:first-child .dl-contact-en { color: var(--white); }
+    .dl-contact-item:first-child .dl-contact-ja { color: rgba(255,255,255,0.5); }
+    .dl-contact-item:first-child .dl-contact-desc { color: rgba(255,255,255,0.8); }
+    .dl-contact-item:first-child .dl-contact-btn { background: var(--white); color: var(--black); border-color: var(--white); }
+    .dl-contact-item:first-child .dl-contact-btn:hover { background: transparent; color: var(--white); }
+    .dl-contact-item:last-child { background: var(--white); border: 1px solid var(--border); margin-left: -80px; z-index: 1; clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%); padding-left: 120px; }
+    .dl-contact-item:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); z-index: 3; }
+    #sns { display: none !important; }
+    @media (max-width: 768px) {
+      .dl-contact-grid { flex-direction: column; height: auto; gap: 20px; }
+      .dl-contact-item { width: 100%; clip-path: none; margin-left: 0 !important; padding-left: 50px !important; }
+    }
+
+    /* Topに戻るボタン */
+    .back-to-top {
+      position: fixed; right: 40px; bottom: 40px; z-index: 100;
+      width: 56px; height: 56px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 1; visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .back-to-top svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
+  </style>
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    // MV をすぐに表示
+    window.addEventListener('DOMContentLoaded', () => {
+      // タイピングアニメーション
+      initTypingAnimation('.mv-en', 150, 300);
+
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+    });
+
+    // スクロールボタン
+    document.getElementById('scrollBtn').addEventListener('click', () => {
+      document.getElementById('section-growth').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

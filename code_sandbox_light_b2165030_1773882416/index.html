@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recruit | WIN PARTNER 株式会社ウィンパートナー</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <!-- 共通CSS -->
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV SECTION
+    =========================== */
+    #mv {
+      min-height: calc(100vh - var(--header-h));
+      background: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 60px 90px;
+      position: relative;
+    }
+
+    .mv-heading-en {
+      font-family: var(--font-en);
+      font-size: clamp(72px, 11vw, 148px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+    .mv-heading-sub {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--gray-dark);
+      margin-bottom: 40px;
+    }
+    .mv-catchcopy {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+    .mv-sub {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      letter-spacing: 0.06em;
+      line-height: 2;
+      max-width: 520px;
+    }
+
+    /* scroll down arrow */
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      right: 40px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+    .scroll-down:hover { background: var(--dark); }
+    .scroll-down svg {
+      width: 18px; height: 18px;
+      fill: none; stroke: var(--white);
+      stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+    }
+
+    /* ===========================
+       MAIN CARDS SECTION
+    =========================== */
+    #menu {
+      padding: 100px 60px;
+      border-top: 1px solid var(--border);
+    }
+
+    .cards-grid {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    .card-item {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 48px 44px 52px;
+      cursor: pointer;
+      transition: background 0.25s;
+      min-height: 220px;
+      display: block;
+    }
+    .card-item:hover { background: var(--bg-light); }
+
+    /* 黒塗りカード */
+    .card-item.dark {
+      background: var(--black);
+      color: var(--white);
+    }
+    .card-item.dark:hover { background: var(--dark); }
+    .card-item.dark .card-arrow {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.3);
+    }
+    .card-item.dark .card-title { color: var(--white); }
+    .card-item.dark .card-body  { color: rgba(255,255,255,0.65); }
+
+    .card-arrow {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--gray-light);
+      font-size: 13px;
+      color: var(--black);
+      margin-bottom: 24px;
+      font-family: var(--font-en);
+      flex-shrink: 0;
+    }
+    .card-title {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+    .card-body {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2;
+    }
+
+    /* ===========================
+       TEAM PHOTO
+    =========================== */
+    #photo {
+      overflow: hidden;
+      line-height: 0;
+    }
+    .photo-wrap {
+      width: 100%;
+      height: clamp(320px, 45vw, 600px);
+      background: var(--bg-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: var(--gray-light);
+    }
+    .photo-placeholder svg {
+      width: 56px; height: 56px;
+      stroke: var(--gray-light);
+      fill: none; stroke-width: 1.2;
+    }
+    .photo-placeholder span {
+      font-family: var(--font-en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      font-weight: 500;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 768px) {
+      #mv    { padding: 0 24px 80px; }
+      #menu  { padding: 72px 24px; }
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .mv-heading-en { font-size: clamp(44px, 14vw, 80px); }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div class="mv-heading-en fade-in">Recruit</div>
+    <p class="mv-heading-sub fade-in delay-1">採用情報</p>
+    <p class="mv-catchcopy fade-in delay-2">未来を切り拓く</p>
+    <p class="mv-sub fade-in delay-3">
+      株式会社ウィンパートナーは、<br>
+      共に持続可能な成長を目指せる仲間を募集しています。
+    </p>
+    <div class="scroll-down" id="scrollBtn" aria-label="スクロール">
+      <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       MAIN CARDS  (2×3 grid)
+  =========================== -->
+  <section id="menu">
+    <div class="cards-grid fade-in">
+
+      <a href="jobs.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">募集要項</h3>
+        <p class="card-body">
+          オモシロイ会社づくりには、オモシロイ仲間が欠かせない。<br>
+          各職種の仕事内容や求める人物像をご紹介します。
+        </p>
+      </a>
+
+      <a href="education.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">教育 / 研修制度</h3>
+        <p class="card-body">
+          ウィンパートナーのビジョンと社員一人ひとりの夢や目標を重ねるために、<br>
+          研修制度や職場環境を整えています。
+        </p>
+      </a>
+
+      <a href="benefits.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">福利厚生 / 社内制度</h3>
+        <p class="card-body">
+          「世界一オモシロイ会社」を目指して導入された、<br>
+          50以上のユニークな福利厚生や社内制度があります。
+        </p>
+      </a>
+
+      <a href="environment.html" class="card-item dark">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">働く環境</h3>
+        <p class="card-body">
+          好きなコトをやり続けるために、ライフスタイルに合わせた<br>
+          働き方制度やオフィス環境にこだわっています。
+        </p>
+      </a>
+
+      <a href="career.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">キャリアアップ</h3>
+        <p class="card-body">
+          会社のビジョンに共感しながら、自分の夢も追いかける。<br>
+          独自の評価システムとキャリアパスを整えています。
+        </p>
+      </a>
+
+      <a href="contact.html" class="card-item">
+        <span class="card-arrow">→</span>
+        <h3 class="card-title">エントリー</h3>
+        <p class="card-body">
+          ウィンパートナーの理念や仕事に共感いただけた方は、<br>
+          こちらのエントリーフォームからご応募ください。
+        </p>
+      </a>
+
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       TEAM PHOTO
+  =========================== -->
+  <div id="photo">
+    <div class="photo-wrap">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="40" height="32" rx="2"/>
+          <circle cx="17" cy="20" r="4"/>
+          <polyline points="4,34 14,22 22,30 30,20 44,36"/>
+        </svg>
+        <span>TEAM PHOTO</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    // MV テキストをすぐに表示
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+    });
+
+    // スクロールボタン
+    document.getElementById('scrollBtn').addEventListener('click', () => {
+      document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+
+</body>
+</html>

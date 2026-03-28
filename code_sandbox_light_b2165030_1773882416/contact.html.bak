@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>エントリー | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       全体レイアウト
+    =========================== */
+    .page-wrap {
+      min-height: calc(100vh - var(--header-h));
+      padding: 80px 60px 120px;
+    }
+    .page-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    /* ===========================
+       MV タイトル
+    =========================== */
+    .entry-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 80px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .entry-en {
+      font-family: var(--font-en);
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+    }
+
+    /* Entryだけカーソル位置を調整 */
+    .entry-en.typing-text::after {
+      right: -28px !important;
+    }
+    .entry-ja {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      color: var(--gray-dark);
+      white-space: nowrap;
+    }
+
+    /* ===========================
+       説明文
+    =========================== */
+    .entry-lead {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.4;
+      margin-bottom: 52px;
+    }
+
+    /* ===========================
+       メインボタン 2列グリッド
+       ▼ ボタンを追加するには
+         .entry-btn-item ブロックをコピーして
+         .entry-btn-grid に追加するだけでOK
+    =========================== */
+    .entry-btn-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 52px;
+    }
+    .entry-btn-item {
+      border: 1px solid var(--border);
+      padding: 40px 36px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      cursor: pointer;
+      transition: background 0.22s, border-color 0.22s;
+      text-decoration: none;
+      background: var(--white);
+    }
+    .entry-btn-item:hover {
+      background: var(--bg-light);
+      border-color: var(--gray-light);
+    }
+    /* 黒塗りバリアント */
+    .entry-btn-item.dark {
+      background: var(--black);
+      border-color: var(--black);
+    }
+    .entry-btn-item.dark:hover {
+      background: var(--dark);
+      border-color: var(--dark);
+    }
+    .entry-btn-item.dark .ebi-dot  { background: var(--white); }
+    .entry-btn-item.dark .ebi-text { color: var(--white); }
+    .entry-btn-item.dark .ebi-sub  { color: rgba(255,255,255,0.55); }
+
+    /* LINEバリアント（白黒） */
+    .entry-btn-item.entry-btn-line {
+      background: var(--white);
+      border-color: var(--border);
+    }
+    .entry-btn-item.entry-btn-line:hover {
+      background: var(--bg-light);
+      border-color: var(--gray-light);
+    }
+    .entry-btn-item.entry-btn-line .ebi-dot-line  { background: var(--black); }
+    .entry-btn-item.entry-btn-line .ebi-text { color: var(--black); }
+    .entry-btn-item.entry-btn-line .ebi-sub  { color: var(--gray-dark); }
+
+    .ebi-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--black);
+      flex-shrink: 0;
+    }
+    .ebi-body {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .ebi-text {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      line-height: 1.4;
+    }
+    .ebi-sub {
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      letter-spacing: 0.08em;
+    }
+
+    /* ===========================
+       各種媒体リンク
+       ▼ バナーを追加するには
+         .media-link ブロックをコピーして
+         .media-list に追加するだけでOK
+    =========================== */
+    .media-section-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--gray-dark);
+      margin-bottom: 20px;
+    }
+    .media-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .media-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      padding: 12px 24px;
+      min-width: 160px;
+      height: 52px;
+      transition: border-color 0.2s, background 0.2s;
+      text-decoration: none;
+      background: var(--white);
+      cursor: pointer;
+    }
+    .media-link:hover {
+      border-color: var(--gray-light);
+      background: var(--bg-light);
+    }
+    /* バナーテキスト（ロゴ画像がない場合のフォールバック） */
+    .media-link-text {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--black);
+    }
+    /* バナー画像がある場合 */
+    .media-link img {
+      max-height: 28px;
+      width: auto;
+      display: block;
+    }
+
+    /*
+    =====================================================
+    ▼ バナーを追加する場合のテンプレート（コピー用）
+    =====================================================
+    <a href="【URL】" target="_blank" rel="noopener" class="media-link">
+      <!-- ロゴ画像がある場合 -->
+      <img src="【画像パス】" alt="【媒体名】" />
+      <!-- ロゴ画像がない場合（テキストフォールバック） -->
+      <span class="media-link-text">【媒体名】</span>
+    </a>
+    =====================================================
+    */
+
+    /* ===========================
+       区切り線
+    =========================== */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 56px 0;
+    }
+
+    /* ===========================
+       採用フロー（簡易版）
+    =========================== */
+    .flow-section-title {
+      font-family: var(--font-en);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--black);
+      margin-bottom: 12px;
+    }
+    .flow-section-sub {
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+    .flow-steps {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      border: 1px solid var(--border);
+    }
+    .flow-step {
+      flex: 1;
+      padding: 28px 20px 32px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      text-align: center;
+    }
+    .flow-step:last-child { border-right: none; }
+    .flow-step-num {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: var(--gray-light);
+      margin-bottom: 12px;
+    }
+    .flow-step-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+    }
+    /* ステップ間の矢印 */
+    .flow-step::after {
+      content: '›';
+      position: absolute;
+      right: -8px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--gray-light);
+      z-index: 1;
+      line-height: 1;
+    }
+    .flow-step:last-child::after { display: none; }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 768px) {
+      .page-wrap { padding: 56px 24px 80px; }
+      .entry-btn-grid { grid-template-columns: 1fr; gap: 12px; }
+      .flow-steps { flex-direction: column; }
+      .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .flow-step:last-child { border-bottom: none; }
+      .flow-step::after { display: none; }
+    }
+    @media (max-width: 480px) {
+      .entry-en { font-size: clamp(40px, 14vw, 64px); }
+      .media-list { gap: 8px; }
+      .media-link { min-width: 140px; }
+    }
+
+
+    /* Topに戻るボタン */
+    .back-to-top {
+      position: fixed; right: 40px; bottom: 40px; z-index: 100;
+      width: 56px; height: 56px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 1; visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .back-to-top svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
+  </style>
+</head>
+<body>
+
+  <!-- Topに戻るボタン -->
+  <button class="back-to-top" id="backToTop">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <!-- ===========================
+       MV タイトル
+  =========================== -->
+  <div class="page-wrap">
+    <div class="page-inner">
+
+      <div class="entry-title-row fade-in">
+        <h1 class="entry-en">Entry</h1>
+        <span class="entry-ja">エントリー</span>
+      </div>
+
+      <p class="entry-lead fade-in delay-1">
+        ウィンパートナーへの選考をご希望いただきありがとうございます。<br>
+        会社説明会もしくはエントリーよりご応募ください。<br>
+        各種媒体からもご応募を受け付けております。
+      </p>
+
+      <!-- ===========================
+           メインボタン
+           ▼ ボタンを追加する場合は .entry-btn-item をコピーして追加
+           ▼ href="【URL】" にリンク先を設定
+      =========================== -->
+      <div class="entry-btn-grid fade-in delay-2">
+
+        <!-- 会社説明会ボタン -->
+        <a href="#" class="entry-btn-item">
+          <!-- ▼ リンク先は href="#" を実際のURLに変更 -->
+          <span class="ebi-dot"></span>
+          <div class="ebi-body">
+            <span class="ebi-text">会社説明会はこちら</span>
+            <span class="ebi-sub">（新卒・中途採用）</span>
+          </div>
+        </a>
+
+        <!-- エントリーボタン -->
+        <a href="#" class="entry-btn-item">
+          <!-- ▼ リンク先は href="#" を実際のURLに変更 -->
+          <span class="ebi-dot"></span>
+          <div class="ebi-body">
+            <span class="ebi-text">エントリーはこちら</span>
+            <span class="ebi-sub">（中途採用）</span>
+          </div>
+        </a>
+
+        <!-- LINEボタン -->
+        <a href="#" class="entry-btn-item entry-btn-line">
+          <!-- ▼ リンク先は href="#" を実際のLINE URLに変更 -->
+          <span class="ebi-dot ebi-dot-line"></span>
+          <div class="ebi-body">
+            <span class="ebi-text">LINEで問い合わせ</span>
+            <span class="ebi-sub">（気軽にご相談ください）</span>
+          </div>
+        </a>
+
+      </div><!-- /entry-btn-grid -->
+
+
+      <!-- ===========================
+           各種媒体リンク
+           ▼ バナーを追加する場合は .media-link をコピーして追加
+           ▼ href="【URL】" にリンク先を設定
+      =========================== -->
+      <p class="media-section-label fade-in delay-3">各種媒体へのリンクはこちら</p>
+
+      <div class="media-list fade-in delay-4">
+
+        <!-- Indeed -->
+        <a href="#" target="_blank" rel="noopener" class="media-link">
+          <!-- ▼ href="#" を実際の Indeed 求人ページURLに変更 -->
+          <!-- ▼ ロゴ画像がある場合: <img src="画像パス" alt="Indeed"> -->
+          <span class="media-link-text" style="color:#003A9B; font-size:15px; letter-spacing:0;">Indeed</span>
+        </a>
+
+        <!-- engage -->
+        <a href="#" target="_blank" rel="noopener" class="media-link">
+          <!-- ▼ href="#" を実際の engage 求人ページURLに変更 -->
+          <!-- ▼ ロゴ画像がある場合: <img src="画像パス" alt="engage"> -->
+          <span class="media-link-text" style="color:#E84B25; font-size:15px; letter-spacing:0;">engage</span>
+        </a>
+
+        <!-- 求人ボックス -->
+        <a href="#" target="_blank" rel="noopener" class="media-link">
+          <!-- ▼ href="#" を実際の求人ボックスURLに変更 -->
+          <!-- ▼ ロゴ画像がある場合: <img src="画像パス" alt="求人ボックス"> -->
+          <span class="media-link-text" style="color:#222; font-size:13px;">求人ボックス</span>
+        </a>
+
+        <!--
+        =====================================================
+        ▼ 媒体を追加する場合はここにコピーして貼り付け
+        =====================================================
+        <a href="【URL】" target="_blank" rel="noopener" class="media-link">
+          ロゴ画像あり: <img src="【画像パス】" alt="【媒体名】" />
+          テキスト: <span class="media-link-text">【媒体名】</span>
+        </a>
+        =====================================================
+        -->
+
+      </div><!-- /media-list -->
+
+
+      <hr class="divider fade-in" />
+
+
+      <!-- ===========================
+           採用フロー（簡易版）
+           ▼ ステップを追加するには
+             .flow-step ブロックをコピーして .flow-steps に追加
+      =========================== -->
+      <div class="fade-in delay-1">
+        <p class="flow-section-title">Hiring Flow</p>
+        <p class="flow-section-sub">採用フロー</p>
+        <div class="flow-steps">
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 01</p>
+            <p class="flow-step-title">エントリー</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 02</p>
+            <p class="flow-step-title">書類選考</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 03</p>
+            <p class="flow-step-title">一次面接</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 04</p>
+            <p class="flow-step-title">最終面接</p>
+          </div>
+
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 05</p>
+            <p class="flow-step-title">内定</p>
+          </div>
+
+          <!--
+          ▼ ステップを追加する場合
+          <div class="flow-step">
+            <p class="flow-step-num">STEP 06</p>
+            <p class="flow-step-title">【ステップ名】</p>
+          </div>
+          -->
+
+        </div><!-- /flow-steps -->
+      </div>
+
+    </div><!-- /page-inner -->
+  </div><!-- /page-wrap -->
+
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // タイピングアニメーション
+      initTypingAnimation('.entry-en', 150, 300);
+
+      setTimeout(() => {
+        document.querySelectorAll('.entry-title-row .fade-in, .entry-title-row').forEach(el => {
+          el.classList.add('visible');
+        });
+        document.querySelectorAll('.page-wrap .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+    });
+  </script>
+
+</body>
+</html>

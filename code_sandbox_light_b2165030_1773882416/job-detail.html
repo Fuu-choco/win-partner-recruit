@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>募集要項詳細 | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV
+    =========================== */
+    #mv {
+      padding: 80px 60px 72px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mv-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 52px;
+    }
+    .mv-en {
+      font-family: var(--font-en);
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+    }
+    .mv-ja {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--gray-dark);
+      white-space: nowrap;
+    }
+    .mv-catch {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .mv-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.2;
+      max-width: 640px;
+    }
+
+    /* ===========================
+       パンくずリスト
+    =========================== */
+    #breadcrumb {
+      padding: 20px 60px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-light);
+    }
+    .breadcrumb-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 300;
+      color: var(--gray);
+      letter-spacing: 0.05em;
+    }
+    .breadcrumb-inner a {
+      color: var(--gray);
+      transition: color 0.2s;
+    }
+    .breadcrumb-inner a:hover { color: var(--black); }
+    .breadcrumb-sep { color: var(--gray-light); }
+    .breadcrumb-current { color: var(--black); font-weight: 400; }
+
+    /* ===========================
+       職種ヘッダー
+    =========================== */
+    #job-header {
+      padding: 56px 60px 48px;
+      border-bottom: 1px solid var(--border);
+    }
+    .job-header-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .job-dept-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      color: var(--gray);
+      text-transform: uppercase;
+      font-family: var(--font-en);
+      margin-bottom: 16px;
+    }
+    .job-title-main {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      line-height: 1.3;
+      margin-bottom: 24px;
+    }
+    .job-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .job-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      padding: 6px 16px;
+      border: 1px solid var(--border);
+      color: var(--gray-dark);
+    }
+    .job-tag.highlight {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+
+    /* ===========================
+       詳細テーブル
+    =========================== */
+    #job-detail-content {
+      padding: 0 60px 80px;
+    }
+    .detail-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .detail-section {
+      padding: 64px 0 0;
+    }
+    .detail-section-title {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: var(--gray);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* 2カラム行（ラベル + 本文） */
+    .detail-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-row:first-of-type { border-top: 1px solid var(--border); }
+    .detail-label {
+      padding: 28px 0;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--black);
+      border-right: 1px solid var(--border);
+      padding-right: 24px;
+    }
+    .detail-value {
+      padding: 28px 0 28px 40px;
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2;
+    }
+    .detail-value strong {
+      color: var(--black);
+      font-weight: 500;
+    }
+    .detail-value ul {
+      list-style: none;
+      margin-top: 8px;
+    }
+    .detail-value ul li {
+      position: relative;
+      padding-left: 16px;
+      margin-bottom: 6px;
+    }
+    .detail-value ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--gray-light);
+    }
+
+    /* ===========================
+       エントリーCTA（ページ下部）
+    =========================== */
+    #entry-cta {
+      background: var(--black);
+      padding: 80px 60px;
+      text-align: center;
+    }
+    .entry-cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .entry-cta-en {
+      font-family: var(--font-en);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .entry-cta-ja {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 40px;
+    }
+    .entry-cta-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.65);
+      line-height: 2.2;
+      margin-bottom: 48px;
+    }
+    .entry-cta-btn {
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      padding: 18px 64px;
+      background: var(--white);
+      color: var(--black);
+      border: 1px solid var(--white);
+      transition: background 0.25s, color 0.25s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .entry-cta-btn:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 768px) {
+      #mv              { padding: 56px 24px 56px; }
+      #breadcrumb      { padding: 16px 24px; }
+      #job-header      { padding: 40px 24px 36px; }
+      #job-detail-content { padding: 0 24px 60px; }
+      #entry-cta       { padding: 64px 24px; }
+      .mv-en           { font-size: clamp(48px, 13vw, 80px); }
+      .detail-row      { grid-template-columns: 1fr; }
+      .detail-label    { border-right: none; padding: 20px 0 8px; }
+      .detail-value    { padding: 0 0 20px; }
+    }
+    @media (max-width: 480px) {
+      .mv-title-row  { flex-wrap: wrap; gap: 8px; }
+    }
+
+
+    /* 固定ボタングループ */
+    .fixed-buttons {
+      position: fixed; right: 40px; bottom: 40px; z-index: 100;
+      display: flex; flex-direction: column; gap: 12px; align-items: center;
+    }
+    .back-to-top, .back-to-home {
+      width: 56px; height: 56px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 1; visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-decoration: none;
+    }
+    .back-to-top.visible, .back-to-home.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover, .back-to-home:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .back-to-top svg, .back-to-home svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
+  </style>
+</head>
+<body>
+
+  <!-- 固定ボタングループ -->
+  <div class="fixed-buttons">
+    <a href="index-pattern-f.html" class="back-to-home" id="backToHome">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <button class="back-to-top" id="backToTop">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div class="mv-title-row fade-in">
+        <h1 class="mv-en">Information</h1>
+        <span class="mv-ja">募集要項</span>
+      </div>
+      <p class="mv-catch fade-in delay-1">
+        「世界一」を目指して、個性あふれるオモシロイ仲間を募集中
+      </p>
+      <p class="mv-desc fade-in delay-2">
+        一人ひとり異なる専門性と個性を持ちながら、全員が同じビジョンに向かって仕事をしています。<br>
+        あなたの専門性とパッションを、ここで活かしてください。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       パンくずリスト
+  =========================== -->
+  <nav id="breadcrumb">
+    <div class="breadcrumb-inner">
+      <a href="index.html">Recruit</a>
+      <span class="breadcrumb-sep">/</span>
+      <a href="jobs.html">募集要項</a>
+      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-current" id="breadcrumb-pos">詳細</span>
+    </div>
+  </nav>
+
+
+  <!-- ===========================
+       職種ヘッダー
+  =========================== -->
+  <div id="job-header" class="fade-in">
+    <div class="job-header-inner">
+      <p class="job-dept-label" id="detail-dept">Department</p>
+      <h2 class="job-title-main" id="detail-title">職種名</h2>
+      <div class="job-tags" id="detail-tags">
+        <!-- JS で挿入 -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ===========================
+       詳細情報
+       ▼ 項目を追加するには
+         .detail-row ブロックをコピーして
+         .detail-label と .detail-value を変更するだけでOK
+  =========================== -->
+  <div id="job-detail-content">
+    <div class="detail-inner">
+
+      <!-- 仕事の内容 -->
+      <div class="detail-section fade-in">
+        <p class="detail-section-title">Job Description</p>
+
+        <div class="detail-row">
+          <p class="detail-label">仕事内容</p>
+          <div class="detail-value" id="detail-job-desc">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <p class="detail-label">求める人物像</p>
+          <div class="detail-value" id="detail-requirements">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <p class="detail-label">歓迎スキル</p>
+          <div class="detail-value" id="detail-welcome">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+      </div><!-- /detail-section -->
+
+
+      <!-- 労働条件 -->
+      <div class="detail-section fade-in delay-1">
+        <p class="detail-section-title">Work Conditions</p>
+
+        <div class="detail-row">
+          <p class="detail-label">雇用形態</p>
+          <div class="detail-value" id="detail-employment">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <p class="detail-label">給与</p>
+          <div class="detail-value" id="detail-salary">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <p class="detail-label">勤務地</p>
+          <div class="detail-value" id="detail-location">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <p class="detail-label">勤務時間</p>
+          <div class="detail-value" id="detail-hours">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <p class="detail-label">休日・休暇</p>
+          <div class="detail-value" id="detail-holiday">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <div class="detail-row">
+          <p class="detail-label">福利厚生</p>
+          <div class="detail-value" id="detail-benefits">
+            <!-- JS で挿入 -->
+          </div>
+        </div>
+
+        <!-- ▼ 項目を追加する場合は以下をコピーして貼り付け
+        <div class="detail-row">
+          <p class="detail-label">【ラベル】</p>
+          <div class="detail-value">
+            【内容】
+          </div>
+        </div>
+        -->
+
+      </div><!-- /detail-section -->
+
+    </div><!-- /detail-inner -->
+  </div><!-- /job-detail-content -->
+
+
+  <!-- ===========================
+       エントリー CTA
+  =========================== -->
+  <section id="entry-cta" class="fade-in">
+    <div class="entry-cta-inner">
+      <p class="entry-cta-en">Entry</p>
+      <p class="entry-cta-ja">エントリー</p>
+      <p class="entry-cta-desc">
+        まずはお気軽にご応募ください。<br>
+        書類選考後、担当者よりご連絡いたします。
+      </p>
+      <a href="contact.html" class="entry-cta-btn">エントリーする →</a>
+    </div>
+  </section>
+
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+  /* ============================================================
+     job-detail.js（インライン）
+     URLパラメータ ?dept=XXX&pos=YYY を読み取り
+     対応する職種データを表示する
+
+     ▼ 職種を追加・編集するには
+       JOB_DATA オブジェクトにエントリーを追加するだけでOK
+       キーは "dept_pos" の形式（jobs.html のリンクに合わせる）
+  ============================================================ */
+
+  const JOB_DATA = {
+
+    /* ==================
+       戦略企画部
+    ================== */
+    "strategy_consultant": {
+      dept: "戦略企画部 / Strategy Planning",
+      title: "コンサルタント",
+      tags: ["正社員", "経験者歓迎", "リモート可"],
+      jobDesc: `クライアント企業の経営課題を深く理解し、戦略立案から実行支援まで一気通貫で担います。<br><br>
+        <ul>
+          <li>クライアントへのヒアリング・課題の構造化</li>
+          <li>市場調査・競合分析・事業計画策定</li>
+          <li>プロジェクトマネジメント・進行管理</li>
+          <li>社内ナレッジの構築・ドキュメント整備</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>論理的思考力と高いコミュニケーション能力</li>
+          <li>課題解決に向けてオーナーシップを持って動ける方</li>
+          <li>変化を楽しみながら成長意欲の高い方</li>
+          <li>チームで協力し合うことが好きな方</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>コンサルティングファームでの実務経験（1年以上）</li>
+          <li>Excelを使った財務モデリング・データ分析経験</li>
+          <li>英語でのビジネスコミュニケーション能力（TOEIC 700点以上）</li>
+          <li>スタートアップ・ベンチャー企業での業務経験</li>
+        </ul>`,
+      employment: "正社員（試用期間：入社後3ヶ月）",
+      salary: `<strong>年収 350万円〜800万円（経験・スキルに応じて決定）</strong><br>
+        ※ 試用期間中は同条件<br>
+        ※ 賞与年2回（7月・12月）`,
+      location: `大阪本社 / 東京オフィス<br>
+        ※ リモートワーク制度あり（週2〜3日程度）`,
+      hours: `フレックスタイム制（コアタイム 10:00〜16:00）<br>
+        所定労働時間：8時間 / 日`,
+      holiday: `<ul>
+          <li>完全週休2日制（土・日）</li>
+          <li>祝日、年末年始休暇</li>
+          <li>年次有給休暇（入社時10日付与）</li>
+          <li>ファミリーバースデー休暇</li>
+          <li>ブラックマンデー（毎月最終月曜 15時出社）</li>
+          <li>メディカル休暇（年間3日）</li>
+        </ul>`,
+      benefits: `<ul>
+          <li>社員食堂（専属シェフ・無料）</li>
+          <li>SNS手当・バズ休制度</li>
+          <li>セミナー補助制度</li>
+          <li>グレードアップ制度（自己啓発支援）</li>
+          <li>各種社会保険完備</li>
+          <li>交通費全額支給</li>
+        </ul>`
+    },
+
+    "strategy_expert": {
+      dept: "戦略企画部 / Strategy Planning",
+      title: "エキスパート",
+      tags: ["正社員", "シニア向け", "リモート可"],
+      jobDesc: `特定領域の高い専門性を活かし、プロジェクトの品質向上・ナレッジ蓄積・後進育成をリードします。<br><br>
+        <ul>
+          <li>専門分野におけるプロジェクトの技術的リード</li>
+          <li>コンサルタントへのOJT・メンタリング</li>
+          <li>ベストプラクティスの確立・社内普及</li>
+          <li>新規サービス・ソリューション開発への参画</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>特定領域での豊富な実務経験（5年以上）</li>
+          <li>チームを引っ張るリーダーシップ</li>
+          <li>知識を体系化して伝える教育力</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>業界特有の資格・認定の保有</li>
+          <li>登壇・執筆・SNS発信などのアウトプット実績</li>
+          <li>海外ビジネス経験</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 500万円〜1,000万円（経験・スキルに応じて決定）</strong><br>
+        ※ 賞与年2回`,
+      location: "大阪本社 / 東京オフィス / リモート可",
+      hours: "フレックスタイム制（コアタイム 10:00〜16:00）",
+      holiday: `完全週休2日制（土・日）、祝日、年次有給、各種特別休暇`,
+      benefits: `社員食堂、SNS手当、セミナー補助、グレードアップ制度、社会保険完備、交通費全額支給`
+    },
+
+    "strategy_analyst": {
+      dept: "戦略企画部 / Strategy Planning",
+      title: "アナリスト",
+      tags: ["正社員", "第二新卒歓迎", "未経験可"],
+      jobDesc: `データ収集・分析を通じてコンサルタントの戦略立案を支援します。若手でも大きな裁量を持って挑戦できます。<br><br>
+        <ul>
+          <li>市場・業界リサーチ、競合分析</li>
+          <li>Excelやスプレッドシートを使ったデータ整理・集計</li>
+          <li>提案資料・レポートの作成補助</li>
+          <li>クライアントミーティングへの同席・議事録作成</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>論理的思考力と数字への親しみ</li>
+          <li>学ぶことへの強い意欲と素直さ</li>
+          <li>チームワークを大切にできる方</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>Excel / スプレッドシートでの集計・グラフ作成経験</li>
+          <li>PowerPoint / Googleスライドでの資料作成経験</li>
+          <li>インターンシップでのコンサル・ビジネス経験</li>
+        </ul>`,
+      employment: "正社員（試用期間：入社後3ヶ月）",
+      salary: `<strong>年収 260万円〜450万円（経験・スキルに応じて決定）</strong><br>
+        ※ 賞与年2回（7月・12月）`,
+      location: "大阪本社 / 東京オフィス",
+      hours: "フレックスタイム制（コアタイム 10:00〜16:00）",
+      holiday: "完全週休2日制（土・日）、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、セミナー補助、社会保険完備、交通費全額支給"
+    },
+
+    /* ==================
+       意匠制作部
+    ================== */
+    "design_creative-director": {
+      dept: "意匠制作部 / Design Production",
+      title: "クリエイティブディレクター",
+      tags: ["正社員", "管理職候補", "経験者必須"],
+      jobDesc: `ブランドの世界観をデザインとして体現し、プロジェクト全体のクリエイティブクオリティを統括します。<br><br>
+        <ul>
+          <li>クライアントとのビジョン共有・コンセプト立案</li>
+          <li>デザインチームのディレクション・品質管理</li>
+          <li>ブランドガイドライン策定・管理</li>
+          <li>新規ビジネス提案のクリエイティブ支援</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>クリエイティブディレクター・アートディレクター経験（5年以上）</li>
+          <li>強いビジョンと審美眼</li>
+          <li>チームをまとめるリーダーシップ</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>受賞歴・著名プロジェクトへの参加経験</li>
+          <li>映像・デジタルマーケティング領域の知識</li>
+          <li>英語でのコミュニケーション能力</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 600万円〜1,200万円（経験・スキルに応じて決定）</strong>`,
+      location: "大阪本社 / 東京オフィス / リモート相談可",
+      hours: "フレックスタイム制（コアタイム 10:00〜16:00）",
+      holiday: "完全週休2日制、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、グレードアップ制度、セミナー補助、社会保険完備"
+    },
+
+    "design_art-director": {
+      dept: "意匠制作部 / Design Production",
+      title: "アートディレクター",
+      tags: ["正社員", "経験者歓迎"],
+      jobDesc: `ビジュアルコンセプトを具体化し、グラフィック・WEB・映像など多様なメディアを横断したアート方向性を担います。<br><br>
+        <ul>
+          <li>プロジェクトのビジュアルコンセプト立案</li>
+          <li>デザイナー・フォトグラファーへのディレクション</li>
+          <li>各種制作物のクオリティチェック・フィードバック</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>アートディレクター・グラフィックデザイナー経験（3年以上）</li>
+          <li>Adobe Creative Suite の高度な使用スキル</li>
+          <li>明確なデザインセンスとコンセプト力</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>UI/UXデザイン経験</li>
+          <li>ブランディングプロジェクトへの参画経験</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 400万円〜800万円</strong>`,
+      location: "大阪本社 / 東京オフィス",
+      hours: "フレックスタイム制（コアタイム 10:00〜16:00）",
+      holiday: "完全週休2日制、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、グレードアップ制度、社会保険完備"
+    },
+
+    "design_web-designer": {
+      dept: "意匠制作部 / Design Production",
+      title: "WEBデザイナー",
+      tags: ["正社員", "経験者歓迎", "リモート可"],
+      jobDesc: `魅力的なWEBサイト・ランディングページのデザインを担当します。UXを意識した設計からビジュアル制作まで一貫して携わります。<br><br>
+        <ul>
+          <li>WEBサイト・LPのUI/UXデザイン</li>
+          <li>Figma / XD などを使ったプロトタイピング</li>
+          <li>フロントエンドエンジニアとの連携・デザインデータ共有</li>
+          <li>既存サイトのデザイン改善・A/Bテスト支援</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>WEBデザイン実務経験（1年以上）</li>
+          <li>Figma または Adobe XD の使用経験</li>
+          <li>HTML / CSS の基礎知識</li>
+          <li>ユーザー目線でのデザイン思考</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>Webアクセシビリティへの理解</li>
+          <li>モーションデザイン（After Effects など）経験</li>
+          <li>マーケティング視点でのデザイン経験</li>
+        </ul>`,
+      employment: "正社員（試用期間：入社後3ヶ月）",
+      salary: `<strong>年収 300万円〜600万円（経験・スキルに応じて決定）</strong><br>
+        ※ 賞与年2回`,
+      location: "大阪本社 / 東京オフィス（リモートワーク制度あり）",
+      hours: "フレックスタイム制（コアタイム 10:00〜16:00）",
+      holiday: "完全週休2日制（土・日）、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、セミナー補助、グレードアップ制度、社会保険完備、交通費全額支給"
+    },
+
+    /* ==================
+       コンテンツ制作部
+    ================== */
+    "content_copywriter": {
+      dept: "コンテンツ制作部 / Content Production",
+      title: "コピーライター",
+      tags: ["正社員", "経験者歓迎"],
+      jobDesc: `ブランドの言葉を生み出し、コンテンツ戦略を推進します。WEB・SNS・広告・映像など幅広い媒体でのコピーを担当します。<br><br>
+        <ul>
+          <li>広告コピー・キャッチコピーの立案・執筆</li>
+          <li>WEBサイト・LPのテキストコンテンツ制作</li>
+          <li>SNS投稿文・メールマガジンのライティング</li>
+          <li>ブランドトーン＆マナー策定・管理</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>コピーライター・ライター実務経験（2年以上）</li>
+          <li>言語に対する強いこだわりと表現力</li>
+          <li>ターゲットに合わせた文章の書き分け能力</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>広告代理店・PR会社での経験</li>
+          <li>SEO・コンテンツマーケティングの知識</li>
+          <li>英日翻訳能力</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 300万円〜700万円</strong>`,
+      location: "大阪本社 / 東京オフィス",
+      hours: "フレックスタイム制（コアタイム 10:00〜16:00）",
+      holiday: "完全週休2日制、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、セミナー補助、社会保険完備"
+    },
+
+    "content_photographer": {
+      dept: "コンテンツ制作部 / Content Production",
+      title: "フォトグラファー",
+      tags: ["正社員", "経験者歓迎"],
+      jobDesc: `ブランドの世界観を写真で体現します。商品・ポートレート・空間撮影など幅広いジャンルを担います。<br><br>
+        <ul>
+          <li>商品・サービス・空間などのスチール撮影</li>
+          <li>ポートレート・イベント撮影</li>
+          <li>撮影ディレクション・スタイリング補助</li>
+          <li>Adobe Lightroom / Photoshop を使ったレタッチ</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>フォトグラファーとしての実務経験（2年以上）</li>
+          <li>各種カメラ機材の取り扱いスキル</li>
+          <li>豊かな審美眼と表現力</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>動画撮影・編集経験</li>
+          <li>スタジオ設営・照明機材の知識</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 280万円〜600万円</strong>`,
+      location: "大阪本社 / 東京オフィス",
+      hours: "フレックスタイム制",
+      holiday: "完全週休2日制、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、グレードアップ制度、社会保険完備"
+    },
+
+    "content_videographer": {
+      dept: "コンテンツ制作部 / Content Production",
+      title: "ビデオグラファー",
+      tags: ["正社員", "経験者歓迎"],
+      jobDesc: `ブランドストーリーを映像で語ります。企画から撮影・編集・納品まで一気通貫で担当します。<br><br>
+        <ul>
+          <li>プロモーション映像・採用動画・SNS動画の企画・制作</li>
+          <li>撮影・照明・音響のセッティング</li>
+          <li>Premiere Pro / After Effects などを使った編集・CG合成</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>映像制作実務経験（2年以上）</li>
+          <li>撮影から編集まで自走できるスキル</li>
+          <li>ストーリーテリングへの強い関心</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>モーショングラフィックス制作経験</li>
+          <li>ドローン操作資格</li>
+          <li>YouTube / SNS動画の運用経験</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 300万円〜700万円</strong>`,
+      location: "大阪本社 / 東京オフィス",
+      hours: "フレックスタイム制",
+      holiday: "完全週休2日制、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、グレードアップ制度、社会保険完備"
+    },
+
+    /* ==================
+       テクノロジー部
+    ================== */
+    "tech_frontend": {
+      dept: "テクノロジー部 / Technology",
+      title: "フロントエンドエンジニア",
+      tags: ["正社員", "経験者歓迎", "フルリモート可"],
+      jobDesc: `高品質なUI実装とパフォーマンス最適化を通じて、ユーザー体験を最大化するプロダクト開発を担います。<br><br>
+        <ul>
+          <li>React / Next.js を使ったWEBアプリケーション開発</li>
+          <li>デザインシステムの構築・維持</li>
+          <li>パフォーマンス計測・改善</li>
+          <li>バックエンドエンジニア・デザイナーとの連携</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>フロントエンド開発経験（2年以上）</li>
+          <li>HTML / CSS / JavaScript の実務スキル</li>
+          <li>Reactなどのモダンフレームワーク経験</li>
+          <li>レスポンシブデザインの実装経験</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>TypeScript の実務経験</li>
+          <li>パフォーマンスチューニング・アクセシビリティ対応の経験</li>
+          <li>テスト（Jest / Testing Library）の経験</li>
+          <li>デザインツール（Figma）の操作経験</li>
+        </ul>`,
+      employment: "正社員（試用期間：入社後3ヶ月）",
+      salary: `<strong>年収 350万円〜800万円（経験・スキルに応じて決定）</strong><br>
+        ※ 賞与年2回（7月・12月）`,
+      location: "フルリモート可（大阪本社 / 東京オフィス）",
+      hours: "フレックスタイム制（コアタイム 11:00〜16:00）",
+      holiday: "完全週休2日制（土・日）、祝日、年次有給、各種特別休暇",
+      benefits: `<ul>
+          <li>フルリモートワーク対応</li>
+          <li>グレードアップ制度（機材・書籍・サービス補助）</li>
+          <li>セミナー補助制度</li>
+          <li>社員食堂（出社時）</li>
+          <li>各種社会保険完備</li>
+        </ul>`
+    },
+
+    "tech_backend": {
+      dept: "テクノロジー部 / Technology",
+      title: "バックエンドエンジニア",
+      tags: ["正社員", "経験者歓迎", "フルリモート可"],
+      jobDesc: `スケーラブルなAPIとインフラを設計・構築し、プロダクトの根幹を支えます。<br><br>
+        <ul>
+          <li>RESTful / GraphQL APIの設計・実装</li>
+          <li>データベース設計・最適化</li>
+          <li>クラウドインフラ（AWS / GCP）の構築・運用</li>
+          <li>セキュリティ設計・コードレビュー</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>バックエンド開発経験（2年以上）</li>
+          <li>Python / Node.js / Go などの実務経験</li>
+          <li>RDB（MySQL / PostgreSQL）の設計経験</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>AWS / GCP のクラウド資格保有</li>
+          <li>マイクロサービスアーキテクチャの経験</li>
+          <li>CI/CD パイプライン構築経験</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 400万円〜900万円</strong>`,
+      location: "フルリモート可",
+      hours: "フレックスタイム制（コアタイム 11:00〜16:00）",
+      holiday: "完全週休2日制、祝日、年次有給、各種特別休暇",
+      benefits: "リモートワーク、グレードアップ制度、セミナー補助、社会保険完備"
+    },
+
+    "tech_marketer": {
+      dept: "テクノロジー部 / Technology",
+      title: "マーケター",
+      tags: ["正社員", "経験者歓迎", "データドリブン"],
+      jobDesc: `データと創造性を組み合わせて、デジタルマーケティング全体を推進します。<br><br>
+        <ul>
+          <li>デジタル広告（リスティング・SNS広告）の運用・最適化</li>
+          <li>SEO / コンテンツマーケティング施策の企画・実行</li>
+          <li>Google Analytics / BIツールを使ったKPI分析・レポーティング</li>
+          <li>CRM・MAツールの活用と顧客育成</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>デジタルマーケティング実務経験（2年以上）</li>
+          <li>データに基づく仮説立案・改善サイクルの実行能力</li>
+          <li>Google Analytics / 広告マネージャーの操作経験</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>Google / Meta広告の資格保有</li>
+          <li>SalesforceなどのCRMツール経験</li>
+          <li>動画マーケティングへの知見</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 320万円〜700万円</strong>`,
+      location: "大阪本社 / 東京オフィス",
+      hours: "フレックスタイム制",
+      holiday: "完全週休2日制、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、セミナー補助、グレードアップ制度、社会保険完備"
+    },
+
+    /* ==================
+       経営管理部
+    ================== */
+    "admin_hr": {
+      dept: "経営管理部 / Management",
+      title: "人事",
+      tags: ["正社員", "経験者歓迎"],
+      jobDesc: `採用活動から組織開発まで、会社の「人」に関わるすべてをリードします。<br><br>
+        <ul>
+          <li>新卒・中途採用の企画・実行（媒体選定・面接・クロージング）</li>
+          <li>オンボーディングプログラムの設計・運営</li>
+          <li>評価制度・等級制度の維持・改善</li>
+          <li>エンゲージメント施策・社内制度の企画立案</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>人事・採用実務経験（2年以上）</li>
+          <li>組織や「人」への深い関心と共感力</li>
+          <li>オーナーシップを持ってPDCAを回せる方</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>HR Tech ツール（SmartHR・HRMOSなど）の活用経験</li>
+          <li>組織開発・ピープルマネジメントへの知見</li>
+          <li>労務管理・社労士資格</li>
+        </ul>`,
+      employment: "正社員（試用期間：入社後3ヶ月）",
+      salary: `<strong>年収 300万円〜600万円</strong>`,
+      location: "大阪本社 / 東京オフィス",
+      hours: "フレックスタイム制（コアタイム 10:00〜16:00）",
+      holiday: "完全週休2日制（土・日）、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、SNS手当、セミナー補助、グレードアップ制度、社会保険完備、交通費全額支給"
+    },
+
+    "admin_finance": {
+      dept: "経営管理部 / Management",
+      title: "経理・財務",
+      tags: ["正社員", "経験者歓迎"],
+      jobDesc: `財務の正確性を維持しながら、経営判断に資するデータを提供します。<br><br>
+        <ul>
+          <li>月次・年次決算業務</li>
+          <li>財務諸表の作成・管理</li>
+          <li>キャッシュフロー管理・資金調達サポート</li>
+          <li>税務申告の準備・税理士との連携</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>経理・財務実務経験（2年以上）</li>
+          <li>日商簿記2級以上</li>
+          <li>細部への注意力と誠実さ</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>公認会計士・税理士資格保有</li>
+          <li>ERPシステム（freee / マネーフォワードなど）の操作経験</li>
+          <li>上場企業での経験</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 320万円〜700万円</strong>`,
+      location: "大阪本社",
+      hours: "所定労働時間 8時間",
+      holiday: "完全週休2日制（土・日）、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、セミナー補助、グレードアップ制度、社会保険完備、交通費全額支給"
+    },
+
+    "admin_general": {
+      dept: "経営管理部 / Management",
+      title: "総務・法務",
+      tags: ["正社員", "経験者歓迎"],
+      jobDesc: `社内インフラを整備し、法令遵守・リスク管理を通じて会社全体を支えます。<br><br>
+        <ul>
+          <li>オフィス管理・備品調達・各種手続き</li>
+          <li>契約書のレビュー・管理</li>
+          <li>法令対応・コンプライアンス施策の推進</li>
+          <li>行政対応・許認可管理</li>
+        </ul>`,
+      requirements: `<ul>
+          <li>総務・法務実務経験（2年以上）</li>
+          <li>幅広い業務を柔軟にこなせる対応力</li>
+          <li>正確さと誠実さ</li>
+        </ul>`,
+      welcome: `<ul>
+          <li>司法書士・行政書士・弁護士資格保有</li>
+          <li>M&A・IPO関連業務経験</li>
+          <li>英語での法務対応経験</li>
+        </ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 300万円〜650万円</strong>`,
+      location: "大阪本社",
+      hours: "所定労働時間 8時間",
+      holiday: "完全週休2日制（土・日）、祝日、年次有給、各種特別休暇",
+      benefits: "社員食堂、セミナー補助、グレードアップ制度、社会保険完備、交通費全額支給"
+    }
+
+    /*
+    =====================================================
+    ▼ 職種を追加する場合は以下をコピーして貼り付け
+    =====================================================
+    "dept_pos": {
+      dept: "部門名 / Department Name",
+      title: "職種名",
+      tags: ["雇用形態", "その他タグ"],
+      jobDesc: `仕事内容の説明。<br><br><ul><li>業務1</li><li>業務2</li></ul>`,
+      requirements: `<ul><li>必須スキル1</li><li>必須スキル2</li></ul>`,
+      welcome: `<ul><li>歓迎スキル1</li></ul>`,
+      employment: "正社員",
+      salary: `<strong>年収 XXX万円〜YYY万円</strong>`,
+      location: "勤務地",
+      hours: "勤務時間",
+      holiday: "休日・休暇",
+      benefits: "福利厚生"
+    }
+    =====================================================
+    */
+  };
+
+
+  /* ============================================================
+     URLパラメータを読み取ってデータを表示
+  ============================================================ */
+  window.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(location.search);
+    const dept = params.get('dept') || '';
+    const pos  = params.get('pos')  || '';
+    const key  = dept + '_' + pos;
+
+    const data = JOB_DATA[key];
+
+    if (data) {
+      // ページタイトル
+      document.title = `${data.title} | 募集要項 | WIN PARTNER`;
+
+      // パンくず
+      document.getElementById('breadcrumb-pos').textContent = data.title;
+
+      // 職種ヘッダー
+      document.getElementById('detail-dept').textContent  = data.dept;
+
+      // タイピングアニメーションで職種名を表示
+      const titleElement = document.getElementById('detail-title');
+      titleElement.classList.add('typing-text');
+      titleElement.textContent = '';
+      setTimeout(() => {
+        let i = 0;
+        const titleText = data.title;
+        function type() {
+          if (i < titleText.length) {
+            titleElement.textContent += titleText.charAt(i);
+            i++;
+            setTimeout(type, 150);
+          }
+        }
+        type();
+      }, 300);
+
+      // タグ
+      const tagsContainer = document.getElementById('detail-tags');
+      data.tags.forEach((tag, i) => {
+        const span = document.createElement('span');
+        span.className = 'job-tag' + (i === 0 ? ' highlight' : '');
+        span.textContent = tag;
+        tagsContainer.appendChild(span);
+      });
+
+      // 詳細情報
+      document.getElementById('detail-job-desc').innerHTML    = data.jobDesc;
+      document.getElementById('detail-requirements').innerHTML = data.requirements;
+      document.getElementById('detail-welcome').innerHTML      = data.welcome;
+      document.getElementById('detail-employment').innerHTML   = data.employment;
+      document.getElementById('detail-salary').innerHTML       = data.salary;
+      document.getElementById('detail-location').innerHTML     = data.location;
+      document.getElementById('detail-hours').innerHTML        = data.hours;
+      document.getElementById('detail-holiday').innerHTML      = data.holiday;
+      document.getElementById('detail-benefits').innerHTML     = data.benefits;
+
+    } else {
+      /* データが見つからない場合 */
+      document.getElementById('detail-dept').textContent   = '—';
+      document.getElementById('detail-title').textContent  = '職種情報が見つかりませんでした';
+      document.getElementById('detail-job-desc').textContent = 'URLのパラメータを確認してください。';
+    }
+
+    /* MV フェードイン */
+    setTimeout(() => {
+      document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+    }, 150);
+  });
+
+  </script>
+
+</body>
+</html>

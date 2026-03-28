@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>募集要項 | WIN PARTNER</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/common.css" />
+  <style>
+
+    /* ===========================
+       MV
+    =========================== */
+    #mv {
+      padding: 80px 60px 72px;
+      border-bottom: 1px solid var(--border);
+    }
+    .mv-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 52px;
+    }
+    .mv-en {
+      font-family: var(--font-en);
+      font-size: clamp(64px, 10vw, 120px);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.0;
+      color: var(--black);
+    }
+    .mv-ja {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      color: var(--gray-dark);
+      white-space: nowrap;
+    }
+    .mv-catch {
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .mv-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--gray-dark);
+      line-height: 2.2;
+      max-width: 640px;
+    }
+
+    /* ===========================
+       部門セクション
+    =========================== */
+    .dept-section {
+      padding: 64px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .dept-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .dept-name {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    /* 職種ボタングリッド */
+    .job-btn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+    .job-btn {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--black);
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+      background: var(--white);
+    }
+    .job-btn:hover {
+      background: var(--bg-light);
+    }
+    .job-btn-arrow {
+      font-family: var(--font-en);
+      font-size: 14px;
+      color: var(--gray-light);
+      flex-shrink: 0;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .job-btn:hover .job-btn-arrow {
+      transform: translateX(4px);
+      color: var(--black);
+    }
+
+    /* リンクなしアイテム（一覧表示のみ） */
+    .job-item {
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--gray-dark);
+      background: var(--white);
+      cursor: default;
+    }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 768px) {
+      #mv          { padding: 56px 24px 56px; }
+      .mv-en       { font-size: clamp(48px, 13vw, 80px); }
+      .dept-section { padding: 48px 24px; }
+      .job-btn-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .job-btn-grid { grid-template-columns: 1fr; }
+      .mv-title-row { flex-wrap: wrap; gap: 8px; }
+    }
+
+
+    /* 固定ボタングループ */
+    .fixed-buttons {
+      position: fixed; right: 40px; bottom: 40px; z-index: 100;
+      display: flex; flex-direction: column; gap: 12px; align-items: center;
+    }
+    .back-to-top, .back-to-home {
+      width: 56px; height: 56px;
+      background: var(--black); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.3s ease;
+      opacity: 1; visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      text-decoration: none;
+    }
+    .back-to-top.visible, .back-to-home.visible { opacity: 1; visibility: visible; }
+    .back-to-top:hover, .back-to-home:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .back-to-top svg, .back-to-home svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
+  </style>
+</head>
+<body>
+
+  <!-- 固定ボタングループ -->
+  <div class="fixed-buttons">
+    <a href="index-pattern-f.html" class="back-to-home" id="backToHome">
+      <svg viewBox="0 0 24 24">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+    <button class="back-to-top" id="backToTop">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+
+
+  <!-- ===========================
+       MV
+  =========================== -->
+  <section id="mv">
+    <div style="max-width:1160px;margin:0 auto;">
+      <div class="mv-title-row fade-in">
+        <h1 class="mv-en">Information</h1>
+        <span class="mv-ja">募集要項</span>
+      </div>
+      <p class="mv-catch fade-in delay-1">
+        「勝ちたい人」と、働きたい。
+      </p>
+      <p class="mv-desc fade-in delay-2">
+        ウィンパートナーでは、さまざまな個性と専門性を持つメンバーが同じビジョンに向かって働いています。<br>
+        あなたが活躍できる場所が、きっとあります。
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ===========================
+       部門 & 職種リスト
+       ▼ 部門・職種を追加するには
+         .dept-section ブロックをコピーして
+         dept-name と .job-btn を増やすだけでOK
+  =========================== -->
+
+  <!-- 戦略企画部 -->
+  <section class="dept-section fade-in">
+    <div class="dept-inner">
+      <h2 class="dept-name">戦略企画部</h2>
+      <div class="job-btn-grid">
+        <div class="job-item">コンサルタント</div>
+        <div class="job-item">エキスパート</div>
+        <div class="job-item">アナリスト</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 意匠制作部 -->
+  <section class="dept-section fade-in">
+    <div class="dept-inner">
+      <h2 class="dept-name">意匠制作部</h2>
+      <div class="job-btn-grid">
+        <div class="job-item">クリエイティブディレクター</div>
+        <div class="job-item">アートディレクター</div>
+        <div class="job-item">WEBデザイナー</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- コンテンツ制作部 -->
+  <section class="dept-section fade-in">
+    <div class="dept-inner">
+      <h2 class="dept-name">コンテンツ制作部</h2>
+      <div class="job-btn-grid">
+        <div class="job-item">コピーライター</div>
+        <div class="job-item">フォトグラファー</div>
+        <div class="job-item">ビデオグラファー</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- テクノロジー部 -->
+  <section class="dept-section fade-in">
+    <div class="dept-inner">
+      <h2 class="dept-name">テクノロジー部</h2>
+      <div class="job-btn-grid">
+        <a href="job-detail.html?dept=tech&pos=frontend" class="job-btn">
+          フロントエンドエンジニア
+          <span class="job-btn-arrow">→</span>
+        </a>
+        <a href="job-detail.html?dept=tech&pos=backend" class="job-btn">
+          バックエンドエンジニア
+          <span class="job-btn-arrow">→</span>
+        </a>
+        <a href="job-detail.html?dept=tech&pos=marketer" class="job-btn">
+          マーケター
+          <span class="job-btn-arrow">→</span>
+        </a>
+        <!-- ▼ 職種を追加する場合はここに .job-btn を追加 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 経営管理部 -->
+  <section class="dept-section fade-in">
+    <div class="dept-inner">
+      <h2 class="dept-name">経営管理部</h2>
+      <div class="job-btn-grid">
+        <div class="job-item">人事</div>
+        <div class="job-item">経理・財務</div>
+        <div class="job-item">総務・法務</div>
+      </div>
+    </div>
+  </section>
+
+  <!--
+  =====================================================
+  ▼ 部門を追加する場合は以下をコピーして貼り付け
+  =====================================================
+  <section class="dept-section fade-in">
+    <div class="dept-inner">
+      <h2 class="dept-name">【部門名】</h2>
+      <div class="job-btn-grid">
+        <a href="job-detail.html?dept=XXX&pos=YYY" class="job-btn">
+          【職種名】
+          <span class="job-btn-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </section>
+  =====================================================
+  -->
+
+
+  <!-- 共通フッター挿入ポイント -->
+  <div id="common-footer-anchor"></div>
+
+
+  <!-- 共通JS -->
+  <script src="js/common.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      // タイピングアニメーション
+      initTypingAnimation('.mv-en', 150, 300);
+
+      setTimeout(() => {
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
+      }, 150);
+
+      // Topに戻るボタンの表示/非表示
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+
+      // Topに戻るボタンのクリックイベント
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
