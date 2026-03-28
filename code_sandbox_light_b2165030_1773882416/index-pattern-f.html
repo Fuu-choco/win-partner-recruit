@@ -467,7 +467,16 @@
       }
     }
 
+    @media (max-width: 960px) {
+      .mv-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+
     @media (max-width: 480px) {
+      .mv-title-row { gap: 6px; }
       .mv-heading-en { font-size: clamp(44px, 14vw, 80px); }
       .card-item {
         min-width: calc(100vw - 64px);
