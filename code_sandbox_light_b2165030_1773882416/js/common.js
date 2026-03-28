@@ -180,11 +180,10 @@
     // モバイル判定：960px以下の場合、日本語サブタイトルを即座に表示
     const isMobile = window.innerWidth <= 960;
     if (isMobile) {
-      const mvJa = document.querySelector('.mv-ja');
-      if (mvJa) {
-        mvJa.classList.add('visible');
-        mvJa.style.opacity = '1';
-        mvJa.style.transform = 'translateY(0)';
+      // 親要素(.mv-title-row)を即座に表示
+      const mvTitleRow = document.querySelector('.mv-title-row');
+      if (mvTitleRow) {
+        mvTitleRow.classList.add('visible');
       }
     }
 
