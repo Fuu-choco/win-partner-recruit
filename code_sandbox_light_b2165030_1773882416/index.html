@@ -471,12 +471,20 @@
       #menu { padding: 72px 0; }
       .section-header { padding: 0 24px; }
       .slider-container { padding: 0 24px; }
-      .card-item { min-width: 320px; padding: 40px 32px; }
+      .card-item {
+        min-width: calc(100vw - 80px);
+        width: calc(100vw - 80px);
+        padding: 40px 32px;
+      }
     }
 
     @media (max-width: 480px) {
       .mv-heading-en { font-size: clamp(44px, 14vw, 80px); }
-      .card-item { min-width: 280px; }
+      .card-item {
+        min-width: calc(100vw - 64px);
+        width: calc(100vw - 64px);
+        padding: 32px 24px;
+      }
     }
 
   </style>
