@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Recruit | WIN PARTNER 株式会社ウィンパートナー</title>
+  <title>Pattern F - 分割MV + スライダー型 | WIN PARTNER</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet" />
@@ -12,43 +12,111 @@
   <style>
 
     /* ===========================
-       MV SECTION
+       MV SECTION - 分割レイアウト（パターンBから）
     =========================== */
     #mv {
       min-height: calc(100vh - var(--header-h));
       background: var(--white);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+    }
+
+    .mv-left {
+      background: linear-gradient(135deg, rgba(17,17,17,0.7) 0%, rgba(51,51,51,0.6) 100%),
+                  url('images/高層ビル.avif') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 画像の上にグリッドアニメーション */
+    .mv-left::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: moveGrid 20s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes moveGrid {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .mv-visual {
+      width: 400px;
+      height: 300px;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 30px;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-en);
+      font-size: 56px;
+      font-weight: 800;
+      color: var(--white);
+      position: relative;
+      z-index: 2;
+      animation: float 3s ease-in-out infinite;
+      letter-spacing: 0.05em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .mv-right {
       display: flex;
       flex-direction: column;
-      justify-content: flex-end;
-      padding: 0 60px 90px;
-      position: relative;
+      justify-content: center;
+      padding: 80px 60px;
+    }
+
+    .mv-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 80px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
     }
 
     .mv-heading-en {
       font-family: var(--font-en);
-      font-size: clamp(72px, 11vw, 148px);
+      font-size: clamp(56px, 8vw, 96px);
       font-weight: 800;
       letter-spacing: -0.02em;
       line-height: 1.0;
       color: var(--black);
-      margin-bottom: 6px;
     }
+
     .mv-heading-sub {
       font-size: 13px;
       font-weight: 400;
       letter-spacing: 0.22em;
       color: var(--gray-dark);
-      margin-bottom: 40px;
+      white-space: nowrap;
     }
     .mv-catchcopy {
-      font-size: clamp(16px, 2vw, 22px);
+      font-size: clamp(18px, 2vw, 24px);
       font-weight: 500;
       letter-spacing: 0.12em;
       color: var(--black);
       margin-bottom: 16px;
     }
     .mv-sub {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--gray-dark);
       letter-spacing: 0.06em;
@@ -60,7 +128,8 @@
     .scroll-down {
       position: absolute;
       bottom: 40px;
-      right: 40px;
+      left: 50%;
+      transform: translateX(-50%);
       width: 48px;
       height: 48px;
       border-radius: 50%;
@@ -69,9 +138,13 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: background 0.25s;
+      transition: all 0.3s;
+      z-index: 10;
     }
-    .scroll-down:hover { background: var(--dark); }
+    .scroll-down:hover {
+      background: var(--dark);
+      transform: translateX(-50%) translateY(-5px);
+    }
     .scroll-down svg {
       width: 18px; height: 18px;
       fill: none; stroke: var(--white);
@@ -79,73 +152,259 @@
     }
 
     /* ===========================
-       MAIN CARDS SECTION
+       SLIDER SECTION（パターンEから）
     =========================== */
     #menu {
-      padding: 100px 60px;
-      border-top: 1px solid var(--border);
+      padding: 100px 0;
+      background: #fafafa;
+      overflow: hidden;
     }
 
-    .cards-grid {
-      max-width: 1160px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border-top: 1px solid var(--border);
-      border-left: 1px solid var(--border);
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 0 60px;
+    }
+
+    .section-title {
+      font-family: var(--font-en);
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      color: var(--black);
+      margin-bottom: 16px;
+      letter-spacing: -0.01em;
+    }
+
+    /* 一文字ずつ現れるアニメーション */
+    .section-title span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    /* スクロールで見えたときのみアニメーション開始 */
+    .section-title.animate span {
+      animation: fadeInChar 0.5s forwards;
+    }
+
+    @keyframes fadeInChar {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: var(--gray-dark);
+      letter-spacing: 0.08em;
+    }
+
+    .slider-container {
+      position: relative;
+      padding: 0 60px;
+    }
+
+    .slider-wrapper {
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE/Edge */
+      padding-bottom: 20px;
+    }
+
+    .slider-wrapper::-webkit-scrollbar {
+      display: none; /* Chrome/Safari */
+    }
+
+    .cards-slider {
+      display: flex;
+      gap: 32px;
+      padding: 20px 0;
     }
 
     .card-item {
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 48px 44px 52px;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 48px 40px;
+      min-width: 420px;
+      flex-shrink: 0;
       cursor: pointer;
-      transition: background 0.25s;
-      min-height: 220px;
-      display: block;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
-    .card-item:hover { background: var(--bg-light); }
 
-    /* 黒塗りカード */
-    .card-item.dark {
-      background: var(--black);
-      color: var(--white);
+    .card-item:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.15);
     }
-    .card-item.dark:hover { background: var(--dark); }
-    .card-item.dark .card-arrow {
-      color: var(--white);
-      border-color: rgba(255,255,255,0.3);
-    }
-    .card-item.dark .card-title { color: var(--white); }
-    .card-item.dark .card-body  { color: rgba(255,255,255,0.65); }
 
-    .card-arrow {
-      display: inline-flex;
+    /* カード番号 */
+    .card-number {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gray);
+      margin-bottom: 24px;
+    }
+
+    .card-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      background: var(--bg-light);
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      border: 1px solid var(--gray-light);
-      font-size: 13px;
-      color: var(--black);
-      margin-bottom: 24px;
-      font-family: var(--font-en);
-      flex-shrink: 0;
+      margin-bottom: 28px;
+      transition: all 0.3s ease;
     }
+
+    .card-item:hover .card-icon {
+      background: var(--black);
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .card-icon svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--black);
+      fill: none;
+      stroke-width: 2;
+      transition: stroke 0.3s ease;
+    }
+
+    .card-item:hover .card-icon svg {
+      stroke: var(--white);
+    }
+
     .card-title {
-      font-size: 20px;
+      font-size: 24px;
       font-weight: 700;
       letter-spacing: 0.04em;
       color: var(--black);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       line-height: 1.4;
     }
+
     .card-body {
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 300;
       color: var(--gray-dark);
       line-height: 2;
+      margin-bottom: 32px;
+      flex-grow: 1;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--black);
+      transition: all 0.3s ease;
+    }
+
+    .card-link svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      transition: transform 0.3s ease;
+    }
+
+    .card-item:hover .card-link {
+      gap: 12px;
+    }
+
+    .card-item:hover .card-link svg {
+      transform: translateX(4px);
+    }
+
+    /* 黒塗りカード */
+    .card-item.dark {
+      background: linear-gradient(135deg, #111111 0%, #2a2a2a 100%);
+      color: var(--white);
+    }
+
+    .card-item.dark .card-number { color: rgba(255,255,255,0.5); }
+    .card-item.dark .card-icon { background: rgba(255,255,255,0.1); }
+    .card-item.dark .card-icon svg { stroke: var(--white); }
+    .card-item.dark:hover .card-icon { background: var(--white); }
+    .card-item.dark:hover .card-icon svg { stroke: var(--black); }
+    .card-item.dark .card-title { color: var(--white); }
+    .card-item.dark .card-body { color: rgba(255,255,255,0.8); }
+    .card-item.dark .card-link { color: var(--white); }
+
+    /* スライダーナビゲーション */
+    .slider-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 48px;
+    }
+
+    .slider-btn {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--white);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .slider-btn:hover {
+      background: var(--black);
+      border-color: var(--black);
+      transform: scale(1.1);
+    }
+
+    .slider-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--black);
+      fill: none;
+      stroke-width: 2;
+      transition: stroke 0.3s ease;
+    }
+
+    .slider-btn:hover svg {
+      stroke: var(--white);
+    }
+
+    .slider-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gray-light);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active,
+    .dot:hover {
+      background: var(--black);
+      transform: scale(1.3);
     }
 
     /* ===========================
@@ -158,7 +417,7 @@
     .photo-wrap {
       width: 100%;
       height: clamp(320px, 45vw, 600px);
-      background: var(--bg-light);
+      background: linear-gradient(135deg, #111111 0%, #333333 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -168,11 +427,11 @@
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      color: var(--gray-light);
+      color: rgba(255,255,255,0.5);
     }
     .photo-placeholder svg {
       width: 56px; height: 56px;
-      stroke: var(--gray-light);
+      stroke: rgba(255,255,255,0.5);
       fill: none; stroke-width: 1.2;
     }
     .photo-placeholder span {
@@ -180,35 +439,64 @@
       font-size: 11px;
       letter-spacing: 0.2em;
       font-weight: 500;
+      color: rgba(255,255,255,0.7);
     }
 
     /* ===========================
        RESPONSIVE
     =========================== */
-    @media (max-width: 768px) {
-      #mv    { padding: 0 24px 80px; }
-      #menu  { padding: 72px 24px; }
-      .cards-grid { grid-template-columns: 1fr; }
+    @media (max-width: 960px) {
+      #mv {
+        grid-template-columns: 1fr;
+      }
+      .mv-left {
+        min-height: 400px;
+      }
     }
+
+    @media (max-width: 768px) {
+      #mv { padding: 0 24px 80px; }
+      .mv-right { padding: 60px 24px; }
+      #menu { padding: 72px 0; }
+      .section-header { padding: 0 24px; }
+      .slider-container { padding: 0 24px; }
+      .card-item { min-width: 320px; padding: 40px 32px; }
+    }
+
     @media (max-width: 480px) {
       .mv-heading-en { font-size: clamp(44px, 14vw, 80px); }
+      .card-item { min-width: 280px; }
     }
 
   </style>
 </head>
 <body>
 
+  <!-- Topに戻るボタン -->
+  <button class="back-to-top" id="backToTop">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 19V5M5 12l7-7 7 7" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
   <!-- ===========================
-       MV
+       MV - 分割レイアウト
   =========================== -->
   <section id="mv">
-    <div class="mv-heading-en fade-in">Recruit</div>
-    <p class="mv-heading-sub fade-in delay-1">採用情報</p>
-    <p class="mv-catchcopy fade-in delay-2">未来を切り拓く</p>
-    <p class="mv-sub fade-in delay-3">
-      株式会社ウィンパートナーは、<br>
-      共に持続可能な成長を目指せる仲間を募集しています。
-    </p>
+    <div class="mv-left">
+      <div class="mv-visual fade-in">WIN PARTNER</div>
+    </div>
+    <div class="mv-right">
+      <div class="mv-title-row fade-in">
+        <h1 class="mv-heading-en">Recruit</h1>
+        <span class="mv-heading-sub">採用情報</span>
+      </div>
+      <p class="mv-catchcopy fade-in delay-2">未来を切り拓く</p>
+      <p class="mv-sub fade-in delay-3">
+        株式会社ウィンパートナーは、<br>
+        共に持続可能な成長を目指せる仲間を募集しています。
+      </p>
+    </div>
     <div class="scroll-down" id="scrollBtn" aria-label="スクロール">
       <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
@@ -216,65 +504,112 @@
 
 
   <!-- ===========================
-       MAIN CARDS  (2×3 grid)
+       SLIDER SECTION
   =========================== -->
   <section id="menu">
-    <div class="cards-grid fade-in">
+    <div class="section-header fade-in">
+      <h2 class="section-title">What We Offer</h2>
+      <p class="section-subtitle">私たちが提供するもの</p>
+    </div>
 
-      <a href="jobs.html" class="card-item">
-        <span class="card-arrow">→</span>
-        <h3 class="card-title">募集要項</h3>
-        <p class="card-body">
-          オモシロイ会社づくりには、オモシロイ仲間が欠かせない。<br>
-          各職種の仕事内容や求める人物像をご紹介します。
-        </p>
-      </a>
+    <div class="slider-container fade-in delay-1">
+      <div class="slider-wrapper" id="slider">
+        <div class="cards-slider">
 
-      <a href="education.html" class="card-item">
-        <span class="card-arrow">→</span>
-        <h3 class="card-title">教育 / 研修制度</h3>
-        <p class="card-body">
-          ウィンパートナーのビジョンと社員一人ひとりの夢や目標を重ねるために、<br>
-          研修制度や職場環境を整えています。
-        </p>
-      </a>
+          <a href="jobs.html" class="card-item">
+            <div class="card-number">01 / JOBS</div>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM10 5h4v2h-4V5z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="card-title">募集要項</h3>
+            <p class="card-body">
+              あなたの次のキャリアがここに。経験とスキルを活かせる場所がここにあります。
+            </p>
+            <span class="card-link">
+              View More
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
 
-      <a href="benefits.html" class="card-item">
-        <span class="card-arrow">→</span>
-        <h3 class="card-title">福利厚生 / 社内制度</h3>
-        <p class="card-body">
-          「世界一オモシロイ会社」を目指して導入された、<br>
-          50以上のユニークな福利厚生や社内制度があります。
-        </p>
-      </a>
+          <a href="education.html" class="card-item">
+            <div class="card-number">02 / EDUCATION</div>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="card-title">教育 / 研修制度</h3>
+            <p class="card-body">
+              充実した研修制度と教育プログラム。スキルアップを全力でサポートします。
+            </p>
+            <span class="card-link">
+              View More
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
 
-      <a href="environment.html" class="card-item dark">
-        <span class="card-arrow">→</span>
-        <h3 class="card-title">働く環境</h3>
-        <p class="card-body">
-          好きなコトをやり続けるために、ライフスタイルに合わせた<br>
-          働き方制度やオフィス環境にこだわっています。
-        </p>
-      </a>
+          <a href="benefits.html" class="card-item">
+            <div class="card-number">03 / BENEFITS</div>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="card-title">福利厚生 / 社内制度</h3>
+            <p class="card-body">
+              仕事もプライベートも充実！ユニークな福利厚生と柔軟な社内制度を整備しています。
+            </p>
+            <span class="card-link">
+              View More
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
 
-      <a href="career.html" class="card-item">
-        <span class="card-arrow">→</span>
-        <h3 class="card-title">キャリアアップ</h3>
-        <p class="card-body">
-          会社のビジョンに共感しながら、自分の夢も追いかける。<br>
-          独自の評価システムとキャリアパスを整えています。
-        </p>
-      </a>
+          <a href="environment.html" class="card-item">
+            <div class="card-number">04 / ENVIRONMENT</div>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="card-title">働く環境</h3>
+            <p class="card-body">
+              リモートワークも相談可！フレキシブルな働き方で理想のワークスタイルを実現します。
+            </p>
+            <span class="card-link">
+              View More
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
 
-      <a href="contact.html" class="card-item">
-        <span class="card-arrow">→</span>
-        <h3 class="card-title">エントリー</h3>
-        <p class="card-body">
-          ウィンパートナーの理念や仕事に共感いただけた方は、<br>
-          こちらのエントリーフォームからご応募ください。
-        </p>
-      </a>
+          <a href="career.html" class="card-item">
+            <div class="card-number">05 / CAREER PATH / MODEL</div>
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3 class="card-title">キャリアパス・モデルケース</h3>
+            <p class="card-body">
+              実際の社員のキャリアパスを紹介。多様な成長の軌跡がここにあります。
+            </p>
+            <span class="card-link">
+              View More
+              <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
 
+        </div>
+      </div>
+
+      <div class="slider-nav">
+        <button class="slider-btn" id="prevBtn">
+          <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="slider-dots" id="dots">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="slider-btn" id="nextBtn">
+          <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -298,19 +633,262 @@
   <!-- 共通フッター挿入ポイント -->
   <div id="common-footer-anchor"></div>
 
+  <!-- 斜めカット・オーバーラップ型のカスタムスタイル -->
+  <style>
+    /* Download/Contactセクション 上書き */
+    #dl-contact {
+      padding: 120px 60px;
+      background: var(--bg-light);
+    }
+
+    .dl-contact-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      border: none;
+      position: relative;
+      height: 400px;
+    }
+
+    .dl-contact-item {
+      width: 500px;
+      height: 100%;
+      padding: 60px 50px;
+      text-align: left;
+      border: none;
+      position: relative;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
+    }
+
+    .dl-contact-item:first-child {
+      background: var(--black);
+      z-index: 2;
+      clip-path: polygon(0 0, 85% 0, 100% 100%, 0 100%);
+    }
+
+    .dl-contact-item:first-child .dl-contact-en { color: var(--white); }
+    .dl-contact-item:first-child .dl-contact-ja { color: rgba(255,255,255,0.5); }
+    .dl-contact-item:first-child .dl-contact-desc { color: rgba(255,255,255,0.8); }
+    .dl-contact-item:first-child .dl-contact-btn {
+      background: var(--white);
+      color: var(--black);
+      border-color: var(--white);
+    }
+    .dl-contact-item:first-child .dl-contact-btn:hover {
+      background: transparent;
+      color: var(--white);
+    }
+
+    .dl-contact-item:last-child {
+      background: var(--white);
+      border: 1px solid var(--border);
+      margin-left: -80px;
+      z-index: 1;
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0 100%);
+      padding-left: 120px;
+    }
+
+    .dl-contact-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      z-index: 3;
+    }
+
+    /* SNSセクションを非表示 */
+    #sns {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      .dl-contact-grid {
+        flex-direction: column;
+        height: auto;
+        gap: 20px;
+      }
+      .dl-contact-item {
+        width: 100%;
+        clip-path: none;
+        margin-left: 0 !important;
+        padding-left: 50px !important;
+      }
+    }
+
+    /* Topに戻るボタン */
+    .back-to-top {
+      position: fixed;
+      right: 40px;
+      bottom: 40px;
+      z-index: 100;
+      width: 56px;
+      height: 56px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 1;
+      visibility: visible;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top:hover {
+      background: var(--dark);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+    .back-to-top svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--white);
+      fill: none;
+      stroke-width: 2;
+    }
+  </style>
+
   <!-- 共通JS -->
   <script src="js/common.js"></script>
   <script>
+    // タイピングアニメーション
+    function typeWriter(element, text, speed = 100) {
+      let i = 0;
+      element.textContent = '';
+
+      function type() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+
+      type();
+    }
+
     // MV テキストをすぐに表示
     window.addEventListener('DOMContentLoaded', () => {
+      // タイピングアニメーション開始
+      initTypingAnimation('.mv-heading-en', 150, 300);
+
+      // フェードイン
       setTimeout(() => {
+        document.querySelectorAll('.mv-title-row, .mv-title-row .fade-in').forEach(el => {
+          el.classList.add('visible');
+        });
         document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
       }, 150);
+
+      // "What We Offer" 文字を一文字ずつ分割
+      const sectionTitle = document.querySelector('.section-title');
+      if (sectionTitle) {
+        const text = sectionTitle.textContent;
+        sectionTitle.textContent = '';
+
+        text.split('').forEach((char, index) => {
+          const span = document.createElement('span');
+          span.textContent = char === ' ' ? '\u00A0' : char; // スペースは&nbsp;に変換
+          span.style.animationDelay = `${index * 0.05}s`;
+          sectionTitle.appendChild(span);
+        });
+
+        // スクロール時にアニメーション開始
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(sectionTitle);
+      }
+
+      // Topに戻るボタンの表示/非表示
+      const backToTopBtn = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.pageYOffset > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+
+      // Topに戻るボタンのクリックイベント
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
 
     // スクロールボタン
     document.getElementById('scrollBtn').addEventListener('click', () => {
       document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // スライダー機能
+    const slider = document.getElementById('slider');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dots = document.querySelectorAll('.dot');
+
+    let currentIndex = 0;
+    const cardWidth = 420 + 32; // カード幅 + gap
+
+    // 次へ
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < 5) {
+        currentIndex++;
+        updateSlider();
+      }
+    });
+
+    // 前へ
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlider();
+      }
+    });
+
+    // ドットクリック
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        currentIndex = index;
+        updateSlider();
+      });
+    });
+
+    function updateSlider() {
+      slider.scrollTo({
+        left: currentIndex * cardWidth,
+        behavior: 'smooth'
+      });
+
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+    }
+
+    // スクロールでドット更新
+    slider.addEventListener('scroll', () => {
+      const scrollLeft = slider.scrollLeft;
+      const newIndex = Math.round(scrollLeft / cardWidth);
+      if (newIndex !== currentIndex) {
+        currentIndex = newIndex;
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+      }
     });
   </script>
 
