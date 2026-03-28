@@ -398,8 +398,15 @@
       .flow-step:last-child { border-bottom: none; }
       .flow-step::after { display: none; }
     }
+    @media (max-width: 960px) {
+      .mv-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
     @media (max-width: 480px) {
-      .mv-title-row { gap: 12px; }
+      .mv-title-row { gap: 6px; }
       .mc-timeline-item { gap: 14px; font-size: 13px; }
     }
 

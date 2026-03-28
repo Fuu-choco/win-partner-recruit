@@ -444,7 +444,15 @@
       .gallery-grid { grid-template-columns: 1fr; }
       .gallery-item.wide { grid-column: auto; }
     }
+    @media (max-width: 960px) {
+      .mv-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
     @media (max-width: 480px) {
+      .mv-title-row { gap: 6px; }
       .number-grid { grid-template-columns: 1fr; }
       .donut-wrap { flex-direction: column; align-items: flex-start; }
       .location-row { gap: 20px; flex-wrap: wrap; }

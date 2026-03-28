@@ -135,9 +135,16 @@
       .dept-section { padding: 48px 24px; }
       .job-btn-grid { grid-template-columns: 1fr 1fr; }
     }
+    @media (max-width: 960px) {
+      .mv-title-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
     @media (max-width: 480px) {
+      .mv-title-row { gap: 6px; }
       .job-btn-grid { grid-template-columns: 1fr; }
-      .mv-title-row { flex-wrap: wrap; gap: 8px; }
     }
 
 
