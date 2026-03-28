@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/career.html"
+      "destination": "/index-pattern-f.html"
     }
   ]
 }
