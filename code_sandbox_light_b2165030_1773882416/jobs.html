@@ -140,11 +140,12 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
-      .mv-title-row.visible {
-        opacity: 1;
+      .mv-ja {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
       }
     }
     @media (max-width: 480px) {
@@ -320,12 +321,7 @@
       initTypingAnimation('.mv-en', 150, 300);
 
       setTimeout(() => {
-        const isMobile = window.innerWidth <= 960;
-        document.querySelectorAll('#mv .fade-in').forEach(el => {
-          // モバイルでは.mv-title-rowを除外（initTypingAnimationで処理）
-          if (isMobile && el.classList.contains('mv-title-row')) return;
-          el.classList.add('visible');
-        });
+        document.querySelectorAll('#mv .fade-in').forEach(el => el.classList.add('visible'));
       }, 150);
 
       // Topに戻るボタンの表示/非表示

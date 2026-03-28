@@ -179,18 +179,7 @@
 
     const originalText = element.textContent + '          '; // 最後にスペース10個追加
     element.classList.add('typing-text');
-
-    // モバイル判定：960px以下の場合、先に英語を空にしてから親要素を表示
-    const isMobile = window.innerWidth <= 960;
-    if (isMobile) {
-      element.textContent = ''; // 先に空にする
-      const mvTitleRow = document.querySelector('.mv-title-row');
-      if (mvTitleRow) {
-        mvTitleRow.classList.add('visible');
-      }
-    } else {
-      element.textContent = '';
-    }
+    element.textContent = '';
 
     setTimeout(() => {
       let i = 0;
