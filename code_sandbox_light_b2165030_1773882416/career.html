@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/common.css" />
   <style>
 
-    /* 固定ボタングループの修正 */
+    /* 固定ボタングループ */
     .fixed-buttons {
       position: fixed;
       right: 40px;
@@ -23,13 +23,13 @@
     }
     .back-to-top,
     .back-to-home {
-      width: 56px !important;
-      height: 56px !important;
+      width: 56px;
+      height: 56px;
       background: var(--black);
       color: var(--white);
       border: none;
       border-radius: 50%;
-      display: flex !important;
+      display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
@@ -38,12 +38,17 @@
       visibility: visible;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
       text-decoration: none;
-      overflow: hidden;
+    }
+    .back-to-top:hover,
+    .back-to-home:hover {
+      background: var(--dark);
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
     .back-to-top svg,
     .back-to-home svg {
-      width: 24px !important;
-      height: 24px !important;
+      width: 24px;
+      height: 24px;
       stroke: var(--white);
       fill: none;
       stroke-width: 2;
@@ -161,46 +166,6 @@
       color: var(--gray-dark);
       line-height: 2.4;
       max-width: 560px;
-    }
-
-    /* ===========================
-       Topに戻るボタン
-    =========================== */
-    .back-to-top {
-      position: fixed;
-      right: 40px;
-      bottom: 40px;
-      z-index: 100;
-      width: 56px;
-      height: 56px;
-      background: var(--black);
-      color: var(--white);
-      border: none;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      opacity: 1;
-      visibility: visible;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-    .back-to-top:hover {
-      background: var(--dark);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    .back-to-top svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--white);
-      fill: none;
-      stroke-width: 2;
     }
 
     /* ===========================
@@ -392,7 +357,8 @@
       #mv, #hiring-flow, #model-case { padding-left: 24px; padding-right: 24px; }
       .mc-profile-row { grid-template-columns: 1fr; gap: 32px; }
       .mc-photo-wrap { aspect-ratio: 3 / 2; max-width: 320px; }
-      .back-to-top { right: 20px; bottom: 20px; width: 48px; height: 48px; }
+      .fixed-buttons { right: 20px; bottom: 20px; }
+      .back-to-top, .back-to-home { width: 48px; height: 48px; }
       .flow-steps { flex-direction: column; }
       .flow-step { border-right: none; border-bottom: 1px solid var(--border); }
       .flow-step:last-child { border-bottom: none; }
