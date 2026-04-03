@@ -284,6 +284,22 @@
       overflow: hidden;
     }
 
+    /* 個別テキスト配置調整 */
+    /* 固定（現在の左寄せを維持） */
+    .benefit-card-title.align-fixed {
+      padding: 0 18px 0 20px;
+    }
+
+    /* 気持ち左へ（現在よりさらに左へ） */
+    .benefit-card-title.align-more-left {
+      padding: 0 22px 0 14px;
+    }
+
+    /* 気持ち右へ（現在より右へ） */
+    .benefit-card-title.align-right {
+      padding: 0 14px 0 26px;
+    }
+
     /* アコーディオンアイコン - 展開無効化のため非表示 */
     .benefit-accordion-icon {
       font-size: 20px;
@@ -887,6 +903,40 @@
       //     accordionItem.classList.toggle('active');
       //   });
       // });
+
+      // カード個別テキスト位置調整
+      const cardTitles = document.querySelectorAll('.benefit-card-title');
+
+      // 固定（現在の左寄せを維持）
+      const fixedCards = [
+        'マリッジアニバーサリー',
+        'フリードリンクバー',
+        '出産お祝い金制度',
+        'リモートワーク',
+        'リモートワーク制度',
+        '勤務時間インターバル',
+        '勤務間インターバル',
+        '勤務地フリー制度'
+      ];
+
+      // 気持ち左へ
+      const moreLeftCards = [
+        'おひとりさまアニバーサリー',
+        'ファミリーバースデー休暇'
+      ];
+
+      cardTitles.forEach(title => {
+        const text = title.textContent.trim();
+
+        if (fixedCards.includes(text)) {
+          title.classList.add('align-fixed');
+        } else if (moreLeftCards.includes(text)) {
+          title.classList.add('align-more-left');
+        } else {
+          // その他のカードは気持ち右へ
+          title.classList.add('align-right');
+        }
+      });
     });
   </script>
 
