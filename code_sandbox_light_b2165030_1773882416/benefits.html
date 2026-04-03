@@ -258,7 +258,7 @@
     .benefit-accordion-header {
       width: 100%;
       height: 100%;
-      padding: 28px 28px;
+      padding: 16px 12px;
       background: none;
       border: none;
       text-align: center;
@@ -269,10 +269,18 @@
     }
 
     .benefit-card-title {
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.04em;
-      line-height: 1.5;
+      line-height: 1.4;
+      writing-mode: horizontal-tb;
+      text-align: center;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: keep-all;
+      padding: 0 8px;
     }
 
     /* アコーディオンアイコン - 展開無効化のため非表示 */
