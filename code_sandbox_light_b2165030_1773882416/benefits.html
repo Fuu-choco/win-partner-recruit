@@ -198,7 +198,7 @@
     /* カードグリッド */
     .benefit-cards-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 20px;
       margin-top: 48px;
     }
@@ -221,32 +221,36 @@
       z-index: 10;
     }
 
-    /* シンプルな市松模様（8個で1サイクル）*/
-    /* 白カード: 1, 3, 6, 8列目 */
-    .benefit-accordion-item:nth-child(8n+1),
-    .benefit-accordion-item:nth-child(8n+3),
-    .benefit-accordion-item:nth-child(8n+6),
-    .benefit-accordion-item:nth-child(8n) {
+    /* シンプルな市松模様（5列グリッド: 10個で1サイクル）*/
+    /* 白カード: 奇数 */
+    .benefit-accordion-item:nth-child(10n+1),
+    .benefit-accordion-item:nth-child(10n+3),
+    .benefit-accordion-item:nth-child(10n+5),
+    .benefit-accordion-item:nth-child(10n+7),
+    .benefit-accordion-item:nth-child(10n+9) {
       background: var(--white);
     }
-    .benefit-accordion-item:nth-child(8n+1) .benefit-card-title,
-    .benefit-accordion-item:nth-child(8n+3) .benefit-card-title,
-    .benefit-accordion-item:nth-child(8n+6) .benefit-card-title,
-    .benefit-accordion-item:nth-child(8n) .benefit-card-title {
+    .benefit-accordion-item:nth-child(10n+1) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n+3) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n+5) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n+7) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n+9) .benefit-card-title {
       color: var(--black);
     }
 
-    /* 黒カード: 2, 4, 5, 7列目 */
-    .benefit-accordion-item:nth-child(8n+2),
-    .benefit-accordion-item:nth-child(8n+4),
-    .benefit-accordion-item:nth-child(8n+5),
-    .benefit-accordion-item:nth-child(8n+7) {
+    /* 黒カード: 偶数 */
+    .benefit-accordion-item:nth-child(10n+2),
+    .benefit-accordion-item:nth-child(10n+4),
+    .benefit-accordion-item:nth-child(10n+6),
+    .benefit-accordion-item:nth-child(10n+8),
+    .benefit-accordion-item:nth-child(10n) {
       background: var(--black);
     }
-    .benefit-accordion-item:nth-child(8n+2) .benefit-card-title,
-    .benefit-accordion-item:nth-child(8n+4) .benefit-card-title,
-    .benefit-accordion-item:nth-child(8n+5) .benefit-card-title,
-    .benefit-accordion-item:nth-child(8n+7) .benefit-card-title {
+    .benefit-accordion-item:nth-child(10n+2) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n+4) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n+6) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n+8) .benefit-card-title,
+    .benefit-accordion-item:nth-child(10n) .benefit-card-title {
       color: var(--white);
     }
 
