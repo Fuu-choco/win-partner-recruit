@@ -214,12 +214,32 @@
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    .benefit-accordion-item:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    /* 偶数行を左にオフセット＆上にずらす（7個で1サイクル: 4個+3個） */
+    .benefit-accordion-item:nth-child(7n+5),
+    .benefit-accordion-item:nth-child(7n+6),
+    .benefit-accordion-item:nth-child(7n) {
+      transform: translateY(-50%);
+      margin-bottom: -50%;
     }
 
-    /* 偶数行を左にオフセット（7個で1サイクル: 4個+3個） */
+    /* ホバー効果 */
+    .benefit-accordion-item:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    /* 奇数行のホバー */
+    .benefit-accordion-item:nth-child(7n+1):hover,
+    .benefit-accordion-item:nth-child(7n+2):hover,
+    .benefit-accordion-item:nth-child(7n+3):hover,
+    .benefit-accordion-item:nth-child(7n+4):hover {
+      transform: translateY(-4px);
+    }
+    /* 偶数行のホバー */
+    .benefit-accordion-item:nth-child(7n+5):hover,
+    .benefit-accordion-item:nth-child(7n+6):hover,
+    .benefit-accordion-item:nth-child(7n):hover {
+      transform: translateY(calc(-50% - 4px));
+    }
     .benefit-accordion-item:nth-child(7n+5) { grid-column: 2 / 3; }
     .benefit-accordion-item:nth-child(7n+6) { grid-column: 3 / 4; }
     .benefit-accordion-item:nth-child(7n) { grid-column: 4 / 5; }
@@ -306,6 +326,17 @@
     =========================== */
     @media (max-width: 960px) {
       .benefit-cards-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      /* レスポンシブ時はオフセットをリセット */
+      .benefit-accordion-item:nth-child(7n+5),
+      .benefit-accordion-item:nth-child(7n+6),
+      .benefit-accordion-item:nth-child(7n) {
+        transform: none;
+        margin-bottom: 0;
+        grid-column: auto;
+      }
+      .benefit-accordion-item:hover {
+        transform: translateY(-4px) !important;
+      }
     }
     @media (max-width: 768px) {
       #mv                { padding: 56px 24px; }
@@ -318,26 +349,21 @@
     }
     @media (max-width: 480px) {
       .benefit-cards-grid{ grid-template-columns: 1fr; gap: 12px; }
-    }
-    @media (max-width: 960px) {
       .mv-title-row {
         flex-direction: column;
         align-items: flex-start;
-        gap: 8px;
+        gap: 6px;
       }
       .mv-en {
         display: inline-block;
         min-height: 1.2em;
         min-width: 200px;
+        font-size: clamp(44px, 14vw, 80px);
       }
       .mv-ja {
         display: block;
         margin-top: 8px;
       }
-    }
-    @media (max-width: 480px) {
-      .mv-title-row { gap: 6px; }
-      .mv-en { font-size: clamp(44px, 14vw, 80px); }
     }
 
 
