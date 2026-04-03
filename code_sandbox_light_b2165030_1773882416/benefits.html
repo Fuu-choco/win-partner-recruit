@@ -198,37 +198,64 @@
     /* カードグリッド */
     .benefit-cards-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      border-top: 1px solid var(--border);
-      border-left: 1px solid var(--border);
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
       margin-top: 48px;
     }
 
-    /* アコーディオンアイテム */
+    /* アコーディオンアイテム - 丸カード + 白黒交互 */
     .benefit-accordion-item {
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      border-radius: 50%;
+      aspect-ratio: 1 / 1;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .benefit-accordion-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    /* 白黒交互の市松模様 */
+    .benefit-accordion-item:nth-child(4n+1),
+    .benefit-accordion-item:nth-child(4n+4) {
+      background: var(--black);
+    }
+    .benefit-accordion-item:nth-child(4n+1) .benefit-card-title,
+    .benefit-accordion-item:nth-child(4n+4) .benefit-card-title {
+      color: var(--white);
+    }
+
+    .benefit-accordion-item:nth-child(4n+2),
+    .benefit-accordion-item:nth-child(4n+3) {
+      background: var(--white);
+    }
+    .benefit-accordion-item:nth-child(4n+2) .benefit-card-title,
+    .benefit-accordion-item:nth-child(4n+3) .benefit-card-title {
+      color: var(--black);
     }
 
     /* アコーディオンヘッダー（ボタン） - 展開無効化 */
     .benefit-accordion-header {
       width: 100%;
+      height: 100%;
       padding: 28px 28px;
       background: none;
       border: none;
-      text-align: left;
+      text-align: center;
       cursor: default;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 16px;
+      justify-content: center;
     }
 
     .benefit-card-title {
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.04em;
-      color: var(--black);
       line-height: 1.5;
     }
 
@@ -265,7 +292,7 @@
        RESPONSIVE
     =========================== */
     @media (max-width: 960px) {
-      .benefit-cards-grid { grid-template-columns: repeat(2, 1fr); }
+      .benefit-cards-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
     }
     @media (max-width: 768px) {
       #mv                { padding: 56px 24px; }
@@ -274,7 +301,10 @@
       #holiday           { padding: 0 24px 60px; }
       .mv-title-row      { flex-wrap: wrap; gap: 12px; }
       .system-row        { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
-      .benefit-cards-grid{ grid-template-columns: 1fr; }
+      .benefit-cards-grid{ grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    }
+    @media (max-width: 480px) {
+      .benefit-cards-grid{ grid-template-columns: 1fr; gap: 12px; }
     }
     @media (max-width: 960px) {
       .mv-title-row {
@@ -776,6 +806,16 @@
           </button>
           <div class="benefit-accordion-content">
             <p class="benefit-card-desc">産休は予定日の3ヶ月前から取得可能。育休は法定（最大2歳まで）に加え、3歳以降も最長10年以内は復職可能な制度を用意しています。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">推し活休暇</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">推しのライブやイベント参加のため、年間2日まで特別休暇を取得できます。推し活を全力で応援する制度です。</p>
           </div>
         </div>
 
