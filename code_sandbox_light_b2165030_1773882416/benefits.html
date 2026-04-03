@@ -767,7 +767,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">ファミリーバースデー休暇</span>
+            <span class="benefit-card-title">ファミリー<br>バースデー休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -797,7 +797,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">おひとりさまアニバーサリー</span>
+            <span class="benefit-card-title">おひとりさま<br>アニバーサリー休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -921,16 +921,16 @@
 
       // 気持ち左へ
       const moreLeftCards = [
-        'おひとりさまアニバーサリー',
+        'おひとりさまアニバーサリー休暇',
         'ファミリーバースデー休暇'
       ];
 
       cardTitles.forEach(title => {
-        const text = title.textContent.trim();
+        const text = title.textContent.trim().replace(/\s+/g, '');
 
-        if (fixedCards.includes(text)) {
+        if (fixedCards.some(card => text === card.replace(/\s+/g, ''))) {
           title.classList.add('align-fixed');
-        } else if (moreLeftCards.includes(text)) {
+        } else if (moreLeftCards.some(card => text === card.replace(/\s+/g, ''))) {
           title.classList.add('align-more-left');
         } else {
           // その他のカードは気持ち右へ
