@@ -219,23 +219,36 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
 
-    /* 白黒交互の市松模様 */
-    .benefit-accordion-item:nth-child(4n+1),
-    .benefit-accordion-item:nth-child(4n+4) {
-      background: var(--black);
-    }
-    .benefit-accordion-item:nth-child(4n+1) .benefit-card-title,
-    .benefit-accordion-item:nth-child(4n+4) .benefit-card-title {
-      color: var(--white);
-    }
+    /* 偶数行を左にオフセット（7個で1サイクル: 4個+3個） */
+    .benefit-accordion-item:nth-child(7n+5) { grid-column: 2 / 3; }
+    .benefit-accordion-item:nth-child(7n+6) { grid-column: 3 / 4; }
+    .benefit-accordion-item:nth-child(7n) { grid-column: 4 / 5; }
 
-    .benefit-accordion-item:nth-child(4n+2),
-    .benefit-accordion-item:nth-child(4n+3) {
+    /* 白黒市松模様 */
+    /* 白カード */
+    .benefit-accordion-item:nth-child(7n+1),
+    .benefit-accordion-item:nth-child(7n+3),
+    .benefit-accordion-item:nth-child(7n+6) {
       background: var(--white);
     }
-    .benefit-accordion-item:nth-child(4n+2) .benefit-card-title,
-    .benefit-accordion-item:nth-child(4n+3) .benefit-card-title {
+    .benefit-accordion-item:nth-child(7n+1) .benefit-card-title,
+    .benefit-accordion-item:nth-child(7n+3) .benefit-card-title,
+    .benefit-accordion-item:nth-child(7n+6) .benefit-card-title {
       color: var(--black);
+    }
+
+    /* 黒カード */
+    .benefit-accordion-item:nth-child(7n+2),
+    .benefit-accordion-item:nth-child(7n+4),
+    .benefit-accordion-item:nth-child(7n+5),
+    .benefit-accordion-item:nth-child(7n) {
+      background: var(--black);
+    }
+    .benefit-accordion-item:nth-child(7n+2) .benefit-card-title,
+    .benefit-accordion-item:nth-child(7n+4) .benefit-card-title,
+    .benefit-accordion-item:nth-child(7n+5) .benefit-card-title,
+    .benefit-accordion-item:nth-child(7n) .benefit-card-title {
+      color: var(--white);
     }
 
     /* アコーディオンヘッダー（ボタン） - 展開無効化 */
