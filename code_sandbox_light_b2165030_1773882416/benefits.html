@@ -214,60 +214,39 @@
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
-    /* 偶数行を左にオフセット＆上にずらす（7個で1サイクル: 4個+3個） */
-    .benefit-accordion-item:nth-child(7n+5),
-    .benefit-accordion-item:nth-child(7n+6),
-    .benefit-accordion-item:nth-child(7n) {
-      transform: translateY(-50%);
-      margin-bottom: -50%;
-    }
-
     /* ホバー効果 */
     .benefit-accordion-item:hover {
+      transform: translateY(-4px);
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       z-index: 10;
     }
-    /* 奇数行のホバー */
-    .benefit-accordion-item:nth-child(7n+1):hover,
-    .benefit-accordion-item:nth-child(7n+2):hover,
-    .benefit-accordion-item:nth-child(7n+3):hover,
-    .benefit-accordion-item:nth-child(7n+4):hover {
-      transform: translateY(-4px);
-    }
-    /* 偶数行のホバー */
-    .benefit-accordion-item:nth-child(7n+5):hover,
-    .benefit-accordion-item:nth-child(7n+6):hover,
-    .benefit-accordion-item:nth-child(7n):hover {
-      transform: translateY(calc(-50% - 4px));
-    }
-    .benefit-accordion-item:nth-child(7n+5) { grid-column: 2 / 3; }
-    .benefit-accordion-item:nth-child(7n+6) { grid-column: 3 / 4; }
-    .benefit-accordion-item:nth-child(7n) { grid-column: 4 / 5; }
 
-    /* 白黒市松模様 */
-    /* 白カード */
-    .benefit-accordion-item:nth-child(7n+1),
-    .benefit-accordion-item:nth-child(7n+3),
-    .benefit-accordion-item:nth-child(7n+6) {
+    /* シンプルな市松模様（8個で1サイクル）*/
+    /* 白カード: 1, 3, 6, 8列目 */
+    .benefit-accordion-item:nth-child(8n+1),
+    .benefit-accordion-item:nth-child(8n+3),
+    .benefit-accordion-item:nth-child(8n+6),
+    .benefit-accordion-item:nth-child(8n) {
       background: var(--white);
     }
-    .benefit-accordion-item:nth-child(7n+1) .benefit-card-title,
-    .benefit-accordion-item:nth-child(7n+3) .benefit-card-title,
-    .benefit-accordion-item:nth-child(7n+6) .benefit-card-title {
+    .benefit-accordion-item:nth-child(8n+1) .benefit-card-title,
+    .benefit-accordion-item:nth-child(8n+3) .benefit-card-title,
+    .benefit-accordion-item:nth-child(8n+6) .benefit-card-title,
+    .benefit-accordion-item:nth-child(8n) .benefit-card-title {
       color: var(--black);
     }
 
-    /* 黒カード */
-    .benefit-accordion-item:nth-child(7n+2),
-    .benefit-accordion-item:nth-child(7n+4),
-    .benefit-accordion-item:nth-child(7n+5),
-    .benefit-accordion-item:nth-child(7n) {
+    /* 黒カード: 2, 4, 5, 7列目 */
+    .benefit-accordion-item:nth-child(8n+2),
+    .benefit-accordion-item:nth-child(8n+4),
+    .benefit-accordion-item:nth-child(8n+5),
+    .benefit-accordion-item:nth-child(8n+7) {
       background: var(--black);
     }
-    .benefit-accordion-item:nth-child(7n+2) .benefit-card-title,
-    .benefit-accordion-item:nth-child(7n+4) .benefit-card-title,
-    .benefit-accordion-item:nth-child(7n+5) .benefit-card-title,
-    .benefit-accordion-item:nth-child(7n) .benefit-card-title {
+    .benefit-accordion-item:nth-child(8n+2) .benefit-card-title,
+    .benefit-accordion-item:nth-child(8n+4) .benefit-card-title,
+    .benefit-accordion-item:nth-child(8n+5) .benefit-card-title,
+    .benefit-accordion-item:nth-child(8n+7) .benefit-card-title {
       color: var(--white);
     }
 
@@ -326,17 +305,6 @@
     =========================== */
     @media (max-width: 960px) {
       .benefit-cards-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-      /* レスポンシブ時はオフセットをリセット */
-      .benefit-accordion-item:nth-child(7n+5),
-      .benefit-accordion-item:nth-child(7n+6),
-      .benefit-accordion-item:nth-child(7n) {
-        transform: none;
-        margin-bottom: 0;
-        grid-column: auto;
-      }
-      .benefit-accordion-item:hover {
-        transform: translateY(-4px) !important;
-      }
     }
     @media (max-width: 768px) {
       #mv                { padding: 56px 24px; }
