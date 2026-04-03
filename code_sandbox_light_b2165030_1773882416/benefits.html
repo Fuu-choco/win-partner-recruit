@@ -208,23 +208,20 @@
     .benefit-accordion-item {
       border-right: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      transition: background 0.2s;
     }
-    .benefit-accordion-item:hover { background: var(--bg-light); }
 
-    /* アコーディオンヘッダー（ボタン） */
+    /* アコーディオンヘッダー（ボタン） - 展開無効化 */
     .benefit-accordion-header {
       width: 100%;
       padding: 28px 28px;
       background: none;
       border: none;
       text-align: left;
-      cursor: pointer;
+      cursor: default;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 16px;
-      transition: background 0.2s;
     }
 
     .benefit-card-title {
@@ -235,27 +232,26 @@
       line-height: 1.5;
     }
 
-    /* アコーディオンアイコン */
+    /* アコーディオンアイコン - 展開無効化のため非表示 */
     .benefit-accordion-icon {
       font-size: 20px;
       font-weight: 300;
       color: var(--black);
       flex-shrink: 0;
-      transition: transform 0.3s ease;
+      display: none; /* アイコン非表示 */
     }
-    .benefit-accordion-item.active .benefit-accordion-icon {
+    /* .benefit-accordion-item.active .benefit-accordion-icon {
       transform: rotate(45deg);
-    }
+    } */
 
-    /* アコーディオンコンテンツ */
+    /* アコーディオンコンテンツ - 展開無効化 */
     .benefit-accordion-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease;
     }
-    .benefit-accordion-item.active .benefit-accordion-content {
+    /* .benefit-accordion-item.active .benefit-accordion-content {
       max-height: 500px;
-    }
+    } */
 
     .benefit-card-desc {
       font-size: 12px;
@@ -646,16 +642,6 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">選挙タイム</span>
-            <span class="benefit-accordion-icon">+</span>
-          </button>
-          <div class="benefit-accordion-content">
-            <p class="benefit-card-desc">選挙期間中に投票するため、勤務時間内に投票所へ行くことができる制度。</p>
-          </div>
-        </div>
-
-        <div class="benefit-accordion-item">
-          <button class="benefit-accordion-header">
             <span class="benefit-card-title">グレードアップ制度</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
@@ -666,21 +652,21 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">SNS手当</span>
-            <span class="benefit-accordion-icon">+</span>
-          </button>
-          <div class="benefit-accordion-content">
-            <p class="benefit-card-desc">フォロワー数に応じて毎月手当を支給。自分の影響力が評価される制度。</p>
-          </div>
-        </div>
-
-        <div class="benefit-accordion-item">
-          <button class="benefit-accordion-header">
             <span class="benefit-card-title">メディカル休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
             <p class="benefit-card-desc">年間3日まで体調不良での欠勤も給与を全額保障します。</p>
+          </div>
+        </div>
+
+        <div class="benefit-accordion-item">
+          <button class="benefit-accordion-header">
+            <span class="benefit-card-title">サークル（自由参加）</span>
+            <span class="benefit-accordion-icon">+</span>
+          </button>
+          <div class="benefit-accordion-content">
+            <p class="benefit-card-desc">社員同士の交流を深めるため、様々なサークル活動を自由に参加できます。フットサル、ボードゲーム、読書会など多様なサークルがあります。</p>
           </div>
         </div>
 
@@ -815,16 +801,6 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">離婚慰安休暇</span>
-            <span class="benefit-accordion-icon">+</span>
-          </button>
-          <div class="benefit-accordion-content">
-            <p class="benefit-card-desc">離婚による心の傷を癒すために1日特別休暇をもらえる制度。</p>
-          </div>
-        </div>
-
-        <div class="benefit-accordion-item">
-          <button class="benefit-accordion-header">
             <span class="benefit-card-title">マタニティ休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
@@ -850,26 +826,6 @@
           </button>
           <div class="benefit-accordion-content">
             <p class="benefit-card-desc">40歳以上の独身社員には40歳・45歳・50歳の年に3日間の特別休暇を取得することができます。</p>
-          </div>
-        </div>
-
-        <div class="benefit-accordion-item">
-          <button class="benefit-accordion-header">
-            <span class="benefit-card-title">バズ休（X）</span>
-            <span class="benefit-accordion-icon">+</span>
-          </button>
-          <div class="benefit-accordion-content">
-            <p class="benefit-card-desc">Xの投稿が1万リツイートされた場合、1日特別休暇を取得できます。</p>
-          </div>
-        </div>
-
-        <div class="benefit-accordion-item">
-          <button class="benefit-accordion-header">
-            <span class="benefit-card-title">バズ休（ブログ）</span>
-            <span class="benefit-accordion-icon">+</span>
-          </button>
-          <div class="benefit-accordion-content">
-            <p class="benefit-card-desc">自分が書いたブログ記事がバズった場合、1日特別休暇がもらえる制度。</p>
           </div>
         </div>
 
@@ -923,14 +879,14 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // アコーディオン機能
-      const accordionHeaders = document.querySelectorAll('.benefit-accordion-header');
-      accordionHeaders.forEach(header => {
-        header.addEventListener('click', () => {
-          const accordionItem = header.parentElement;
-          accordionItem.classList.toggle('active');
-        });
-      });
+      // アコーディオン機能 - 無効化
+      // const accordionHeaders = document.querySelectorAll('.benefit-accordion-header');
+      // accordionHeaders.forEach(header => {
+      //   header.addEventListener('click', () => {
+      //     const accordionItem = header.parentElement;
+      //     accordionItem.classList.toggle('active');
+      //   });
+      // });
     });
   </script>
 
