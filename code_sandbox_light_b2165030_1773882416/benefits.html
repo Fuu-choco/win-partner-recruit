@@ -92,94 +92,6 @@
     }
 
     /* ===========================
-       INTERNAL SYSTEM
-       左ラベル・右説明の2カラムリスト
-    =========================== */
-    #internal-system {
-      padding: 0 60px;
-      border-bottom: 1px solid var(--border);
-    }
-    .internal-inner {
-      max-width: 1160px;
-      margin: 0 auto;
-    }
-    .internal-heading {
-      font-family: var(--font-en);
-      font-size: clamp(40px, 6vw, 80px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--black);
-      padding-top: 64px;
-      margin-bottom: 48px;
-    }
-    .system-list {
-      border-top: 1px solid var(--border);
-    }
-    .system-row {
-      display: grid;
-      grid-template-columns: 260px 1fr;
-      gap: 0;
-      border-bottom: 1px solid var(--border);
-      padding: 40px 0;
-      align-items: start;
-    }
-    .system-name {
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: var(--black);
-      padding-right: 40px;
-      line-height: 1.7;
-    }
-    .system-desc {
-      font-size: 13px;
-      font-weight: 300;
-      color: var(--gray-dark);
-      line-height: 2.2;
-      max-width: 700px;
-    }
-
-    /* ===========================
-       オフィス写真エリア
-    =========================== */
-    #office-photo {
-      overflow: hidden;
-      line-height: 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .office-photo-wrap {
-      width: 100%;
-      height: clamp(280px, 40vw, 540px);
-      background: var(--bg-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .office-photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .photo-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      color: var(--gray-light);
-    }
-    .photo-placeholder svg {
-      width: 56px; height: 56px;
-      stroke: var(--gray-light); fill: none; stroke-width: 1.2;
-    }
-    .photo-placeholder span {
-      font-family: var(--font-en);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      font-weight: 500;
-    }
-
-    /* ===========================
        ALL BENEFIT / HOLIDAY
        アコーディオン形式
     =========================== */
@@ -337,11 +249,9 @@
     }
     @media (max-width: 768px) {
       #mv                { padding: 56px 24px; }
-      #internal-system   { padding: 0 24px; }
       #all-benefit,
       #holiday           { padding: 0 24px 60px; }
       .mv-title-row      { flex-wrap: wrap; gap: 12px; }
-      .system-row        { grid-template-columns: 1fr; gap: 12px; padding: 28px 0; }
       .benefit-cards-grid{ grid-template-columns: repeat(2, 1fr); gap: 12px; }
     }
     @media (max-width: 480px) {
@@ -418,73 +328,6 @@
       </p>
     </div>
   </section>
-
-
-  <!-- ===========================
-       INTERNAL SYSTEM（社内制度 2カラムリスト）
-       ▼ 項目を追加するには
-         .system-row ブロックをコピーして .system-list 内に追加するだけでOK
-  =========================== -->
-  <section id="internal-system">
-    <div class="internal-inner">
-
-      <h2 class="internal-heading fade-in">Our Initiative</h2>
-
-      <div class="system-list fade-in delay-1">
-
-        <div class="system-row">
-          <p class="system-name">ブラックマンデー</p>
-          <p class="system-desc">毎月最終月曜日の出社時間を15時に設定。日曜日や月曜の朝をゆっくり過ごせる制度です。約7割の社員が利用し、週の始まりを心地よくスタートしています。</p>
-        </div>
-
-        <div class="system-row">
-          <p class="system-name">ファミリーバースデー休暇</p>
-          <p class="system-desc">本人や家族（配偶者・1親等）の誕生日に特別休暇を取得できます。家族を大切にできる人は、仕事も大切にできる。そう信じています。</p>
-        </div>
-
-        <div class="system-row">
-          <p class="system-name">メディカル休暇</p>
-          <p class="system-desc">体調不良で休む際、年間3日間まで給与全額を保障。誰でも体調を崩すことはある。だから、安心して休める環境を整えています。</p>
-        </div>
-
-        <div class="system-row">
-          <p class="system-name">勤務間インターバル</p>
-          <p class="system-desc">退勤から翌日の始業まで、最低10時間のインターバルを確保。高いパフォーマンスは、十分な休息から生まれると考えています。</p>
-        </div>
-
-        <!--
-        =====================================================
-        ▼ 社内制度を追加する場合は以下をコピーして貼り付け
-        =====================================================
-        <div class="system-row">
-          <p class="system-name">【制度名】</p>
-          <p class="system-desc">【説明文】</p>
-        </div>
-        =====================================================
-        -->
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ===========================
-       オフィス写真
-       ▼ 写真を挿入する場合は .photo-placeholder を
-         <img src="画像パス" alt="説明"> に差し替えてOK
-  =========================== -->
-  <div id="office-photo">
-    <div class="office-photo-wrap">
-      <div class="photo-placeholder">
-        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="8" width="40" height="32" rx="2"/>
-          <circle cx="17" cy="20" r="4"/>
-          <polyline points="4,34 14,22 22,30 30,20 44,36"/>
-        </svg>
-        <span>OFFICE PHOTO</span>
-      </div>
-    </div>
-  </div>
 
 
   <!-- ===========================
