@@ -175,7 +175,64 @@
     .back-to-top.visible, .back-to-home.visible { opacity: 1; visibility: visible; }
     .back-to-top:hover, .back-to-home:hover { background: var(--dark); transform: translateY(-4px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
     .back-to-top svg, .back-to-home svg { width: 24px; height: 24px; stroke: var(--white); fill: none; stroke-width: 2; }
-  </style>
+  
+    /* ===========================
+       フッター：会社HPリンク
+    =========================== */
+    .site-footer {
+      background: var(--black);
+      padding: 60px 60px;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .company-site-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 40px;
+      background: var(--white);
+      color: var(--black);
+      text-decoration: none;
+      font-family: var(--font-en);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      border: 2px solid var(--white);
+    }
+    .company-site-link:hover {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--white);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255,255,255,0.2);
+    }
+    .link-arrow {
+      width: 20px;
+      height: 20px;
+      transition: transform 0.3s ease;
+    }
+    .company-site-link:hover .link-arrow {
+      transform: translate(4px, -4px);
+    }
+
+    @media (max-width: 768px) {
+      .site-footer {
+        padding: 40px 24px;
+      }
+      .company-site-link {
+        font-size: 14px;
+        padding: 16px 32px;
+      }
+    }
+</style>
 </head>
 <body>
 
@@ -320,6 +377,19 @@
 
 
   <!-- 共通フッター挿入ポイント -->
+
+  <!-- フッター：会社HPリンク -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a href="https://win-partner.co.jp/" target="_blank" rel="noopener noreferrer" class="company-site-link">
+        <span class="link-text">WIN PARTNER 公式サイト</span>
+        <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </footer>
+
   <div id="common-footer-anchor"></div>
 
 
