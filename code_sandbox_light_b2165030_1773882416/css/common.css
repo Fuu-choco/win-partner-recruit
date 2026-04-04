@@ -362,7 +362,6 @@ footer {
 #page-image-section {
   overflow: hidden;
   line-height: 0;
-  border: 1px solid var(--black);
 }
 .page-image-wrap {
   width: 100%;
