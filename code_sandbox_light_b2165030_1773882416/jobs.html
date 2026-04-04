@@ -55,6 +55,64 @@
     }
 
     /* ===========================
+       職種画像セクション（インタラクティブ）
+    =========================== */
+    .job-images-section {
+      padding: 80px 60px;
+      border-bottom: 1px solid var(--border);
+    }
+    .job-images-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .job-images-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+    .job-image-item {
+      position: relative;
+      overflow: hidden;
+      border: 3px solid #2a2a2a;
+      border-radius: 12px;
+      aspect-ratio: 3/4;
+      background: #1a1a1a;
+      cursor: pointer;
+      transition: border-color 0.5s ease;
+    }
+    .job-image-item:hover {
+      border-color: #000;
+    }
+    .job-image-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%);
+      transition: filter 0.5s ease;
+    }
+    .job-image-item:hover img,
+    .job-image-item.active img {
+      filter: grayscale(0%);
+    }
+    .job-image-item.active {
+      border-color: #000;
+    }
+    .job-image-label {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.6), transparent);
+      color: var(--white);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    /* ===========================
        部門セクション
     =========================== */
     .dept-section {
@@ -132,6 +190,8 @@
     @media (max-width: 768px) {
       #mv          { padding: 56px 24px 56px; }
       .mv-en       { font-size: clamp(48px, 13vw, 80px); }
+      .job-images-section { padding: 56px 24px; }
+      .job-images-grid { grid-template-columns: 1fr 1fr; gap: 16px; }
       .dept-section { padding: 48px 24px; }
       .job-btn-grid { grid-template-columns: 1fr 1fr; }
     }
@@ -153,6 +213,7 @@
     }
     @media (max-width: 480px) {
       .mv-title-row { gap: 6px; }
+      .job-images-grid { grid-template-columns: 1fr; }
       .job-btn-grid { grid-template-columns: 1fr; }
     }
 
@@ -363,6 +424,34 @@
     </div>
   </section>
 
+
+  <!-- ===========================
+       職種画像セクション（インタラクティブ）
+  =========================== -->
+  <section class="job-images-section fade-in">
+    <div class="job-images-inner">
+      <div class="job-images-grid">
+        <div class="job-image-item">
+          <img src="images/job-consultant.png" alt="Consultant">
+          <div class="job-image-label">Consultant</div>
+        </div>
+        <div class="job-image-item">
+          <img src="images/job-webdesign.png" alt="Web Designer">
+          <div class="job-image-label">Web Designer</div>
+        </div>
+        <div class="job-image-item">
+          <img src="images/job-cad.png" alt="CAD Operator">
+          <div class="job-image-label">CAD Operator</div>
+        </div>
+        <div class="job-image-item">
+          <img src="images/job-engineer-new.png" alt="Engineer">
+          <div class="job-image-label">Engineer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
   <!--
   =====================================================
   ▼ 部門を追加する場合は以下をコピーして貼り付け
@@ -411,6 +500,17 @@
       // Topに戻るボタンのクリックイベント
       backToTopBtn.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // 職種画像のタップインタラクション（スマホ対応）
+      const jobImageItems = document.querySelectorAll('.job-image-item');
+      jobImageItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // モバイルデバイスの場合のみタップでactive切り替え
+          if (window.matchMedia('(max-width: 768px)').matches) {
+            this.classList.toggle('active');
+          }
+        });
       });
     });
   </script>

@@ -127,7 +127,7 @@
           メインページ (index-pattern-f.html) の場合はイメージセクションなし */
     const currentPage = location.pathname.split('/').pop();
     const isMainPage = currentPage === 'index-pattern-f.html' || currentPage === '';
-    const contentToInsert = (isMainPage ? '' : IMAGE_SECTION_HTML);
+    const contentToInsert = ''; // IMAGE PLACEHOLDERを挿入しないように変更
 
     const anchor = document.getElementById('common-footer-anchor');
     if (anchor) {
