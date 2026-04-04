@@ -191,7 +191,7 @@
       align-items: center;
       justify-content: flex-start;
       word-break: keep-all;
-      padding: 0 18px 0 14px;
+      padding: 0 18px 0 20px;
       max-height: 3.4em;
       overflow: hidden;
     }
@@ -199,17 +199,17 @@
     /* 個別テキスト配置調整 */
     /* 固定（現在の左寄せを維持） */
     .benefit-card-title.align-fixed {
-      padding: 0 18px 0 14px;
+      padding: 0 18px 0 20px;
     }
 
     /* 気持ち左へ（現在よりさらに左へ） */
     .benefit-card-title.align-more-left {
-      padding: 0 18px 0 10px;
+      padding: 0 18px 0 24px;
     }
 
     /* もう少し右へ */
     .benefit-card-title.align-right {
-      padding: 0 10px 0 18px;
+      padding: 0 10px 0 32px;
     }
 
     /* アコーディオンアイコン - 展開無効化のため非表示 */
@@ -256,6 +256,21 @@
     }
     @media (max-width: 480px) {
       .benefit-cards-grid{ grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+      /* モバイル版のみ：丸カード内の文字を左寄りに */
+      .benefit-card-title {
+        padding: 0 18px 0 14px;
+      }
+      .benefit-card-title.align-fixed {
+        padding: 0 18px 0 14px;
+      }
+      .benefit-card-title.align-more-left {
+        padding: 0 18px 0 10px;
+      }
+      .benefit-card-title.align-right {
+        padding: 0 10px 0 18px;
+      }
+
       .mv-title-row {
         flex-direction: column;
         align-items: flex-start;
