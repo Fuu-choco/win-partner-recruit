@@ -421,29 +421,10 @@
     .photo-wrap {
       width: 100%;
       height: clamp(320px, 45vw, 600px);
-      background: linear-gradient(135deg, #111111 0%, #333333 100%);
+      background: url('images/ロゴのみ.png') center/contain no-repeat;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .photo-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      color: rgba(255,255,255,0.5);
-    }
-    .photo-placeholder svg {
-      width: 56px; height: 56px;
-      stroke: rgba(255,255,255,0.5);
-      fill: none; stroke-width: 1.2;
-    }
-    .photo-placeholder span {
-      font-family: var(--font-en);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      font-weight: 500;
-      color: rgba(255,255,255,0.7);
     }
 
     /* ===========================
@@ -649,14 +630,6 @@
   =========================== -->
   <div id="photo">
     <div class="photo-wrap">
-      <div class="photo-placeholder">
-        <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <rect x="4" y="8" width="40" height="32" rx="2"/>
-          <circle cx="17" cy="20" r="4"/>
-          <polyline points="4,34 14,22 22,30 30,20 44,36"/>
-        </svg>
-        <span>TEAM PHOTO</span>
-      </div>
     </div>
   </div>
 
@@ -747,43 +720,6 @@
       }
     }
 
-    /* Topに戻るボタン */
-    .back-to-top {
-      position: fixed;
-      right: 40px;
-      bottom: 40px;
-      z-index: 100;
-      width: 56px;
-      height: 56px;
-      background: var(--black);
-      color: var(--white);
-      border: none;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      opacity: 1;
-      visibility: visible;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
-    }
-    .back-to-top:hover {
-      background: var(--dark);
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-    }
-    .back-to-top svg {
-      width: 24px;
-      height: 24px;
-      stroke: var(--white);
-      fill: none;
-      stroke-width: 2;
-    }
   </style>
 
   <!-- 共通JS -->

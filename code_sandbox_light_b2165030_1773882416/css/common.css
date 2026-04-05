@@ -578,6 +578,61 @@ footer {
 }
 
 /* ===========================
+   FIXED BUTTONS (Top に戻る / ホームに戻る)
+=========================== */
+.fixed-buttons {
+  position: fixed;
+  right: 40px;
+  bottom: 40px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+.back-to-top,
+.back-to-home {
+  width: 56px;
+  height: 56px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 1;
+  visibility: visible;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-decoration: none;
+}
+
+.back-to-top.visible,
+.back-to-home.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.back-to-top:hover,
+.back-to-home:hover {
+  background: var(--dark);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.back-to-top svg,
+.back-to-home svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--white);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* ===========================
    RESPONSIVE
 =========================== */
 @media (max-width: 960px) {
@@ -592,6 +647,10 @@ footer {
 
   /* ハンバーガーメニューをモバイルで表示 */
   .hamburger { display: flex; }
+
+  /* 固定ボタン（モバイル） */
+  .fixed-buttons { right: 20px; bottom: 20px; }
+  .back-to-top, .back-to-home { width: 48px; height: 48px; }
 
   /* サイトフッター（モバイル） */
   .site-footer {
