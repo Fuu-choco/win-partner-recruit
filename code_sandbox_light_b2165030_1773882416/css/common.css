@@ -51,7 +51,6 @@ body {
   padding-top: var(--header-h); /* ヘッダー固定分の余白 */
   margin: 0 !important;
   padding-bottom: 0 !important;
-  min-height: 100vh;
 }
 
 a { color: inherit; text-decoration: none; }
