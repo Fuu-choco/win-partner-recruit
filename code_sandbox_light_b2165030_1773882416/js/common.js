@@ -5,11 +5,40 @@
 
 (function () {
 
-  /* ---- ヘッダー HTML ---- */
-  const HEADER_HTML = `
+  /* ---- ヘッダー HTML（メインページ用） ---- */
+  const HEADER_SIMPLE = `
   <header id="site-header">
-    <a href="index-pattern-f.html" class="logo">WIN PARTNER</a>
+    <a href="index.html" class="logo">WIN PARTNER</a>
   </header>`;
+
+  /* ---- ヘッダー HTML（サブページ用 - ナビゲーション付き） ---- */
+  const HEADER_WITH_NAV = `
+  <header id="site-header">
+    <a href="index.html" class="logo">WIN PARTNER</a>
+    <div class="header-right">
+      <nav class="header-nav">
+        <a href="jobs.html">募集要項</a>
+        <a href="education.html">教育 / 研修</a>
+        <a href="benefits.html">福利厚生</a>
+        <a href="environment.html">働く環境</a>
+        <a href="career.html">キャリアパス</a>
+        <a href="https://win-partner.jp" target="_blank" rel="noopener">公式サイト</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="jobs.html">募集要項</a>
+    <a href="education.html">教育 / 研修制度</a>
+    <a href="benefits.html">福利厚生 / 社内制度</a>
+    <a href="environment.html">働く環境</a>
+    <a href="career.html">キャリアパス・モデルケース</a>
+    <a href="https://win-partner.jp" target="_blank" rel="noopener">WIN PARTNER 公式サイト</a>
+  </nav>`;
 
   /* ---- Image Section HTML ---- */
   const IMAGE_SECTION_HTML = `
@@ -119,14 +148,17 @@
   ============================================================ */
   document.addEventListener('DOMContentLoaded', function () {
 
-    /* 1. ヘッダー：body の先頭に挿入 */
-    document.body.insertAdjacentHTML('afterbegin', HEADER_HTML);
+    /* 1. ヘッダー：ページに応じて適切なヘッダーを挿入 */
+    const currentPage = location.pathname.split('/').pop();
+    const isMainPage = currentPage === 'index.html' || currentPage === '';
+
+    // メインページはシンプルなヘッダー、サブページはナビゲーション付きヘッダー
+    const headerHTML = isMainPage ? HEADER_SIMPLE : HEADER_WITH_NAV;
+    document.body.insertAdjacentHTML('afterbegin', headerHTML);
 
     /* 2. Image Section のみ挿入（SNS・フッターは削除）
           ただし #common-footer-anchor がある場合はその直前に挿入
-          メインページ (index-pattern-f.html) の場合はイメージセクションなし */
-    const currentPage = location.pathname.split('/').pop();
-    const isMainPage = currentPage === 'index-pattern-f.html' || currentPage === '';
+          メインページの場合はイメージセクションなし */
     const contentToInsert = ''; // IMAGE PLACEHOLDERを挿入しないように変更
 
     const anchor = document.getElementById('common-footer-anchor');
@@ -167,6 +199,47 @@
         }
       });
     });
+
+    /* 6. ハンバーガーメニューの開閉（サブページのみ） */
+    if (!isMainPage) {
+      const hamburger = document.getElementById('hamburger');
+      const mobileNav = document.getElementById('mobileNav');
+
+      if (hamburger && mobileNav) {
+        hamburger.addEventListener('click', () => {
+          hamburger.classList.toggle('active');
+          mobileNav.classList.toggle('open');
+        });
+
+        // モバイルナビのリンクをクリックしたらメニューを閉じる
+        mobileNav.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            hamburger.classList.remove('active');
+            mobileNav.classList.remove('open');
+          });
+        });
+      }
+
+      /* 7. 現在のページをアクティブ表示（PC & モバイルナビ） */
+      // PC用ナビゲーション
+      const headerNav = document.querySelector('.header-nav');
+      if (headerNav) {
+        headerNav.querySelectorAll('a').forEach(link => {
+          if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // モバイル用ナビゲーション
+      if (mobileNav) {
+        mobileNav.querySelectorAll('a').forEach(link => {
+          if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+          }
+        });
+      }
+    }
 
   });
 
