@@ -11,19 +11,11 @@
     <a href="index.html" class="logo">WIN PARTNER</a>
   </header>`;
 
-  /* ---- ヘッダー HTML（サブページ用 - ナビゲーション付き） ---- */
+  /* ---- ヘッダー HTML（サブページ用 - ハンバーガーメニューのみ） ---- */
   const HEADER_WITH_NAV = `
   <header id="site-header">
     <a href="index.html" class="logo">WIN PARTNER</a>
     <div class="header-right">
-      <nav class="header-nav">
-        <a href="jobs.html">募集要項</a>
-        <a href="education.html">教育 / 研修</a>
-        <a href="benefits.html">福利厚生</a>
-        <a href="environment.html">働く環境</a>
-        <a href="career.html">キャリアパス</a>
-        <a href="https://win-partner.jp" target="_blank" rel="noopener">公式サイト</a>
-      </nav>
       <button class="hamburger" id="hamburger" aria-label="メニュー">
         <span></span>
         <span></span>
@@ -39,6 +31,21 @@
     <a href="career.html">キャリアパス・モデルケース</a>
     <a href="https://win-partner.jp" target="_blank" rel="noopener">WIN PARTNER 公式サイト</a>
   </nav>`;
+
+  /* ---- フッター上のナビゲーション HTML ---- */
+  const FOOTER_NAV_HTML = `
+  <section id="footer-navigation">
+    <div class="footer-nav-container">
+      <nav class="footer-page-nav">
+        <a href="jobs.html">募集要項</a>
+        <a href="education.html">教育 / 研修</a>
+        <a href="benefits.html">福利厚生</a>
+        <a href="environment.html">働く環境</a>
+        <a href="career.html">キャリアパス</a>
+        <a href="https://win-partner.jp" target="_blank" rel="noopener">WIN PARTNER 公式サイト</a>
+      </nav>
+    </div>
+  </section>`;
 
   /* ---- Image Section HTML ---- */
   const IMAGE_SECTION_HTML = `
@@ -169,6 +176,14 @@
       document.body.insertAdjacentHTML('beforeend', contentToInsert);
     }
 
+    /* 3. サブページのフッター前にナビゲーションを挿入 */
+    if (!isMainPage) {
+      const footer = document.querySelector('.site-footer');
+      if (footer) {
+        footer.insertAdjacentHTML('beforebegin', FOOTER_NAV_HTML);
+      }
+    }
+
     /* 3. 現在ページのナビリンクをアクティブ表示 */
     const currentPath = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('.footer-nav-col a').forEach(a => {
@@ -220,11 +235,11 @@
         });
       }
 
-      /* 7. 現在のページをアクティブ表示（PC & モバイルナビ） */
-      // PC用ナビゲーション
-      const headerNav = document.querySelector('.header-nav');
-      if (headerNav) {
-        headerNav.querySelectorAll('a').forEach(link => {
+      /* 7. 現在のページをアクティブ表示（フッターナビ & モバイルナビ） */
+      // フッターナビゲーション
+      const footerNav = document.querySelector('.footer-page-nav');
+      if (footerNav) {
+        footerNav.querySelectorAll('a').forEach(link => {
           if (link.getAttribute('href') === currentPage) {
             link.classList.add('active');
           }

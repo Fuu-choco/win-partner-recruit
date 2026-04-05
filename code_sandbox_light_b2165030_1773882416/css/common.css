@@ -127,37 +127,6 @@ a { color: inherit; text-decoration: none; }
   gap: 12px;
 }
 
-/* ヘッダーナビゲーション（PC用） */
-.header-nav {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.header-nav a {
-  font-family: var(--font-en);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  padding: 9px 18px;
-  background: transparent;
-  color: var(--black);
-  border: 1px solid var(--black);
-  transition: background 0.25s, color 0.25s;
-  white-space: nowrap;
-}
-
-.header-nav a:hover {
-  background: var(--black);
-  color: var(--white);
-}
-
-.header-nav a.active {
-  background: var(--black);
-  color: var(--white);
-}
-
 /* ハンバーガーメニューボタン（モバイル用） */
 .hamburger {
   display: none;
@@ -335,6 +304,52 @@ a { color: inherit; text-decoration: none; }
 .dl-contact-btn:hover {
   background: var(--white);
   color: var(--black);
+}
+
+/* ===========================
+   FOOTER NAVIGATION (フッター上のナビゲーション)
+=========================== */
+#footer-navigation {
+  background: var(--white);
+  padding: 60px;
+  border-top: 1px solid var(--border);
+}
+
+.footer-nav-container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.footer-page-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-page-nav a {
+  font-family: var(--font-en);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--black);
+  border: 1px solid var(--black);
+  transition: background 0.25s, color 0.25s;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.footer-page-nav a:hover {
+  background: var(--black);
+  color: var(--white);
+}
+
+.footer-page-nav a.active {
+  background: var(--black);
+  color: var(--white);
 }
 
 /* ===========================
@@ -531,11 +546,11 @@ footer {
 @media (max-width: 768px) {
   #site-header { padding: 0 20px; }
 
-  /* モバイルではPC用ナビゲーションを非表示 */
-  .header-nav { display: none; }
-
   /* ハンバーガーメニューをモバイルで表示 */
   .hamburger { display: flex; }
+
+  /* モバイルではフッターナビゲーションを非表示 */
+  #footer-navigation { display: none; }
 
   #sns         { padding: 0 24px 60px; }
   footer       { padding: 56px 24px 32px; }
