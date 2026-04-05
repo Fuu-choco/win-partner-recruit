@@ -161,7 +161,7 @@
 
     /* 1. ヘッダー：ページに応じて適切なヘッダーを挿入 */
     const currentPage = location.pathname.split('/').pop();
-    const isMainPage = currentPage === 'index.html' || currentPage === '';
+    const isMainPage = currentPage === 'index.html' || currentPage === 'index-pattern-f.html' || currentPage === '';
 
     // メインページはシンプルなヘッダー、サブページはナビゲーション付きヘッダー
     const headerHTML = isMainPage ? HEADER_SIMPLE : HEADER_WITH_NAV;
