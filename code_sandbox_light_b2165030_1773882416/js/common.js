@@ -5,11 +5,40 @@
 
 (function () {
 
-  /* ---- ヘッダー HTML ---- */
-  const HEADER_HTML = `
+  /* ---- ヘッダー HTML（メインページ用） ---- */
+  const HEADER_HTML_MAIN = `
   <header id="site-header">
-    <a href="index-pattern-f.html" class="logo">WIN PARTNER</a>
+    <a href="index.html" class="logo">WIN PARTNER</a>
   </header>`;
+
+  /* ---- ヘッダー HTML（サブページ用） ---- */
+  const HEADER_HTML_SUB = `
+  <header id="site-header">
+    <a href="index.html" class="logo">WIN PARTNER</a>
+    <div class="header-right">
+      <nav class="header-nav">
+        <a href="jobs.html">募集要項</a>
+        <a href="education.html">教育 / 研修</a>
+        <a href="benefits.html">福利厚生</a>
+        <a href="environment.html">働く環境</a>
+        <a href="career.html">キャリアパス</a>
+        <a href="https://win-partner.jp" target="_blank" rel="noopener">WIN PARTNER 公式サイト</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="メニュー">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="jobs.html">募集要項</a>
+    <a href="education.html">教育 / 研修制度</a>
+    <a href="benefits.html">福利厚生 / 社内制度</a>
+    <a href="environment.html">働く環境</a>
+    <a href="career.html">キャリアパス・モデルケース</a>
+    <a href="https://win-partner.jp" target="_blank" rel="noopener">WIN PARTNER 公式サイト</a>
+  </nav>`;
 
   /* ---- Image Section HTML ---- */
   const IMAGE_SECTION_HTML = `
@@ -119,8 +148,11 @@
   ============================================================ */
   document.addEventListener('DOMContentLoaded', function () {
 
-    /* 1. ヘッダー：body の先頭に挿入 */
-    document.body.insertAdjacentHTML('afterbegin', HEADER_HTML);
+    /* 1. ヘッダー：現在のページに応じて挿入 */
+    const currentPage = location.pathname.split('/').pop();
+    const isMainPage = currentPage === 'index.html' || currentPage === '';
+    const headerHTML = isMainPage ? HEADER_HTML_MAIN : HEADER_HTML_SUB;
+    document.body.insertAdjacentHTML('afterbegin', headerHTML);
 
     /* 2. Image Section のみ挿入（SNS・フッターは削除）
           ただし #common-footer-anchor がある場合はその直前に挿入
@@ -167,6 +199,47 @@
         }
       });
     });
+
+    /* 6. ハンバーガーメニューの開閉 */
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener('click', () => {
+        hamburger.classList.toggle('active');
+        mobileNav.classList.toggle('open');
+      });
+
+      // モバイルナビのリンクをクリックしたらメニューを閉じる
+      mobileNav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          hamburger.classList.remove('active');
+          mobileNav.classList.remove('open');
+        });
+      });
+    }
+
+    /* 7. 現在のページをアクティブ表示（PC & モバイルナビ） */
+    const currentPath = location.pathname.split('/').pop() || 'index.html';
+
+    // PC用ナビゲーション
+    const headerNav = document.querySelector('.header-nav');
+    if (headerNav) {
+      headerNav.querySelectorAll('a').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+          link.classList.add('active');
+        }
+      });
+    }
+
+    // モバイル用ナビゲーション
+    if (mobileNav) {
+      mobileNav.querySelectorAll('a').forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+          link.classList.add('active');
+        }
+      });
+    }
 
   });
 
