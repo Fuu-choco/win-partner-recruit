@@ -824,13 +824,24 @@
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const dots = document.querySelectorAll('.dot');
+    const cards = document.querySelectorAll('.card-item');
 
     let currentIndex = 0;
-    const cardWidth = 420 + 32; // カード幅 + gap
+
+    // カード幅を動的に取得する関数
+    function getCardWidth() {
+      if (cards.length > 0) {
+        const cardRect = cards[0].getBoundingClientRect();
+        const cardStyle = window.getComputedStyle(cards[0]);
+        const marginRight = parseFloat(cardStyle.marginRight) || 0;
+        return cardRect.width + marginRight + 32; // カード幅 + gap
+      }
+      return 452; // デフォルト値
+    }
 
     // 次へ
     nextBtn.addEventListener('click', () => {
-      if (currentIndex < 5) {
+      if (currentIndex < 4) {
         currentIndex++;
         updateSlider();
       }
@@ -853,6 +864,7 @@
     });
 
     function updateSlider() {
+      const cardWidth = getCardWidth();
       slider.scrollTo({
         left: currentIndex * cardWidth,
         behavior: 'smooth'
@@ -863,16 +875,30 @@
       });
     }
 
-    // スクロールでドット更新
-    slider.addEventListener('scroll', () => {
-      const scrollLeft = slider.scrollLeft;
-      const newIndex = Math.round(scrollLeft / cardWidth);
-      if (newIndex !== currentIndex) {
-        currentIndex = newIndex;
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === currentIndex);
-        });
-      }
+    // Intersection Observerでカード表示を検知してドット更新
+    const observerOptions = {
+      root: slider,
+      threshold: 0.5, // カードが50%以上表示されたら
+      rootMargin: '0px'
+    };
+
+    const cardObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(cards).indexOf(entry.target);
+          if (index !== -1 && index !== currentIndex) {
+            currentIndex = index;
+            dots.forEach((dot, i) => {
+              dot.classList.toggle('active', i === currentIndex);
+            });
+          }
+        }
+      });
+    }, observerOptions);
+
+    // 各カードを監視
+    cards.forEach(card => {
+      cardObserver.observe(card);
     });
   </script>
 
