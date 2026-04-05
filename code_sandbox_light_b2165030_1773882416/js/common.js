@@ -21,7 +21,7 @@
         <a href="education.html">教育 / 研修</a>
         <a href="benefits.html">福利厚生</a>
         <a href="environment.html">働く環境</a>
-        <a href="career.html">キャリアパス</a>
+        <a href="career.html">採用フロー</a>
       </nav>
       <button class="hamburger" id="hamburger" aria-label="メニュー">
         <span></span>
@@ -35,7 +35,7 @@
     <a href="education.html">教育 / 研修制度</a>
     <a href="benefits.html">福利厚生 / 社内制度</a>
     <a href="environment.html">働く環境</a>
-    <a href="career.html">キャリアパス・モデルケース</a>
+    <a href="career.html">採用フロー・モデルケース</a>
   </nav>`;
 
   /* ---- サイトフッター HTML ---- */
