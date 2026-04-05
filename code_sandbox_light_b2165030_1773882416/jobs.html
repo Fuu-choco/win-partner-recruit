@@ -420,16 +420,25 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
 
-      // 職種画像のタップインタラクション（スマホ対応）
+      // 職種画像のスクロールインタラクション（モバイル対応）
       const jobImageItems = document.querySelectorAll('.job-image-item');
-      jobImageItems.forEach(item => {
-        item.addEventListener('click', function() {
-          // モバイルデバイスの場合のみタップでactive切り替え
-          if (window.matchMedia('(max-width: 768px)').matches) {
-            this.classList.toggle('active');
-          }
+
+      // モバイルの場合はスクロールで色をつける
+      if (window.matchMedia('(max-width: 768px)').matches) {
+        const imageObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            } else {
+              entry.target.classList.remove('active');
+            }
+          });
+        }, { threshold: 0.8 });
+
+        jobImageItems.forEach(item => {
+          imageObserver.observe(item);
         });
-      });
+      }
     });
   </script>
 

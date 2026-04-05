@@ -22,15 +22,21 @@
   <link rel="stylesheet" href="css/common.css" />
   <style>
 
+    /* メインページはヘッダー下の余白をなくす */
+    body {
+      padding-top: 0 !important;
+    }
+
     /* ===========================
        MV SECTION - 分割レイアウト（パターンBから）
     =========================== */
     #mv {
-      min-height: calc(100vh - var(--header-h));
+      min-height: 100vh;
       background: var(--white);
       display: grid;
       grid-template-columns: 1fr 1fr;
       position: relative;
+      margin-top: 0;
     }
 
     .mv-left {
@@ -417,6 +423,8 @@
       line-height: 0;
       width: 100vw;
       margin-left: calc(-50vw + 50%);
+      margin-bottom: 0;
+      background: var(--black);
     }
     .photo-wrap {
       width: 100%;
@@ -425,6 +433,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 0;
+      padding-bottom: 0;
     }
 
     /* ===========================
@@ -435,12 +445,16 @@
         grid-template-columns: 1fr;
       }
       .mv-left {
-        min-height: 150px;
+        min-height: 60vh;
       }
     }
 
     @media (max-width: 768px) {
-      #mv { padding: 0 24px 80px; }
+      #mv { padding: 0; }
+      .mv-left {
+        width: 100vw;
+        margin-left: 0;
+      }
       .mv-right { padding: 60px 24px; }
       #menu { padding: 72px 0; }
       .section-header { padding: 0 24px; }
@@ -615,7 +629,6 @@
           <span class="dot"></span>
           <span class="dot"></span>
           <span class="dot"></span>
-          <span class="dot"></span>
         </div>
         <button class="slider-btn" id="nextBtn">
           <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -704,6 +717,11 @@
     /* SNSセクションを非表示 */
     #sns {
       display: none !important;
+    }
+
+    /* メインページのフッターは写真下のスペースを少なく */
+    .site-footer {
+      padding-top: 20px !important;
     }
 
     @media (max-width: 768px) {

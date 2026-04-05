@@ -241,6 +241,11 @@
       padding: 0 28px 28px;
     }
 
+    /* モバイル版のみ改行 */
+    .mobile-br {
+      display: none;
+    }
+
     /* ===========================
        RESPONSIVE
     =========================== */
@@ -257,18 +262,42 @@
     @media (max-width: 480px) {
       .benefit-cards-grid{ grid-template-columns: repeat(3, 1fr); gap: 8px; }
 
-      /* モバイル版のみ：丸カード内の文字を左寄りに */
+      /* モバイル版のみ：全て統一して左寄りに */
       .benefit-card-title {
-        padding: 0 18px 0 14px;
+        padding: 0 18px 0 10px !important;
+        font-size: 11px;
       }
       .benefit-card-title.align-fixed {
-        padding: 0 18px 0 14px;
+        padding: 0 18px 0 10px !important;
       }
       .benefit-card-title.align-more-left {
-        padding: 0 18px 0 10px;
+        padding: 0 18px 0 10px !important;
       }
       .benefit-card-title.align-right {
-        padding: 0 10px 0 18px;
+        padding: 0 18px 0 10px !important;
+      }
+
+      /* 特定の4項目のみ元の位置を維持 */
+      .benefit-card-title.keep-position-mobile {
+        padding: 0 18px 0 14px !important;
+      }
+
+      /* スーツ廃止制度・フリードリンク・リモートワークは気持ち左へ */
+      .benefit-card-title.shift-left-mobile {
+        padding: 0 18px 0 6px !important;
+      }
+
+      /* 2行表示用 */
+      .benefit-card-title.two-line-mobile {
+        white-space: normal;
+        word-break: keep-all;
+        line-height: 1.3;
+        max-height: none;
+      }
+
+      /* モバイル版では改行を表示 */
+      .mobile-br {
+        display: inline;
       }
 
       .mv-title-row {
@@ -377,7 +406,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">スーツ廃止制度</span>
+            <span class="benefit-card-title shift-left-mobile">スーツ廃止制度</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -387,7 +416,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">フリードリンクバー</span>
+            <span class="benefit-card-title shift-left-mobile">フリードリンク</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -397,7 +426,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">出産お祝い金制度</span>
+            <span class="benefit-card-title">出産お祝い金</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -417,7 +446,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">リモートワーク制度</span>
+            <span class="benefit-card-title shift-left-mobile">リモートワーク制度</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -437,7 +466,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">サークル（自由参加）</span>
+            <span class="benefit-card-title two-line-mobile">サークル（自由参加）</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -447,7 +476,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">勤務間インターバル</span>
+            <span class="benefit-card-title two-line-mobile">勤務間<br class="mobile-br">インターバル</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -467,7 +496,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">勤務地フリー制度</span>
+            <span class="benefit-card-title">勤務地フリー</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -536,7 +565,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">メディカル休暇</span>
+            <span class="benefit-card-title shift-left-mobile">メディカル休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -556,7 +585,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">マタニティ休暇</span>
+            <span class="benefit-card-title shift-left-mobile">マタニティ休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -566,7 +595,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">ウェルネス休暇</span>
+            <span class="benefit-card-title shift-left-mobile">ウェルネス休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -576,7 +605,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">マリッジアニバーサリー</span>
+            <span class="benefit-card-title two-line-mobile">マリッジ<br class="mobile-br">アニバーサリー</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -586,7 +615,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">ブラックマンデー</span>
+            <span class="benefit-card-title shift-left-mobile">ブラックマンデー</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -606,7 +635,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">ファミリー<br>バースデー休暇</span>
+            <span class="benefit-card-title shift-left-mobile">ファミリー<br>バースデー休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -616,7 +645,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">失恋休暇</span>
+            <span class="benefit-card-title keep-position-mobile">失恋休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -636,7 +665,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">おひとりさま<br>アニバーサリー休暇</span>
+            <span class="benefit-card-title shift-left-mobile">おひとりさま<br>アニバーサリー休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -656,7 +685,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">推し活休暇</span>
+            <span class="benefit-card-title keep-position-mobile">推し活休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -666,7 +695,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">お子様行事休暇</span>
+            <span class="benefit-card-title shift-left-mobile">お子様行事休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
@@ -676,7 +705,7 @@
 
         <div class="benefit-accordion-item">
           <button class="benefit-accordion-header">
-            <span class="benefit-card-title">妊活休暇</span>
+            <span class="benefit-card-title keep-position-mobile">妊活休暇</span>
             <span class="benefit-accordion-icon">+</span>
           </button>
           <div class="benefit-accordion-content">
