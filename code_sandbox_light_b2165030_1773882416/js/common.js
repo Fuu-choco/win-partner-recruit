@@ -42,7 +42,7 @@
   const SITE_FOOTER_HTML = `
   <footer class="site-footer">
     <div class="footer-inner">
-      <a href="https://win-partner.jp" target="_blank" rel="noopener noreferrer" class="company-site-link">
+      <a href="https://win-partner.co.jp/" target="_blank" rel="noopener noreferrer" class="company-site-link">
         <span class="link-text">WIN PARTNER 公式サイト</span>
         <svg class="link-arrow" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M7 17L17 7M17 7H7M17 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -180,10 +180,8 @@
       document.body.insertAdjacentHTML('beforeend', contentToInsert);
     }
 
-    /* 3. サブページにフッターを挿入 */
-    if (!isMainPage) {
-      document.body.insertAdjacentHTML('beforeend', SITE_FOOTER_HTML);
-    }
+    /* 3. すべてのページにフッターを挿入 */
+    document.body.insertAdjacentHTML('beforeend', SITE_FOOTER_HTML);
 
     /* 4. 現在ページのナビリンクをアクティブ表示 */
     const currentPath = location.pathname.split('/').pop() || 'index.html';
